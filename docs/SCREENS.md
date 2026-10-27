@@ -32,7 +32,7 @@ public class MiPanel extends JPanel {
     setLayout(new BorderLayout());
     add(Page.create()
         .top(Header.create("Impresora", "Elige como se conecta"))
-        .center(Col.gap(10).children(connectionBlock(), qualityBlock()))
+        .center(Col.gap(10).padding(10, 12, 10, 12).children(connectionBlock(), qualityBlock()))
         .bottom(Footer.of(btnCancel, btnSave))
         .build());
   }
@@ -58,6 +58,10 @@ public class MiPanel extends JPanel {
   }
 }
 ```
+
+Asi se ve esa pantalla (el codigo de arriba esta compilado en `src/demo/java/tessera/demo/ScreenExample.java`):
+
+![Pantalla de ejemplo](img/screen-example.png)
 
 ## Reglas
 
@@ -88,6 +92,10 @@ public class MiPanel extends JPanel {
 | alternar paneles | `Pages.create()` (uno visible) o `Stack` (alternativas apiladas) |
 | separar en dos zonas redimensionables | `Split.horizontal(a, b)` |
 | contenido con scroll | `Scroll.of(c)` |
+
+Los contenedores principales, con el codigo que los arma en el titulo de cada tarjeta:
+
+![Contenedores del kit](img/containers.png)
 
 La referencia completa de metodos esta en [AGENTS.md](../AGENTS.md).
 

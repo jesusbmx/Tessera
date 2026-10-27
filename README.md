@@ -88,7 +88,9 @@ Theme.builder()
     .install();
 ```
 
-Ojo: el radio de `Card` hoy es fijo (12). Todo el detalle, con la lista de lo que se puede y no se puede cambiar, en
+![Tema propio](docs/img/theme-custom.png)
+
+Ojo: el radio de `Card` hoy es fijo (12) y `accent` todavia no pinta radios ni barras de progreso. Todo el detalle, con la lista de lo que se puede y no se puede cambiar, en
 [docs/CUSTOMIZING.md](docs/CUSTOMIZING.md).
 
 ## Estructura
@@ -97,7 +99,8 @@ Ojo: el radio de `Card` hoy es fijo (12). Todo el detalle, con la lista de lo qu
 src/main/java/tessera/   la libreria (kit, theme, notify, app, components)
 src/main/resources/      fuente Inter, interruptor y iconos de avisos
 src/demo/java/           Showcase: ejemplo ejecutable y fuente de las capturas de docs/
-docs/                    guias: personalizar, pantallas, migrar, contribuir
+docs/                    guias: personalizar, pantallas, migrar, contribuir; docs/img: imagenes de los ejemplos
+scripts/doc-images.sh    regenera docs/img (ver docs/CONTRIBUTING.md)
 scripts/fetch-libs.sh    descarga las dependencias
 build.sh | build.ps1     compilacion sin Maven ni Gradle
 ```

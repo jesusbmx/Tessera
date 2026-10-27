@@ -7,7 +7,7 @@ Antes de editar la libreria conviene revisar la tabla de abajo: casi todo se cam
 
 | Quiero cambiar | Donde | Como |
 |---|---|---|
-| Color de acento (foco, seleccion, checks, barras de progreso) | `Theme.builder().accent(..)` | en el `UI.java` de la app |
+| Color de acento (`Theme.accent()`) | `Theme.builder().accent(..)` | en el `UI.java` de la app; **ojo**: hoy no pinta radios, casillas ni barras (ver "Nota sobre el acento") |
 | Color de los botones principales | `Theme.builder().primary(..)` | idem |
 | Fondo de las pantallas | `Theme.builder().panelBackground(..)` | idem |
 | Relleno y borde de las tarjetas (`Card`) | `Theme.builder().surface(..)` y `.cardLine(..)` | idem |
@@ -27,7 +27,7 @@ Se instala **una sola vez, antes de crear cualquier ventana**. Normalmente vive 
 
 ```java
 Theme.builder()
-    .accent("#1976D2")          // foco, seleccion, checks, radios, progreso, enlaces
+    .accent("#1976D2")          // se guarda en Theme.accent() (ver "Nota sobre el acento")
     .primary("#1976D2")         // Button.primary(..)
     .panelBackground("#F7F6F3") // fondo de paneles, scrolls y viewports
     .surface("#FFFFFF")         // relleno de Card
@@ -49,10 +49,34 @@ Que hace `install()` por dentro (`theme/Theme.java`):
 
 | Clave de `UIManager` | Valor | Afecta |
 |---|---|---|
-| `Component.accentColor` | `accent` | foco, seleccion, checks, radios, progreso |
+| `Component.accentColor` | `accent` | solo los componentes que leen esta clave; no cambia radios, casillas ni barras (ver nota) |
 | `Panel.background`, `ScrollPane.background`, `Viewport.background` | `panelBackground` | fondo de toda pantalla (`List.background` no se toca: listas y tablas siguen blancas) |
 | `Button.arc`, `Component.arc`, `ProgressBar.arc`, `TextComponent.arc` | `arc` | esquinas de botones, combos, spinners, campos de texto, barras de progreso |
 | `ScrollBar.trackArc`, `ScrollBar.thumbArc` | `999` | barras de desplazamiento totalmente redondas |
+
+![Tema por defecto](img/theme-default.png)
+
+Un tema propio (`accent` y `primary` verde azulado, fondo gris, `arc(6)`); el boton principal y el fondo cambian, los radios y la barra de progreso no (ver la nota):
+
+```java
+Theme.builder().accent("#0F766E").primary("#0F766E").panelBackground("#F3F4F6")
+    .surface("#FFFFFF").cardLine("#D1D5DB").arc(6).install();
+```
+
+![Tema propio](img/theme-custom.png)
+
+### Nota sobre el acento
+
+`Theme.builder().accent(..)` escribe `Component.accentColor` **despues** de instalar FlatLaf, y FlatLaf ya calculo los colores de radios, casillas
+y barras de progreso a partir de su propio acento. Resultado verificado: esos tres siguen con el azul de FlatLaf aunque se pida otro color.
+Mientras no se corrija en `Theme`, el acento se aplica a esos componentes si **antes** de `install()` se fija la variable de FlatLaf:
+
+```java
+FlatLaf.setGlobalExtraDefaults(Collections.singletonMap("@accentColor", "#1976D2"));
+Theme.builder().accent("#1976D2")....install();
+```
+
+El interruptor `Switch` y los iconos de avisos son SVG con sus colores propios y no siguen al acento.
 
 Si algo no esta en esa lista, se cambia con `UIManager.put(...)` **despues** de `install()`. Las claves disponibles son las de
 FlatLaf: <https://www.formdev.com/flatlaf/customizing/>.
@@ -84,6 +108,8 @@ Input.text().placeholder("Nombre").columns(20).width(240);
 Button.of("Buscar").icon("app/img/search.svg", 16).iconGap(8).onClick(this::buscar);
 ```
 
+![Metodos encadenables](img/styled.png)
+
 `.width(px)` y `.height(px)` **solo** los entienden los contenedores del kit (`Row`, `Col`, `Form`, `Card`, `Stack`): se guardan como
 propiedad del componente y el contenedor las convierte en restricciones de MigLayout. Todas las medidas estan en px **sin escalar**; el kit
 las multiplica por el zoom de la pantalla con `Kit.px(n)`. Para medidas propias usa `Kit.px(n)`, no numeros fijos.
@@ -107,6 +133,13 @@ las multiplica por el zoom de la pantalla con `Kit.px(n)`. Para medidas propias 
 - Para texto propio: `Kit.font(tamano, negrita)` devuelve la fuente de la interfaz escalada con el zoom.
 
 ## 5. Lo que no se puede cambiar desde la app
+
+El radio de `Theme.arc` cambia botones, combos y campos, pero **no** las tarjetas (`Card`), que siguen en 12 px. Misma pantalla con
+`arc(0)`, `arc(12)` (por defecto) y `arc(24)`:
+
+| `arc(0)` | `arc(12)` | `arc(24)` |
+|---|---|---|
+| ![arc 0](img/arc-0.png) | ![arc 12](img/arc-12.png) | ![arc 24](img/arc-24.png) |
 
 Estas cosas estan fijas dentro de la libreria. Si el diseno las necesita distintas, se edita Tessera (ver [CONTRIBUTING.md](CONTRIBUTING.md))
 y se regenera el jar.

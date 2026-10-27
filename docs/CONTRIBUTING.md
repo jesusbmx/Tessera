@@ -76,6 +76,10 @@ No hay tests automaticos. Se comprueba compilando y mirando el Showcase:
 ./build.sh --demo        (Windows: ./build.ps1 -Demo)
 ```
 
+Las imagenes de las guias (`docs/img/`) las genera `src/demo/java/tessera/demo/DocImages.java`. Despues de cambiar el aspecto de algo
+que aparezca en ellas: `./build.sh && ./scripts/doc-images.sh`, y revisar los PNG antes de subirlos. `ScreenExample.java` es el ejemplo de
+[SCREENS.md](SCREENS.md) compilado: si cambia ese ejemplo, se cambian los dos.
+
 `build.sh` compila con `javac --release 8`, copia los recursos y arma `dist/tessera-<version>.jar`. Las dependencias salen de `lib/`
 (`scripts/fetch-libs.sh` las descarga de Maven Central).
 

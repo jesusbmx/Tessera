@@ -24,7 +24,7 @@ tessera.components  modelos/renderers/bordes/validacion sueltos
 Theme.builder().accent("#1976D2").primary("#1976D2").panelBackground("#F7F6F3")
      .surface("#FFFFFF").cardLine("#E4E1D9").arc(12).install();
 ```
-Fuente Inter empaquetada por defecto; `.font("Segoe UI")` usa una del sistema. `Theme.fontFamily()`, `Theme.accent()` para codigo propio. `arc` afecta botones, campos y barras, **no** a `Card` (fijo en 12).
+Fuente Inter empaquetada por defecto; `.font("Segoe UI")` usa una del sistema. `Theme.fontFamily()`, `Theme.accent()` para codigo propio. `arc` afecta botones, campos y barras, **no** a `Card` (fijo en 12). `accent` hoy no cambia el color de radios, casillas ni barras de progreso (workaround y detalle en docs/CUSTOMIZING.md).
 Despues de `install()` la app ajusta lo suyo con `UIManager.put(...)`. La paleta del kit (`Kit.PRIMARY`, `Kit.SURFACE`, `Kit.CARD_LINE`, `Kit.DARK`,
 `Kit.ON_DARK`, `Kit.MUTED`, `Kit.LINE`, `Kit.ROW_ODD/ROW_EVEN/ROW_SELECTED`) son campos `static` no finales: se pueden asignar tambien a mano.
 
