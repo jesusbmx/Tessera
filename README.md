@@ -30,8 +30,9 @@ Page.create()
 | `tessera.app` | `TrayDock` (icono de bandeja + reapertura desde el Dock de macOS) y `WindowPrefs` (cada ventana se abre con el tamano que el usuario le dejo). |
 | `tessera.components` | Modelos y renderizadores de tabla/lista (`BaseTableModel`, `CheckableListModel`, `ComboItem`, `HighlightColumnRenderer`...), bordes (`RoundedBorder`, `DashedBorder`), validacion de formularios (`ErrorProvider`, `FloatingErrorProvider`), arrastrar y soltar, deshacer/rehacer, navegacion (`InteractiveNavbar`). |
 
-La idea: **la logica va arriba de cada clase y la pantalla se arma al final** con el kit. Una pantalla tipica
-tiene los widgets declarados en una seccion (`// UI: componentes`) y un `buildUI()` (`// UI: construccion`).
+La idea: **la logica va arriba de cada clase y la pantalla se arma al final** con el kit, en una zona marcada
+`// UI: widgets y construcción de la pantalla` donde cada bloque lleva sus campos justo encima del metodo que lo arma
+(ver [docs/SCREENS.md](docs/SCREENS.md)).
 
 ## Dependencias
 
@@ -64,12 +65,39 @@ Tambien funciona con Maven: `mvn package`.
 Guia para pasar una app existente (formularios NetBeans, GroupLayout) a Tessera: [docs/MIGRATING.md](docs/MIGRATING.md).
 Referencia compacta de toda la API, pensada para que una IA o un dev nuevo la lea en un minuto: [AGENTS.md](AGENTS.md).
 
+## Documentacion
+
+| Quiero... | Leer |
+|---|---|
+| **cambiar colores, esquinas redondeadas, fuente** o saber que se puede personalizar | [docs/CUSTOMIZING.md](docs/CUSTOMIZING.md) |
+| armar una pantalla siguiendo la convencion de las apps | [docs/SCREENS.md](docs/SCREENS.md) |
+| conocer toda la API en un minuto (pensado para IA y devs nuevos) | [AGENTS.md](AGENTS.md) |
+| pasar una app NetBeans / GroupLayout a Tessera | [docs/MIGRATING.md](docs/MIGRATING.md) |
+| modificar la libreria: agregar un widget, abrir un valor fijo, publicar el jar | [docs/CONTRIBUTING.md](docs/CONTRIBUTING.md) |
+
+Cada clase publica tiene Javadoc corto con un ejemplo de uso.
+
+## Personalizar en 30 segundos
+
+```java
+Theme.builder()
+    .accent("#1976D2")           // color de acento
+    .primary("#1976D2")          // botones principales
+    .panelBackground("#F7F6F3")  // fondo de las pantallas
+    .arc(8)                      // esquinas de botones y campos (12 por defecto, 0 = rectas)
+    .install();
+```
+
+Ojo: el radio de `Card` hoy es fijo (12). Todo el detalle, con la lista de lo que se puede y no se puede cambiar, en
+[docs/CUSTOMIZING.md](docs/CUSTOMIZING.md).
+
 ## Estructura
 
 ```
 src/main/java/tessera/   la libreria (kit, theme, notify, app, components)
 src/main/resources/      fuente Inter, interruptor y iconos de avisos
 src/demo/java/           Showcase: ejemplo ejecutable y fuente de las capturas de docs/
+docs/                    guias: personalizar, pantallas, migrar, contribuir
 scripts/fetch-libs.sh    descarga las dependencias
 build.sh | build.ps1     compilacion sin Maven ni Gradle
 ```

@@ -43,14 +43,13 @@ public class LabelListCell extends JPanel implements ListCellRenderer {
     }
 
     // ---------------------------------------------------------------------
-    // UI: componentes
+    // UI: widgets y construcción de la pantalla
+    // Cada bloque lleva sus campos (widgets) justo encima del método que lo arma:
+    // campos del bloque -> método del bloque. Empieza en buildUI() y sigue el orden
+    // en que se usan. La lógica (eventos, datos, etc.) va fuera de esta zona.
     // ---------------------------------------------------------------------
 
-    private final JLabel label = Label.text("");
-
-    // ---------------------------------------------------------------------
-    // UI: construccion
-    // ---------------------------------------------------------------------
+    private final Label label = Label.text("");
 
     private void buildUI() {
         setLayout(new BorderLayout());

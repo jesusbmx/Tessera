@@ -49,8 +49,9 @@ se fijan en `Theme.builder()` (`surface`, `cardLine`, `primary`) y no en cada pa
 
 1. **Origen de la verdad**: el `initComponents()` generado y el `.form` (texto, fuente, colores, bordes, claves de recursos, gaps).
 2. Se borran el `.form`, `initComponents()` y todo lo generado (`GroupLayout`, `// <editor-fold ... GEN-BEGIN`, `// Variables declaration`, `// NOI18N`).
-3. La clase queda con la **logica arriba** y, al final, dos secciones: `// UI: componentes` (los widgets declarados con
-   texto, icono, tooltip y eventos del kit) y `// UI: construccion` (`buildUI()` con Card/Row/Col/Form/...).
+3. La clase queda con la **logica arriba** y, al final, una zona `// UI: widgets y construcción de la pantalla`
+   donde cada bloque lleva sus widgets (con texto, icono, tooltip y eventos del kit) justo encima del metodo que lo arma
+   (`buildUI()` y metodos de bloque con Card/Row/Col/Form/...). Ver [SCREENS.md](SCREENS.md).
 4. Mismo orden y aspecto que antes; los huecos y tamanos fijos que solo existian por como se dibujo en el disenador no se reproducen.
 5. `TitledBorder` pasa a `Card.create(titulo)` o `Card.section(titulo)`.
 6. No cambiar firmas publicas ni logica de negocio. `ItemListener`/`ChangeListener` que reaccionaban a `setSelected` por codigo
