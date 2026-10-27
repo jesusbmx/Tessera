@@ -1,0 +1,5 @@
+build/
+dist/
+lib/
+*.log
+hs_err_pid*

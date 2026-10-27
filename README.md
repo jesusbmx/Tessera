@@ -1,0 +1,83 @@
+# Tessera
+
+Libreria de UI para **Swing** (Java 8+): un kit de layout y widgets sobre **FlatLaf + MigLayout**, mas el tema,
+los avisos, la bandeja del sistema y los componentes de uso comun. Pantallas armadas a mano, cortas y legibles,
+sin disenador de formularios y sin escribir restricciones de layout.
+
+![Showcase](docs/showcase-1.png)
+
+```java
+Theme.builder().accent("#1976D2").panelBackground("#F7F6F3").install();   // una vez, al iniciar
+
+Page.create()
+    .top(Header.create("Impresoras", "Elige como se conecta"))
+    .center(Card.create("Conexion")
+        .subtitle("Como se conecta la impresora")
+        .children(
+            Row.gap(14).children(Radio.of("Driver").selected(true), Radio.of("Red"), Radio.of("USB")),
+            Row.gap(10).fill(Input.text().placeholder("192.168.0.10")).children(Button.of("Buscar"))))
+    .bottom(Footer.of(Button.of("Cancelar"), Button.primary("Guardar")))
+    .build();
+```
+
+## Que incluye
+
+| Paquete | Contenido |
+|---|---|
+| `tessera.kit` | Contenedores `Row`, `Col`, `Stack`, `Grid`, `Form`, `Card`, `Header`, `Footer`, `Page`, `Pages`, `Scroll`, `Tabs`, `Split`, `Separator`. Widgets con metodos encadenables: `Label`, `Hint`, `Button`, `Input`, `Password`, `TextArea`, `Combo`, `Check`, `Radio`, `Toggle`, `Switch`, `Spinner`, `Table`. Paleta y utilidades en `Kit`. |
+| `tessera.theme` | `Theme` (FlatLaf, fuente Inter empaquetada, acento, fondo, esquinas redondeadas) e `Icons` (SVG nitidos, interruptor estilo iOS). |
+| `tessera.notify` | `Notification` (tarjetas apiladas en la esquina de la pantalla, con progreso y acciones) y `Toast` (mensaje breve sobre la ventana, con cola). |
+| `tessera.app` | `TrayDock` (icono de bandeja + reapertura desde el Dock de macOS) y `WindowPrefs` (cada ventana se abre con el tamano que el usuario le dejo). |
+| `tessera.components` | Modelos y renderizadores de tabla/lista (`BaseTableModel`, `CheckableListModel`, `ComboItem`, `HighlightColumnRenderer`...), bordes (`RoundedBorder`, `DashedBorder`), validacion de formularios (`ErrorProvider`, `FloatingErrorProvider`), arrastrar y soltar, deshacer/rehacer, navegacion (`InteractiveNavbar`). |
+
+La idea: **la logica va arriba de cada clase y la pantalla se arma al final** con el kit. Una pantalla tipica
+tiene los widgets declarados en una seccion (`// UI: componentes`) y un `buildUI()` (`// UI: construccion`).
+
+## Dependencias
+
+| Libreria | Version | Para que |
+|---|---|---|
+| [FlatLaf](https://www.formdev.com/flatlaf/) | 3.7 | look and feel |
+| FlatLaf Extras | 3.7 | iconos SVG |
+| [JSVG](https://github.com/weisj/jsvg) | 2.0.0 | motor de los SVG (lo pide FlatLaf Extras) |
+| [MigLayout](https://www.miglayout.com/) (swing) | 4.2 o superior | layout de los contenedores |
+
+Java 8 o superior. Nada mas: la libreria no usa JSON, logging externo ni utilidades de terceros.
+`./scripts/fetch-libs.sh` las descarga de Maven Central a `lib/`; con Maven, `pom.xml` las declara.
+
+## Compilar
+
+```
+./build.sh            # compila y deja dist/tessera-<version>.jar
+./build.sh --demo     # ademas abre el Showcase (src/demo)
+```
+
+En Windows con PowerShell: `./build.ps1` (o `./build.ps1 -Demo`). Hace falta un JDK (8 o superior) en el PATH.
+Tambien funciona con Maven: `mvn package`.
+
+## Usarla en una app
+
+1. Poner `tessera-<version>.jar` y las dependencias de arriba en el classpath (o `mvn install` y declarar la dependencia).
+2. Instalar el tema una vez, antes de crear ventanas: `Theme.builder()...install()`.
+3. Construir las pantallas con `tessera.kit`.
+
+Guia para pasar una app existente (formularios NetBeans, GroupLayout) a Tessera: [docs/MIGRATING.md](docs/MIGRATING.md).
+Referencia compacta de toda la API, pensada para que una IA o un dev nuevo la lea en un minuto: [AGENTS.md](AGENTS.md).
+
+## Estructura
+
+```
+src/main/java/tessera/   la libreria (kit, theme, notify, app, components)
+src/main/resources/      fuente Inter, interruptor y iconos de avisos
+src/demo/java/           Showcase: ejemplo ejecutable y fuente de las capturas de docs/
+scripts/fetch-libs.sh    descarga las dependencias
+build.sh | build.ps1     compilacion sin Maven ni Gradle
+```
+
+## Licencias de terceros
+
+- **Inter** (fuente, `src/main/resources/tessera/fonts`): SIL Open Font License 1.1, texto en `Inter-LICENSE.txt`.
+- **Iconos de avisos** (`info`, `warning_amber`, `success_green`, `error_red`, `arrow_down`): derivados de Material Symbols (Apache 2.0).
+- FlatLaf (Apache 2.0), JSVG (MIT), MigLayout (BSD / GPL, doble licencia).
+
+La licencia de Tessera todavia no esta definida: agregar `LICENSE` antes de publicar.
