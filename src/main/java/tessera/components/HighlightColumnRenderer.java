@@ -26,7 +26,8 @@ public class HighlightColumnRenderer extends DefaultTableCellRenderer {
     }
     
     public HighlightColumnRenderer(String... highlightedColumns) {
-        this(Arrays.asList(highlightedColumns));
+        // Copia modificable: Arrays.asList es de tamano fijo y add/removeHighlightedColumn fallarian despues
+        this(new ArrayList<>(Arrays.asList(highlightedColumns)));
     }
 
     public void setHighlightedColumns(List<String> columns) {

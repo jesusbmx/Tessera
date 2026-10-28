@@ -1,6 +1,7 @@
 package tessera.kit;
 
 import javax.swing.JTextArea;
+import tessera.components.TextPlaceholder;
 
 /** Area de texto de varias lineas (se crea con {@link Input#area}); va dentro de un {@link Scroll}. */
 public class TextArea extends JTextArea implements Styled<TextArea> {
@@ -9,8 +10,9 @@ public class TextArea extends JTextArea implements Styled<TextArea> {
     super(rows, 0);
   }
 
+  /** Texto gris que se ve mientras el area esta vacia (FlatLaf no lo pinta en un JTextArea: se usa {@link TextPlaceholder}). */
   public TextArea placeholder(String text) {
-    Texts.placeholder(this, text);
+    TextPlaceholder.install(this, text);
     return this;
   }
 

@@ -34,8 +34,19 @@ public final class TextPlaceholder {
         }
     }
 
+    /** Propiedad del componente donde queda la etiqueta ya instalada (para cambiar el texto sin duplicarla). */
+    private static final String HINT_KEY = "tessera.placeholder";
+
+    /** Pone el texto de ayuda; si el componente ya tiene uno instalado, solo cambia su texto. */
     public static void install(final JTextComponent component, String text) {
+        final Object installed = component.getClientProperty(HINT_KEY);
+        if (installed instanceof JLabel) {
+            ((JLabel) installed).setText(text);
+            return;
+        }
+
         final JLabel hint = new HintLabel(text);
+        component.putClientProperty(HINT_KEY, hint);
         hint.setForeground(COLOR);
         hint.setFont(component.getFont());
         hint.setBorder(new EmptyBorder(component.getInsets()));

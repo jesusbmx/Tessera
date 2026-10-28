@@ -45,7 +45,7 @@ de usarlo. Nunca poner numeros fijos sin escalar.
 1. Crear `kit/MiWidget.java` extendiendo la clase de Swing e implementando `Styled<MiWidget>` (o `Clickable<MiWidget>` si es un boton).
 2. Constructor `protected`, fabrica estatica (`MiWidget.of(..)`), metodos encadenables que devuelven `this`.
 3. Javadoc corto en espanol con un `<pre>` de uso, como los de `Button` o `Input`.
-4. Agregarlo al `Showcase` (`src/demo/java/tessera/demo/Showcase.java`) y a las tablas de [AGENTS.md](../AGENTS.md) y del [README](../README.md).
+4. Agregarlo al `Showcase` (`src/demo/java/tessera/demo/Showcase.java`) y a las tablas de [KIT.md](KIT.md), [AGENTS.md](../AGENTS.md) y del [README](../README.md).
 
 ## Abrir un valor fijo a las apps
 
@@ -65,8 +65,20 @@ Con el valor por defecto igual al de antes, las apps que no lo llaman no cambian
 - **Compatibilidad**: no cambiar la firma de lo que ya existe; las apps lo usan. Agregar metodos nuevos esta bien, renombrar o quitar no.
 - **Estilo**: codigo y comentarios en espanol, 2 espacios de indentacion, el estilo del archivo que se toca.
 - **Sin datos sensibles** (nombres de empresas, correos, URLs, claves) en codigo, docs ni ejemplos: el proyecto puede ser open source.
-- **Docs**: si cambia algo visible para quien usa la libreria, actualizar el Javadoc de la clase, [AGENTS.md](../AGENTS.md) y, si aplica,
-  [CUSTOMIZING.md](CUSTOMIZING.md).
+- **Docs**: si cambia algo visible para quien usa la libreria, actualizar el Javadoc de la clase, [AGENTS.md](../AGENTS.md), la guia del paquete
+  (ver la tabla de abajo) y, si aplica, [CUSTOMIZING.md](CUSTOMIZING.md) y el [CHANGELOG](../CHANGELOG.md).
+
+| Si tocas... | Actualiza |
+|---|---|
+| `tessera.kit` (contenedores, widgets, `Kit`) | [KIT.md](KIT.md) |
+| `tessera.notify` | [NOTIFICATIONS.md](NOTIFICATIONS.md) |
+| `tessera.app` | [APP.md](APP.md) |
+| `tessera.components` | [COMPONENTS.md](COMPONENTS.md) |
+| `tessera.theme` o un valor fijo que se abre | [CUSTOMIZING.md](CUSTOMIZING.md) |
+| la compilacion, dependencias o requisitos | [GETTING-STARTED.md](GETTING-STARTED.md) y el [README](../README.md) |
+| un problema conocido que se corrige (o aparece) | [FAQ.md](FAQ.md), la lista de "Trampas conocidas" de [AGENTS.md](../AGENTS.md) y el [CHANGELOG](../CHANGELOG.md) |
+
+Los ejemplos de [RECIPES.md](RECIPES.md) estan compilados contra la libreria: si cambias una firma que usan, vuelve a compilarlos.
 
 ## Verificar
 

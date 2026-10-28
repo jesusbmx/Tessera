@@ -84,12 +84,12 @@ public class FloatingErrorProvider {
   }
   
   /**
-   * Valida si el componente es un email.
+   * Valida que el texto del componente tenga forma de correo (le quita los espacios de los extremos).
    *
-   * @param txt a validad
-   * @param error a mostrar
+   * @param txt a validar
+   * @param error a mostrar si no lo es
    *
-   * @return @true si el componente es un email
+   * @return {@code true} si NO es un correo valido (y marca el error); {@code false} si esta bien
    */
   public boolean notIsEmail(JTextComponent txt, String error) {
     txt.setText(txt.getText().trim());

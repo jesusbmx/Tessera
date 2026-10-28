@@ -27,7 +27,7 @@ import javax.swing.Timer;
  *
  * <pre>
  * WindowPrefs.install("com.miapp.");                 // guarda en las preferencias del usuario
- * WindowPrefs.install("com.miapp.", miPropioStore);  // o donde quiera la app
+ * WindowPrefs.install(miPropioStore, "com.miapp.");  // o donde quiera la app
  * </pre>
  */
 public final class WindowPrefs {

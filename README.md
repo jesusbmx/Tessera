@@ -53,7 +53,8 @@ Java 8 o superior. Nada mas: la libreria no usa JSON, logging externo ni utilida
 ./build.sh --demo     # ademas abre el Showcase (src/demo)
 ```
 
-En Windows con PowerShell: `./build.ps1` (o `./build.ps1 -Demo`). Hace falta un JDK (8 o superior) en el PATH.
+En Windows con PowerShell: `./build.ps1` (o `./build.ps1 -Demo`). Hace falta un **JDK** completo (8 o superior), con `javac` y `jar`, en el PATH
+(si `jar` no se reconoce, ver la [FAQ](docs/FAQ.md#buildsh-dice-falta-jar-o-jar-command-not-found)).
 Tambien funciona con Maven: `mvn package`.
 
 ## Usarla en una app
@@ -62,20 +63,43 @@ Tambien funciona con Maven: `mvn package`.
 2. Instalar el tema una vez, antes de crear ventanas: `Theme.builder()...install()`.
 3. Construir las pantallas con `tessera.kit`.
 
+Con el detalle paso a paso (IDE, Maven, Gradle, linea de comandos) y una primera ventana completa: [docs/GETTING-STARTED.md](docs/GETTING-STARTED.md).
 Guia para pasar una app existente (formularios NetBeans, GroupLayout) a Tessera: [docs/MIGRATING.md](docs/MIGRATING.md).
 Referencia compacta de toda la API, pensada para que una IA o un dev nuevo la lea en un minuto: [AGENTS.md](AGENTS.md).
 
 ## Documentacion
 
+Todo esta en este repositorio, en Markdown: no depende de ningun sitio web.
+
+**Empezar**
+
+| Quiero... | Leer |
+|---|---|
+| instalarla y ver mi primera ventana | [docs/GETTING-STARTED.md](docs/GETTING-STARTED.md) |
+| ejemplos completos listos para copiar (login, lista y detalle, asistente, ajustes, progreso, bandeja) | [docs/RECIPES.md](docs/RECIPES.md) |
+| resolver un problema o una duda | [docs/FAQ.md](docs/FAQ.md) |
+
+**Referencia**
+
+| Quiero... | Leer |
+|---|---|
+| ver **todos los contenedores y widgets**, con todos sus metodos | [docs/KIT.md](docs/KIT.md) |
+| mostrar **avisos** (`Notification`, `Toast`) | [docs/NOTIFICATIONS.md](docs/NOTIFICATIONS.md) |
+| poner un **icono en la bandeja** o recordar el tamano de las ventanas | [docs/APP.md](docs/APP.md) |
+| usar tablas, validacion, arrastrar y soltar, bordes y demas **componentes sueltos** | [docs/COMPONENTS.md](docs/COMPONENTS.md) |
+| conocer toda la API en un minuto (pensado para IA y devs nuevos) | [AGENTS.md](AGENTS.md) |
+
+**Guias**
+
 | Quiero... | Leer |
 |---|---|
 | **cambiar colores, esquinas redondeadas, fuente** o saber que se puede personalizar | [docs/CUSTOMIZING.md](docs/CUSTOMIZING.md) |
 | armar una pantalla siguiendo la convencion de las apps | [docs/SCREENS.md](docs/SCREENS.md) |
-| conocer toda la API en un minuto (pensado para IA y devs nuevos) | [AGENTS.md](AGENTS.md) |
 | pasar una app NetBeans / GroupLayout a Tessera | [docs/MIGRATING.md](docs/MIGRATING.md) |
 | modificar la libreria: agregar un widget, abrir un valor fijo, publicar el jar | [docs/CONTRIBUTING.md](docs/CONTRIBUTING.md) |
+| ver que cambio entre versiones | [CHANGELOG.md](CHANGELOG.md) |
 
-Cada clase publica tiene Javadoc corto con un ejemplo de uso.
+Cada clase publica tiene ademas Javadoc corto con un ejemplo de uso.
 
 ## Personalizar en 30 segundos
 
@@ -99,7 +123,8 @@ Ojo: el radio de `Card` hoy es fijo (12) y `accent` todavia no pinta radios ni b
 src/main/java/tessera/   la libreria (kit, theme, notify, app, components)
 src/main/resources/      fuente Inter, interruptor y iconos de avisos
 src/demo/java/           Showcase: ejemplo ejecutable y fuente de las capturas de docs/
-docs/                    guias: personalizar, pantallas, migrar, contribuir; docs/img: imagenes de los ejemplos
+docs/                    guias y referencia (ver la tabla de Documentacion); docs/img: imagenes de los ejemplos
+CHANGELOG.md             cambios entre versiones
 scripts/doc-images.sh    regenera docs/img (ver docs/CONTRIBUTING.md)
 scripts/fetch-libs.sh    descarga las dependencias
 build.sh | build.ps1     compilacion sin Maven ni Gradle

@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  * Receptor de arrastrar y soltar archivos (o texto) sobre un componente: sobrescribir
- * {@code dropFiles}/{@code dropText} para atender lo soltado.
+ * {@code dropFile}/{@code dropFiles}/{@code dropString} para atender lo soltado.
  */
 public class DragAndDrop extends DropTargetAdapter {
 

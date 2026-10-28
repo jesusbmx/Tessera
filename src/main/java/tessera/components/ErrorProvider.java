@@ -59,7 +59,7 @@ public class ErrorProvider {
   public String getError(JComponent component) {
     final BorderPart part = components.get(component);
     if (part == null) return null;
-    return part.oldToolTipText;
+    return part.error;
   }
 
   /**
@@ -70,29 +70,31 @@ public class ErrorProvider {
    */
   public void setError(JComponent component, String error) {
     if (component == null) return;
-    final Border oldBorder = component.getBorder();
-    final String oldToolTipText = component.getToolTipText();
-    
-    final Border newBorder = BorderFactory.createCompoundBorder(
-            BORDER_ERROR, 
-            oldBorder);
-    
-    component.setBorder(newBorder);
-    component.setToolTipText(error);
-    
-    components.putIfAbsent(component, new BorderPart(oldBorder, oldToolTipText));
-    
+
+    final BorderPart marked = components.get(component);
+    if (marked != null) {
+      // Ya estaba marcado: solo cambia el mensaje (no se vuelve a envolver el borde)
+      marked.error = error;
+      component.setToolTipText(error);
+    } else {
+      final BorderPart part = new BorderPart(component.getBorder(), component.getToolTipText());
+      part.error = error;
+      components.put(component, part);
+      component.setBorder(BorderFactory.createCompoundBorder(BORDER_ERROR, part.border));
+      component.setToolTipText(error);
+    }
+
     component.requestFocus();
     log(component);
   }
   
   /**
-   * Valida si el componente es un email.
+   * Valida que el texto del componente tenga forma de correo (le quita los espacios de los extremos).
    *
-   * @param txt a validad
-   * @param error a mostrar
+   * @param txt a validar
+   * @param error a mostrar si no lo es
    *
-   * @return @true si el componente es un email
+   * @return {@code true} si NO es un correo valido (y marca el error); {@code false} si esta bien
    */
   public boolean notIsEmail(JTextComponent txt, String error) {
     txt.setText(txt.getText().trim());
@@ -114,6 +116,8 @@ public class ErrorProvider {
   public static class BorderPart {
     Border border;
     String oldToolTipText;
+    /** Mensaje del error actual (ver {@link ErrorProvider#getError}). */
+    String error;
     public BorderPart(Border border, String oldToolTipText) {
       this.border = border;
       this.oldToolTipText = oldToolTipText;

@@ -4,6 +4,17 @@
 set -euo pipefail
 cd "$(dirname "$0")"
 
+# En Windows el PATH a veces solo trae java y javac (carpeta "javapath") y no jar: se usa el JDK de JAVA_HOME
+if ! command -v jar >/dev/null 2>&1 && [ -n "${JAVA_HOME:-}" ]; then
+  JDK_HOME=$JAVA_HOME
+  if command -v cygpath >/dev/null 2>&1; then JDK_HOME=$(cygpath -u "$JAVA_HOME"); fi
+  if [ -d "$JDK_HOME/bin" ]; then PATH="$JDK_HOME/bin:$PATH"; fi
+fi
+if ! command -v jar >/dev/null 2>&1; then
+  echo "Falta 'jar': hace falta un JDK completo (no solo el JRE) en el PATH, o JAVA_HOME apuntando a el." >&2
+  exit 1
+fi
+
 VERSION=$(sed -n 's#.*<version>\(.*\)</version>.*#\1#p' pom.xml | head -1)
 ls lib/*.jar >/dev/null 2>&1 || scripts/fetch-libs.sh
 

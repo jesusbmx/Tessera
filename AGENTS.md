@@ -112,14 +112,28 @@ WindowPrefs.install(miStore, "com.miapp.");           // con almacen propio (int
 ```
 
 ## Componentes sueltos (`tessera.components`)
-`BaseTableModel<T>` (modelo por columnas con lista de T) · `CheckableListModel<T>` + `CheckBoxCellRenderer` · `ComboItem<K>` (etiqueta + valor)
+`BaseTableModel<T>` (modelo por columnas con lista de T) · `CheckableListModel<T>` (+ `CheckBoxCellRenderer` interno) · `ComboItem<K>` (etiqueta + valor)
 · `CheckGroup<K>` (clave ↔ radios/checks) · `HighlightColumnRenderer`, `FlexibleColumnRenderer` (resaltar columnas) · `LabelListCell` (filas alternas)
 · `ComboBoxRenderer` · `RoundedBorder`, `DashedBorder` · `ErrorProvider` (borde rojo) / `FloatingErrorProvider` (globo) con `setError(c, msg)`, `clear()`
-· `DragAndDrop` (soltar archivos) · `TextUndoRedoManager` · `TextPlaceholder` (placeholder para JTextArea) · `PopupMenuExtension` · `WindowDragListener` · `InteractiveNavbar`.
+(detalle y ejemplos de todos: [docs/COMPONENTS.md](docs/COMPONENTS.md))
+· `DragAndDrop` (soltar archivos) · `TextUndoRedoManager` · `TextPlaceholder` (placeholder para JTextArea de Swing puro; `Input.area(n).placeholder(..)` ya lo usa) · `PopupMenuExtension` · `WindowDragListener` · `InteractiveNavbar`.
 
 ## Recursos de la libreria
 `tessera/fonts/Inter-*.ttf`, `tessera/img/switch_*.svg`, `info|warning_amber|success_green|error_red|arrow_down.svg`. Los iconos de la app van en los recursos
 de la app (`"com/miapp/img/x.svg"`), no aqui.
+
+## Trampas conocidas (verificadas)
+- Imports **explicitos**: `Label`, `Button`, `List`, `TextArea` chocan con `java.awt` y `Stack` con `java.util`.
+- `Hint.of(txt)` y `Card.subtitle(txt)` meten el texto en `<html>`: escapar `<` y `&`.
+- `Toast.LENGTH_INDEFINITE` solo se cierra con `dismiss()` o su accion (un clic no lo cierra).
+- `ErrorProvider.setError` mueve el foco y muestra un `Toast`: marcar un solo error por pasada. `notIsEmail` devuelve `true` cuando **no** es correo.
+- `CheckableListModel.configureList` quita los `MouseListener` previos de la lista. `CheckBoxCellRenderer` es interno (no publico).
+- `WindowPrefs.install(store, paquetes...)`: el almacen va **primero**. Un `JDialog` suelto no se detecta: `WindowPrefs.remember(ventana, clave)`.
+
+## Documentacion completa
+Cada tema tiene su guia en `docs/` (todo en Markdown, sin sitio web):
+- [docs/GETTING-STARTED.md](docs/GETTING-STARTED.md) instalar y primera ventana · [docs/RECIPES.md](docs/RECIPES.md) pantallas completas · [docs/FAQ.md](docs/FAQ.md) problemas.
+- [docs/KIT.md](docs/KIT.md) contenedores y widgets con todos sus metodos · [docs/NOTIFICATIONS.md](docs/NOTIFICATIONS.md) avisos · [docs/APP.md](docs/APP.md) bandeja y ventanas · [docs/COMPONENTS.md](docs/COMPONENTS.md) componentes sueltos.
 
 ## Personalizar y modificar
 - Cambiar colores, esquinas, fuente, y que **no** se puede cambiar desde la app (ej. el radio de `Card` es fijo): [docs/CUSTOMIZING.md](docs/CUSTOMIZING.md).

@@ -52,7 +52,7 @@ public class Toast {
 
   public static final int LENGTH_SHORT = 3000;
   public static final int LENGTH_LONG = 6000;
-  /** No se cierra solo; queda visible hasta que el usuario le haga clic. */
+  /** No se cierra solo: queda visible hasta {@link #dismiss()} o hasta que se use su botón de acción (un clic sobre él no lo cierra). */
   public static final int LENGTH_INDEFINITE = -1;
 
   private static final float MAX_OPACITY = 0.95f;
