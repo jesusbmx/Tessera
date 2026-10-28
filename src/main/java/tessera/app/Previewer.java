@@ -2,7 +2,11 @@ package tessera.app;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
+import java.awt.Rectangle;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -17,6 +21,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.Callable;
+import java.util.prefs.Preferences;
 import javax.imageio.ImageIO;
 import javax.swing.AbstractAction;
 import javax.swing.JComponent;
@@ -81,7 +86,21 @@ public final class Previewer {
     for (int i = 0; i < args.length; i++) {
       classes[i] = Class.forName(args[i]);
     }
-    show(classes);
+    final String theme = System.getProperty(THEME_PROPERTY);
+    show(theme == null ? () -> Theme.builder().install() : () -> installTheme(theme), classes);
+  }
+
+  /** Propiedad con el tema de la app ({@code paquete.Clase#metodo}, un metodo estatico sin parametros): lo usa el plugin del IDE. */
+  public static final String THEME_PROPERTY = "tessera.preview.theme";
+
+  private static void installTheme(String spec) {
+    try {
+      final int hash = spec.indexOf('#');
+      final Method method = Class.forName(spec.substring(0, hash)).getMethod(spec.substring(hash + 1));
+      method.invoke(null);
+    } catch (Exception e) {
+      throw new IllegalArgumentException("No se pudo instalar el tema '" + spec + "' (se espera paquete.Clase#metodo, estatico y sin parametros)", e);
+    }
   }
 
   /** Abre la ventana con las vistas previas de esas clases, con el tema por defecto de Tessera. */
@@ -235,7 +254,46 @@ public final class Previewer {
     frame.pack();
     frame.setSize(sizeFor(frame, entries.get(0)));
     frame.setLocationRelativeTo(null);
+    rememberBounds(frame, entries.get(0).name);
     frame.setVisible(true);
+  }
+
+  /** La ventana se abre donde y como se dejo la vez anterior: asi no salta cuando se relanza al guardar. */
+  private static void rememberBounds(JFrame frame, String name) {
+    final Preferences prefs = Preferences.userRoot().node("tessera/preview");
+    final String key = "w" + Integer.toHexString(name.hashCode());
+    final String saved = prefs.get(key, null);
+    if (saved != null) {
+      try {
+        final String[] p = saved.split(",");
+        final Rectangle bounds = new Rectangle(Integer.parseInt(p[0]), Integer.parseInt(p[1]),
+            Integer.parseInt(p[2]), Integer.parseInt(p[3]));
+        for (GraphicsDevice device : GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices()) {
+          if (device.getDefaultConfiguration().getBounds().intersects(bounds)) {
+            frame.setBounds(bounds);
+            break;
+          }
+        }
+      } catch (RuntimeException ignored) {
+        // preferencia danada: se queda con el tamano y lugar por defecto
+      }
+    }
+    frame.addComponentListener(new ComponentAdapter() {
+      @Override
+      public void componentMoved(ComponentEvent e) {
+        save();
+      }
+
+      @Override
+      public void componentResized(ComponentEvent e) {
+        save();
+      }
+
+      private void save() {
+        final Rectangle b = frame.getBounds();
+        prefs.put(key, b.x + "," + b.y + "," + b.width + "," + b.height);
+      }
+    });
   }
 
   /** (Re)crea la pantalla dentro de su contenedor; si falla, muestra el error en lugar de la pantalla. */
