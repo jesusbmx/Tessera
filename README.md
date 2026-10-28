@@ -94,7 +94,7 @@ Todo esta en este repositorio, en Markdown: no depende de ningun sitio web.
 | Quiero... | Leer |
 |---|---|
 | **cambiar colores, esquinas redondeadas, fuente** o saber que se puede personalizar | [docs/CUSTOMIZING.md](docs/CUSTOMIZING.md) |
-| armar una pantalla siguiendo la convencion de las apps | [docs/SCREENS.md](docs/SCREENS.md) |
+| armar una pantalla siguiendo la convencion de las apps, con una **guia visual de disposiciones** (Row, Col, Form, Grid, Card, Header, Footer, Stack, Page...) y 9 pantallas completas | [docs/SCREENS.md](docs/SCREENS.md) |
 | pasar una app NetBeans / GroupLayout a Tessera | [docs/MIGRATING.md](docs/MIGRATING.md) |
 | modificar la libreria: agregar un widget, abrir un valor fijo, publicar el jar | [docs/CONTRIBUTING.md](docs/CONTRIBUTING.md) |
 | ver que cambio entre versiones | [CHANGELOG.md](CHANGELOG.md) |

@@ -1,8 +1,9 @@
 # Referencia del kit (`tessera.kit`)
 
 Todo lo que trae el kit: contenedores para acomodar, widgets para capturar y mostrar, y las utilidades de `Kit`.
-Es la referencia completa, clase por clase, con todos los metodos. Para una lectura rapida de toda la API
-mira [AGENTS.md](../AGENTS.md); para empezar desde cero, [GETTING-STARTED.md](GETTING-STARTED.md).
+Es la referencia completa, clase por clase, con todos los metodos. Para **ver** como se coloca cada cosa (con imagenes y pantallas completas) mira
+[la guia visual de SCREENS.md](SCREENS.md#guia-visual-de-disposiciones); para una lectura rapida de toda la API, [AGENTS.md](../AGENTS.md); para empezar desde cero,
+[GETTING-STARTED.md](GETTING-STARTED.md).
 
 ![Contenedores del kit](img/containers.png)
 

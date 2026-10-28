@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-# Genera las imagenes de docs/img/ (capturas de los ejemplos de las guias). Uso: ./scripts/doc-images.sh
+# Genera las imagenes de docs/img/ (capturas de los ejemplos de las guias, incluida la guia visual de docs/SCREENS.md).
+# Uso: ./scripts/doc-images.sh
 # Necesita build/classes: corre antes ./build.sh
 set -euo pipefail
 cd "$(dirname "$0")/.."
@@ -14,3 +15,6 @@ for name in screen-example containers styled theme-default theme-custom arc-0 ar
   java -cp "build/demo${SEP}build/classes$SEP$CP" tessera.demo.DocImages "$name" "docs/img/$name.png"
   echo "docs/img/$name.png"
 done
+
+# guia visual de disposiciones (docs/SCREENS.md): layout-*.png y app-*.png, todas en una sola ejecucion
+java -cp "build/demo${SEP}build/classes$SEP$CP" tessera.demo.LayoutImages docs/img

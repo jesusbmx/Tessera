@@ -16,6 +16,9 @@ Los cambios importantes de Tessera. Formato basado en [Keep a Changelog](https:/
 
 ### Documentacion
 
+- [SCREENS.md](docs/SCREENS.md) ahora incluye una **guia visual de disposiciones**: `Row`, `Col`, `Form`, `Grid`, `Card`, `Header`, `Footer`, `Stack`, `Page`, `Tabs`, `Split`, `Pages`,
+  espaciado y ocultar componentes, mas 9 pantallas completas (listado con tabla, lista y detalle, menu lateral, asistente, tablero, dos columnas, inicio de sesion centrado, editor y consola,
+  ajustes con pestanas). Las 26 imagenes se generan con `LayoutImages.java` (`scripts/doc-images.sh`).
 - Guias nuevas: [Primeros pasos](docs/GETTING-STARTED.md), [referencia del kit](docs/KIT.md), [avisos](docs/NOTIFICATIONS.md),
   [bandeja y ventanas](docs/APP.md), [componentes](docs/COMPONENTS.md), [recetas](docs/RECIPES.md) y [preguntas frecuentes](docs/FAQ.md).
 - Javadoc corregido: `WindowPrefs.install(store, paquetes...)` (el orden de los parametros estaba al reves en el ejemplo), `DragAndDrop` (`dropString`, no

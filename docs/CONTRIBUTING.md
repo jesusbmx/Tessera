@@ -88,7 +88,7 @@ No hay tests automaticos. Se comprueba compilando y mirando el Showcase:
 ./build.sh --demo        (Windows: ./build.ps1 -Demo)
 ```
 
-Las imagenes de las guias (`docs/img/`) las genera `src/demo/java/tessera/demo/DocImages.java`. Despues de cambiar el aspecto de algo
+Las imagenes de las guias (`docs/img/`) las generan `src/demo/java/tessera/demo/DocImages.java` y, para la guia visual de [SCREENS.md](SCREENS.md) (`layout-*.png` y `app-*.png`), `LayoutImages.java`, cuyo codigo es el mismo que muestra la guia. Despues de cambiar el aspecto de algo
 que aparezca en ellas: `./build.sh && ./scripts/doc-images.sh`, y revisar los PNG antes de subirlos. `ScreenExample.java` es el ejemplo de
 [SCREENS.md](SCREENS.md) compilado: si cambia ese ejemplo, se cambian los dos.
 
