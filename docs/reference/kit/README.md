@@ -28,7 +28,7 @@ Acomodan a sus hijos; son `JPanel` con MigLayout adentro (no hace falta saber Mi
 
 ## Widgets
 
-Cada uno **es** el widget de Swing (`Button extends JButton`...) con metodos encadenables.
+Cada uno **es** el widget de Swing (`Button extends JButton`...) con metodos encadenables. Para elegir el correcto y saber como reaccionar a un cambio: [Que widget uso](../../guides/widgets.md).
 
 ![Widgets del kit](../../img/showcase-1.png)
 

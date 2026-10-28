@@ -47,7 +47,7 @@ method.onChange(() -> {
 });
 method.setValue(NETWORK);
 
-Form.gap(6).row("Metodo", method).field(lblHint).row(lblIp, txtIp);
+Form.gap(6).row("Metodo", Col.gap(2).children(method, lblHint)).row(lblIp, txtIp);
 ```
 
 Que pasa, en orden:
@@ -255,4 +255,5 @@ Si `onOpen` deja el menu sin opciones, no se abre (por ejemplo cuando todavia no
 ## Ver tambien
 
 - Referencia: [`ChoiceButton`](../reference/kit/widgets/choicebutton.md) · [`MultiChoiceButton`](../reference/kit/widgets/multichoicebutton.md) · [`MenuButton`](../reference/kit/widgets/menubutton.md) · [`Menu` y `MenuItem`](../reference/kit/widgets/menu.md)
+- Todos los widgets, y cual elegir: [Que widget uso](widgets.md).
 - Para una lista larga o editable: [`Combo`](../reference/kit/widgets/combo.md). Para 2 a 5 opciones siempre visibles: [`Radio`](../reference/kit/widgets/radio.md).

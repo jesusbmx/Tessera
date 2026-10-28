@@ -107,7 +107,7 @@ public final class MenuImages {
   /** Formulario de impresion: el selector del metodo y lo que cambia en la pantalla al elegir. */
   private static final class PrintForm {
     final Label lblHint = Label.muted("").small();
-    final Label lblIp = Label.text("Direccion IP");
+    final Label lblIp = Label.field("Direccion IP");
     final Input txtIp = Input.text().placeholder("192.168.0.10");
 
     final ChoiceButton<Integer> method = ChoiceButton.<Integer>of()
@@ -128,7 +128,7 @@ public final class MenuImages {
     }
 
     JComponent form() {
-      return Form.gap(6).row("Metodo", method).field(lblHint).row(lblIp, txtIp);
+      return Form.gap(6).row("Metodo", Col.gap(2).children(method, lblHint)).row(lblIp, txtIp);
     }
   }
 

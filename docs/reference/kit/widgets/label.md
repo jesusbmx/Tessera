@@ -11,6 +11,12 @@ Etiqueta de texto con **estilos listos**: titulo, nombre de campo, texto secunda
 
 ![Label: estilos y enlace](../../../img/widget-label.png)
 
+**En una frase:** texto de la pantalla con el **estilo listo**: titulo, nombre de campo, texto secundario o texto normal. Con `.onClick(...)` se vuelve un enlace.
+
+**Reemplaza, en Swing puro:** `new JLabel(texto)` + `setFont(...)` + `setForeground(...)` + `setBorder(...)` en cada pantalla, y un `MouseListener` para el enlace.
+
+**Cual elegir entre varios widgets parecidos:** [Que widget uso](../../../guides/widgets.md#mostrar-texto-label-o-hint).
+
 ## Cuando usarlo
 
 - Cualquier texto de la pantalla.
@@ -18,6 +24,23 @@ Etiqueta de texto con **estilos listos**: titulo, nombre de campo, texto secunda
 - El nombre de un campo en un `Form` (se crea solo con `.row("Nombre", campo)`).
 
 **Cuando no:** Para ayudas largas que deben partirse en lineas usa `Hint`.
+
+## Ejemplo: un bloque de perfil: titulo, ayuda, campo y enlace
+
+![un bloque de perfil: titulo, ayuda, campo y enlace](../../../img/example-label.png)
+
+```java
+final Card profile = Card.create().children(
+    Label.title("Perfil de usuario"),
+    Label.muted("Estos datos aparecen en tus documentos.").small(),
+    Form.create().row("Nombre", Input.text().placeholder("Nombre completo")),
+    Label.text("Ver ayuda").icon("tessera/img/info.svg", 16).iconGap(6).color(Theme.accent())
+        .onClick(() -> { }));                   // un enlace: cursor de mano y una accion
+```
+
+1. `Label.title(...)` y `Label.muted(...).small()` arman el encabezado: el titulo y, debajo, su ayuda en gris.
+2. En el `Form`, `.row("Nombre", campo)` crea la etiqueta del campo sola, con el estilo de `Label.field`.
+3. `.onClick(...)` convierte el texto en un **enlace**: cursor de mano y una accion al hacer clic.
 
 ## Referencia
 

@@ -90,7 +90,7 @@ No hay tests automaticos. Se comprueba compilando y mirando el Showcase:
 ./build.sh --demo        (Windows: ./build.ps1 -Demo)
 ```
 
-Las imagenes de la documentacion (`docs/img/`) las generan cuatro clases de `src/demo/java/tessera/demo/`: `DocImages.java` (capturas de las guias), `LayoutImages.java` (la guia visual de [screens.md](screens.md): `layout-*.png` y `app-*.png`, con el mismo codigo que muestra la guia), `WidgetImages.java` (las paginas de widgets: `widget-*.png` y `container-*.png`) y `MenuImages.java` (la guia [menus.md](menus.md): `menus-*.png`, pantallas con el menu abierto encima del boton; los fragmentos de esa guia que no estan ahi viven en `MenuExamples.java`, que solo existe para que compilen). Despues de cambiar el aspecto de algo
+Las imagenes de la documentacion (`docs/img/`) las generan cinco clases de `src/demo/java/tessera/demo/`: `WidgetExamples.java` (un ejemplo por widget, `example-*.png`, y las imagenes de comparacion de [widgets.md](widgets.md), `widgets-*.png`; su codigo es el que muestran las paginas), `DocImages.java` (capturas de las guias), `LayoutImages.java` (la guia visual de [screens.md](screens.md): `layout-*.png` y `app-*.png`, con el mismo codigo que muestra la guia), `WidgetImages.java` (las paginas de widgets: `widget-*.png` y `container-*.png`) y `MenuImages.java` (la guia [menus.md](menus.md): `menus-*.png`, pantallas con el menu abierto encima del boton; los fragmentos de esa guia que no estan ahi viven en `MenuExamples.java`, que solo existe para que compilen). Despues de cambiar el aspecto de algo
 que aparezca en ellas: `./build.sh && ./scripts/doc-images.sh`, y revisar los PNG antes de subirlos. `ScreenExample.java` es el ejemplo de
 [screens.md](screens.md) compilado: si cambia ese ejemplo, se cambian los dos.
 
@@ -130,8 +130,10 @@ Toda pagina de `docs/reference/kit/` tiene el mismo orden, para que se encuentre
 |---|---|
 | Titulo y resumen | el nombre de la clase y una frase: que es |
 | Tabla de datos | paquete, clase (de que extiende), como se crea, `import` |
+| En una frase | que es y **que reemplaza en Swing puro** (un par de lineas) |
 | Imagen | como se ve (generada con `WidgetImages`, `LayoutImages` o `DocImages`; el titulo de cada tarjeta es el codigo que la arma) |
 | Cuando usarlo | casos de uso y, en **Cuando no**, que usar en su lugar |
+| Ejemplo | una pantalla pequena y real, con su imagen (`example-*.png`) y el codigo que la arma, tomado de `WidgetExamples.java` entre las marcas `// ejemplo:nombre` y `// fin` |
 | Referencia | todos los metodos en tablas, con ejemplos de codigo |
 | Errores comunes | los sintomas que se repiten y su arreglo |
 | Ver tambien | los componentes relacionados |

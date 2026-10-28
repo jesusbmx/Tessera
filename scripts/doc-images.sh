@@ -22,6 +22,9 @@ java -cp "build/demo${SEP}build/classes$SEP$CP" tessera.demo.LayoutImages docs/i
 # imagenes de los widgets (docs/reference/kit): widget-*.png y container-*.png
 java -cp "build/demo${SEP}build/classes$SEP$CP" tessera.demo.WidgetImages docs/img
 
+# ejemplos de las paginas de widgets y de la guia docs/guides/widgets.md: example-*.png y widgets-*.png
+java -cp "build/demo${SEP}build/classes$SEP$CP" tessera.demo.WidgetExamples docs/img
+
 # imagenes de la guia de menus (docs/guides/menus.md): menus-*.png, con el menu abierto encima del boton
 java -cp "build/demo${SEP}build/classes$SEP$CP" tessera.demo.MenuImages docs/img
 

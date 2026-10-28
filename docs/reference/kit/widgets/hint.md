@@ -11,12 +11,33 @@ Texto de ayuda: **pequeno, gris, y se parte en lineas** al ancho que reciba.
 
 ![Hint: se parte al ancho disponible](../../../img/widget-hint.png)
 
+**En una frase:** ayuda **pequena y gris** que se parte en lineas al ancho que reciba, para explicar un campo o un bloque.
+
+**Reemplaza, en Swing puro:** un `JLabel` con `<html>` y un ancho fijo puesto a ojo para que el texto largo no se salga.
+
+**Cual elegir entre varios widgets parecidos:** [Que widget uso](../../../guides/widgets.md#mostrar-texto-label-o-hint).
+
 ## Cuando usarlo
 
 - La linea de ayuda bajo un campo o un bloque.
 - Un texto explicativo largo dentro de un `Card` (`Card.subtitle(..)` lo usa).
 
 **Cuando no:** Para un texto corto y normal usa `Label`.
+
+## Ejemplo: la ayuda de un campo, partida al ancho de la tarjeta
+
+![la ayuda de un campo, partida al ancho de la tarjeta](../../../img/example-hint.png)
+
+```java
+final Card address = Card.create("Direccion de la impresora").children(
+    Input.text().placeholder("192.168.0.10"),
+    Hint.of("Escribe la IP que aparece en la etiqueta de configuracion de la impresora. "
+        + "Si no la conoces, imprime esa etiqueta manteniendo presionado el boton de avance."));
+```
+
+1. No hay que poner saltos de linea ni un ancho fijo: el texto se parte solo al ancho de la tarjeta (y de nuevo si la ventana cambia).
+2. Va **debajo** del campo al que explica, dentro del mismo `Card` o `Col`.
+3. `Hint` es un `JLabel` pero **no** un `Label`: para un texto corto y normal usa `Label`.
 
 ## Referencia
 

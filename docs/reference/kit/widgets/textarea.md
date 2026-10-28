@@ -11,11 +11,34 @@
 
 ![TextArea: placeholder y wrap](../../../img/widget-textarea.png)
 
+**En una frase:** campo de **varias lineas**, siempre dentro de un `Scroll`.
+
+**Reemplaza, en Swing puro:** `new JTextArea(filas, 0)` + `new JScrollPane(...)` + `setLineWrap(true)` + `setWrapStyleWord(true)` + un placeholder propio (FlatLaf no lo pinta en un `JTextArea`).
+
+**Cual elegir entre varios widgets parecidos:** [Que widget uso](../../../guides/widgets.md#escribir-input-password-textarea-o-spinner).
+
 ## Cuando usarlo
 
 - Notas, descripciones, texto libre.
 
 **Cuando no:** Para una sola linea usa `Input`.
+
+## Ejemplo: notas con placeholder y lineas largas que se parten
+
+![notas con placeholder y lineas largas que se parten](../../../img/example-textarea.png)
+
+```java
+final TextArea txtNotes = Input.area(4).wrap().placeholder("Escribe aqui las notas...");
+txtNotes.setText("Las etiquetas se imprimen al llegar el archivo a la carpeta. "
+    + "Revisar el papel antes de arrancar el servicio.");
+
+final Card notes = Card.create("Servicio").children(
+    Form.gap(6).rowTop("Notas", Scroll.of(txtNotes)));      // rowTop: la etiqueta queda arriba
+```
+
+1. `Input.area(4)` crea el area de 4 filas; `.wrap()` hace que las lineas largas se partan por palabras en vez de salirse.
+2. `Scroll.of(area)` le da sus barras: **sin `Scroll` no hay barras de desplazamiento**.
+3. En un `Form`, `rowTop(...)` deja la etiqueta arriba, junto a la primera linea (con `row(...)` quedaria centrada).
 
 ## Referencia
 
