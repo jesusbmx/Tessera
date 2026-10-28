@@ -34,12 +34,12 @@ import tessera.theme.Theme;
  * <pre>
  * java ... tessera.demo.DocImages &lt;nombre&gt; &lt;archivo.png&gt;
  *
- * screen-example    SCREENS.md: pantalla armada con la convencion
- * containers        SCREENS.md: los contenedores Row, Col, Form, Grid y Card
- * theme-default     CUSTOMIZING.md: el tema por defecto
- * theme-custom      CUSTOMIZING.md: un tema propio (acento, fondo, esquinas)
- * arc-0 | arc-12 | arc-24     CUSTOMIZING.md: radio de las esquinas
- * styled            CUSTOMIZING.md: metodos encadenables de un widget
+ * screen-example    guides/screens.md: pantalla armada con la convencion
+ * containers        guides/screens.md: los contenedores Row, Col, Form, Grid y Card
+ * theme-default     guides/customizing.md: el tema por defecto
+ * theme-custom      guides/customizing.md: un tema propio (acento, fondo, esquinas)
+ * arc-0 | arc-12 | arc-24     guides/customizing.md: radio de las esquinas
+ * styled            guides/customizing.md: metodos encadenables de un widget
  * </pre>
  */
 public final class DocImages {

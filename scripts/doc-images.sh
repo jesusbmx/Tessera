@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Genera las imagenes de docs/img/ (capturas de los ejemplos de las guias, incluida la guia visual de docs/SCREENS.md).
+# Genera las imagenes de docs/img/ (capturas de los ejemplos de las guias, incluida la guia visual de docs/guides/screens.md).
 # Uso: ./scripts/doc-images.sh
 # Necesita build/classes: corre antes ./build.sh
 set -euo pipefail
@@ -16,5 +16,11 @@ for name in screen-example containers styled theme-default theme-custom arc-0 ar
   echo "docs/img/$name.png"
 done
 
-# guia visual de disposiciones (docs/SCREENS.md): layout-*.png y app-*.png, todas en una sola ejecucion
+# guia visual de disposiciones (docs/guides/screens.md): layout-*.png y app-*.png, todas en una sola ejecucion
 java -cp "build/demo${SEP}build/classes$SEP$CP" tessera.demo.LayoutImages docs/img
+
+# imagenes de los widgets (docs/reference/kit): widget-*.png y container-*.png
+java -cp "build/demo${SEP}build/classes$SEP$CP" tessera.demo.WidgetImages docs/img
+
+# imagenes de los avisos (docs/reference/notify): notify-*.png. Muestran las ventanas un instante: necesita un escritorio (no sirve sin pantalla)
+java -cp "build/demo${SEP}build/classes$SEP$CP" tessera.demo.NotifyImages docs/img

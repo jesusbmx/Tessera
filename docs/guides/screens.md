@@ -64,7 +64,7 @@ public class MiPanel extends JPanel {
 
 Asi se ve esa pantalla (el codigo de arriba esta compilado en `src/demo/java/tessera/demo/ScreenExample.java`):
 
-![Pantalla de ejemplo](img/screen-example.png)
+![Pantalla de ejemplo](../img/screen-example.png)
 
 ## Reglas
 
@@ -98,9 +98,9 @@ Asi se ve esa pantalla (el codigo de arriba esta compilado en `src/demo/java/tes
 
 Los contenedores principales, con el codigo que los arma en el titulo de cada tarjeta:
 
-![Contenedores del kit](img/containers.png)
+![Contenedores del kit](../img/containers.png)
 
-La referencia completa de metodos esta en [AGENTS.md](../AGENTS.md).
+La referencia completa de metodos esta en [AGENTS.md](../../AGENTS.md).
 
 ## Guia visual de disposiciones
 
@@ -157,7 +157,7 @@ sobra:
 | `.fillEqual(a, b)` | `a` y `b` miden **siempre lo mismo**, aunque sus contenidos sean distintos |
 | `.glue()` | un hueco elastico: **lo que se agregue despues** queda pegado a la derecha |
 
-![Row: fill, glue y fillEqual](img/layout-row-fill.png)
+![Row: fill, glue y fillEqual](../img/layout-row-fill.png)
 
 ```java
 Row.gap(10).children(Button.of("Uno"), Button.of("Dos"), Button.of("Tres"))
@@ -186,7 +186,7 @@ El **orden importa**: `fill(...)` y `children(...)` agregan en el orden en que l
 
 **Alineacion vertical.** Si los hijos no miden lo mismo de alto, por defecto se **centran**; con `.top()` se alinean **arriba** (util junto a un area de texto):
 
-![Row: centrado o arriba](img/layout-row-align.png)
+![Row: centrado o arriba](../img/layout-row-align.png)
 
 ```java
 Row.gap(10).top().children(
@@ -194,14 +194,14 @@ Row.gap(10).top().children(
 ```
 
 `.width(px)` da un **ancho fijo** a un hijo (aqui, 260 px al area de notas). Los metodos de `Row`: `gap`, `fill`, `fillBoth`, `fillEqual`, `glue`, `top`,
-`center`, `padding`, `children`; todos en [KIT.md](KIT.md#row).
+`center`, `padding`, `children`; todos en [Row](../reference/kit/containers/row.md).
 
 ### Col: en columna
 
 `Col` apila los hijos **de arriba hacia abajo**. La regla que conviene recordar: cada hijo ocupa **todo el ancho**, **menos los botones y las
 etiquetas**, que se quedan a la izquierda con su ancho natural.
 
-![Col: ancho natural o completo](img/layout-col-rules.png)
+![Col: ancho natural o completo](../img/layout-col-rules.png)
 
 ```java
 Col.gap(6).children(
@@ -222,7 +222,7 @@ Col.gap(6)
 **Que sobra de alto.** Con `.glue()` el hueco elastico empuja lo que sigue **hacia abajo**; con `.fillBoth(c)` un hijo **ocupa el alto que sobra**. Las lineas
 punteadas de la imagen son el borde de cada `Col` (de 190 px de alto):
 
-![Col: glue y fillBoth](img/layout-col-fill.png)
+![Col: glue y fillBoth](../img/layout-col-fill.png)
 
 ```java
 Col.gap(8).padding(8)
@@ -244,7 +244,7 @@ Col.gap(8).padding(8)
 
 `Form` son **dos columnas**: las etiquetas a la izquierda (alineadas entre si) y los campos a la derecha, que ocupan el ancho que sobra.
 
-![Form: row, rowTop y wide](img/layout-form.png)
+![Form: row, rowTop y wide](../img/layout-form.png)
 
 ```java
 Form.create()
@@ -269,7 +269,7 @@ Un campo con **ancho fijo** (`Spinner...width(80)`) no se estira; el resto, si. 
 
 **Espaciado de las etiquetas.** `labelsRight()` las pega a su campo; `labelGap(px)` cambia el espacio entre etiqueta y campo y `Form.gap(n)` el espacio entre filas:
 
-![Form: labelsRight y labelGap](img/layout-form-labels.png)
+![Form: labelsRight y labelGap](../img/layout-form-labels.png)
 
 ```java
 Form.create().labelsRight()
@@ -288,7 +288,7 @@ Form.gap(4).labelGap(30)
 
 Si necesitas **mas de dos columnas**, o varios pares etiqueta/campo por fila, usa `Grid`: cada columna mide lo que su celda mas ancha.
 
-![Grid: columnas alineadas](img/layout-grid.png)
+![Grid: columnas alineadas](../img/layout-grid.png)
 
 ```java
 Grid.gap(6)
@@ -316,7 +316,7 @@ Grid.gap(8).columnGap(1, 40)
 
 `Card` agrupa contenido en un bloque con fondo suave y borde redondeado. Sus hijos siguen las reglas de `Col`.
 
-![Card: variantes](img/layout-card.png)
+![Card: variantes](../img/layout-card.png)
 
 ```java
 Card.create("Card.create(titulo).icon(..).subtitle(..)")
@@ -353,7 +353,7 @@ Con `.padding(...)` y `.gap(n)` ajustas el margen interior y el espacio entre hi
 
 `Header` es el **banner oscuro** de arriba de una ventana o de cada paso de un asistente.
 
-![Header: variantes](img/layout-header.png)
+![Header: variantes](../img/layout-header.png)
 
 ```java
 Header.create("Header.create(titulo)")
@@ -374,7 +374,7 @@ Se coloca normalmente en `Page.top(...)`. Para cambiar el texto despues de armad
 
 `Footer.of(botones...)` pone los botones **abajo a la derecha**, con el margen de siempre. Va en `Page.bottom(...)`.
 
-![Footer: variantes](img/layout-footer.png)
+![Footer: variantes](../img/layout-footer.png)
 
 ```java
 Footer.of(Button.of("Cancelar"), Button.primary("Guardar"))
@@ -403,7 +403,7 @@ La convencion es que el boton de la **accion principal** (`Button.primary`) sea 
 
 El mismo boton dentro de cada tipo de `Stack` (que a su vez ocupa todo el ancho de su bloque):
 
-![Stack: fill, start, center y end](img/layout-stack-align.png)
+![Stack: fill, start, center y end](../img/layout-stack-align.png)
 
 ```java
 return Col.gap(10).padding(12, 16, 12, 16).children(
@@ -430,7 +430,7 @@ En todos, los hijos se **centran en vertical**. Dentro de un `Row`, solo `Stack.
 
 Una opcion (`Radio`) decide si se ve un combo, un campo de texto u otro combo, **todos en el mismo lugar** y con el mismo boton al lado:
 
-![Stack: tres alternativas](img/layout-stack.png)
+![Stack: tres alternativas](../img/layout-stack.png)
 
 ```java
 private static JComponent stackState(String title, int visible) {
@@ -470,7 +470,7 @@ private void showOnly(JComponent visible) {
 
 "Iniciar" y "Detener" ocupan **el mismo sitio** y solo se ve el que corresponde al estado. Como el `Stack` mide su hijo visible, el boton no deja hueco ni mueve lo demas:
 
-![Stack: Iniciar o Detener](img/layout-stack-patterns.png)
+![Stack: Iniciar o Detener](../img/layout-stack-patterns.png)
 
 ```java
 private static JComponent stackToggle(String title, boolean running) {
@@ -519,7 +519,7 @@ Cuando **no** usar `Stack`: si lo que cambia es el contenido de una **pantalla e
 `Page` divide la ventana en **cinco zonas**: `top`, `left`, `center`, `right` y `bottom`. Arriba y abajo toman el **alto que piden** y todo el ancho; izquierda y
 derecha, el **ancho que piden** y el alto que queda; el **centro se queda con todo lo que sobra**. No hace falta llenar las cinco.
 
-![Page: las cinco zonas](img/layout-page.png)
+![Page: las cinco zonas](../img/layout-page.png)
 
 ```java
 return Page.create()
@@ -537,7 +537,7 @@ Un menu lateral (`left`) mide lo que **pida su contenido**: para hacerlo mas anc
 
 Tres formas de repartir una zona entre varios contenidos:
 
-![Tabs y Split](img/layout-tabs-split.png)
+![Tabs y Split](../img/layout-tabs-split.png)
 
 ```java
 Tabs.create()
@@ -562,7 +562,7 @@ Dos medidas distintas, que no se deben confundir:
 - **`gap`**: el espacio **entre** un hijo y el siguiente (`Row.gap(10)`, `Col.gap(8)`, `Form.gap(4)`, `Card.gap(6)`).
 - **`padding`**: el espacio **entre el borde del contenedor y sus hijos** (`padding(12)`, `padding(vertical, horizontal)`, `padding(arriba, izq, abajo, der)`).
 
-![Gap y padding](img/layout-gap-padding.png)
+![Gap y padding](../img/layout-gap-padding.png)
 
 Un valor de partida comodo: `Col.gap(10).padding(12)` para el contenido de una ventana, y `gap(6)` o `gap(8)` dentro de un `Card`. Todos los valores
 estan en **px logicos**: se escalan con el zoom de la pantalla.
@@ -571,7 +571,7 @@ estan en **px logicos**: se escalan con el zoom de la pantalla.
 
 En **todos** los contenedores del kit, un componente invisible **no ocupa espacio ni deja su `gap`**. Para ocultar algo solo hay que llamar a `setVisible(false)` (o `.visible(false)`):
 
-![Ocultar componentes](img/layout-visibility.png)
+![Ocultar componentes](../img/layout-visibility.png)
 
 ```java
 final Button hidden = Button.of("Dos").visible(false);
@@ -606,13 +606,13 @@ Las piezas combinadas en **disposiciones tipicas** de una aplicacion. Cada una v
 
 Cabecera, bloques con titulo y barra de botones: el esqueleto de [este mismo documento](#esqueleto).
 
-![Dialogo clasico](img/screen-example.png)
+![Dialogo clasico](../img/screen-example.png)
 
 ### Barra de herramientas, tabla y barra de estado
 
 Una pantalla de **listado**: cabecera, una fila de acciones con un buscador a la derecha, la tabla ocupando el centro y una barra de estado abajo.
 
-![Barra de herramientas, tabla y estado](img/app-toolbar-table.png)
+![Barra de herramientas, tabla y estado](../img/app-toolbar-table.png)
 
 ```java
 final BaseTableModel.TArray model = new BaseTableModel.TArray("Impresora", "Puerto", "Estado");
@@ -643,7 +643,7 @@ Notas: la tabla va dentro de un `Scroll`, dentro de un `Col` con `fillBoth` para
 
 Una lista a la izquierda y el detalle de lo elegido a la derecha, con una barra para ajustar el reparto.
 
-![Lista y detalle](img/app-master-detail.png)
+![Lista y detalle](../img/app-master-detail.png)
 
 ```java
 final BaseTableModel.TArray model = new BaseTableModel.TArray("Cliente");
@@ -668,13 +668,13 @@ return Page.create()
 ```
 
 Notas: `Split.horizontal(...).divider(220)`; la lista va en un `Scroll` sin borde (`noBorder()`); el detalle es un `Col` con `Card` y una fila de botones a la derecha (`glue()`).
-La logica de seleccionar y actualizar el detalle esta en la [receta de lista y detalle](RECIPES.md#2-lista-y-detalle).
+La logica de seleccionar y actualizar el detalle esta en la [receta de lista y detalle](recipes.md#2-lista-y-detalle).
 
 ### Menu lateral
 
 Un menu oscuro a la izquierda y el contenido a la derecha: `Page.left(...)` y `Page.center(...)`.
 
-![Menu lateral](img/app-sidebar.png)
+![Menu lateral](../img/app-sidebar.png)
 
 ```java
 private static Label navItem(String text, boolean selected) {
@@ -709,7 +709,7 @@ al fondo. Para que cada elemento cambie el contenido, junta esto con un `Pages` 
 
 Cabecera, un panel por paso y botones Atras / Siguiente. `Pages` mide la pagina mas grande, asi la ventana no cambia de tamano entre pasos.
 
-![Asistente de pasos](img/app-wizard.png)
+![Asistente de pasos](../img/app-wizard.png)
 
 ```java
 final Pages pages = Pages.create()
@@ -727,13 +727,13 @@ return Page.create()
     .bottom(Footer.of(Button.of("Atras"), Button.primary("Siguiente")));
 ```
 
-La logica de Atras / Siguiente esta en la [receta del asistente](RECIPES.md#3-asistente-de-pasos).
+La logica de Atras / Siguiente esta en la [receta del asistente](recipes.md#3-asistente-de-pasos).
 
 ### Tablero con indicadores
 
 Una fila de tarjetas del **mismo ancho** (`fillEqual`) con una cifra grande, y debajo un bloque de actividad.
 
-![Tablero con indicadores](img/app-dashboard.png)
+![Tablero con indicadores](../img/app-dashboard.png)
 
 ```java
 private static Card stat(String title, String value, Color color) {
@@ -762,7 +762,7 @@ return Page.create()
 
 Dos columnas del mismo ancho, cada una con sus tarjetas apiladas: `Row.fillEqual(Col, Col)`.
 
-![Dos columnas](img/app-two-columns.png)
+![Dos columnas](../img/app-two-columns.png)
 
 ```java
 return Page.create()
@@ -793,7 +793,7 @@ return Page.create()
 
 Un bloque **centrado** en la ventana, de ancho fijo. El truco: un `glue()` a cada lado, en horizontal (dentro de una `Row`) y en vertical (dentro de una `Col`).
 
-![Inicio de sesion centrado](img/app-login-centered.png)
+![Inicio de sesion centrado](../img/app-login-centered.png)
 
 ```java
 return Page.create().center(
@@ -808,14 +808,14 @@ return Page.create().center(
         .glue());
 ```
 
-La version modal de este dialogo, con validacion, esta en la [receta de inicio de sesion](RECIPES.md#1-dialogo-de-inicio-de-sesion).
+La version modal de este dialogo, con validacion, esta en la [receta de inicio de sesion](recipes.md#1-dialogo-de-inicio-de-sesion).
 
 ### Editor y consola
 
 Una barra de acciones y, debajo, un editor y una consola **una sobre otra** con una barra que se arrastra: `Split.vertical`. `weight(0.7)` hace que el editor se quede con el 70% al
 crecer la ventana.
 
-![Editor y consola](img/app-editor-console.png)
+![Editor y consola](../img/app-editor-console.png)
 
 ```java
 final Font mono = new Font(Font.MONOSPACED, Font.PLAIN, 13);
@@ -836,7 +836,7 @@ return Page.create()
 
 Una pantalla de preferencias: cabecera, `Tabs` en el centro y botones al pie.
 
-![Ajustes con pestanas](img/app-settings-tabs.png)
+![Ajustes con pestanas](../img/app-settings-tabs.png)
 
 ```java
 return Page.create()

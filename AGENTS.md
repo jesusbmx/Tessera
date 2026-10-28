@@ -24,7 +24,7 @@ tessera.components  modelos/renderers/bordes/validacion sueltos
 Theme.builder().accent("#1976D2").primary("#1976D2").panelBackground("#F7F6F3")
      .surface("#FFFFFF").cardLine("#E4E1D9").arc(12).install();
 ```
-Fuente Inter empaquetada por defecto; `.font("Segoe UI")` usa una del sistema. `Theme.fontFamily()`, `Theme.accent()` para codigo propio. `arc` afecta botones, campos y barras, **no** a `Card` (fijo en 12). `accent` hoy no cambia el color de radios, casillas ni barras de progreso (workaround y detalle en docs/CUSTOMIZING.md).
+Fuente Inter empaquetada por defecto; `.font("Segoe UI")` usa una del sistema. `Theme.fontFamily()`, `Theme.accent()` para codigo propio. `arc` afecta botones, campos y barras, **no** a `Card` (fijo en 12). `accent` hoy no cambia el color de radios, casillas ni barras de progreso (workaround y detalle en docs/guides/customizing.md).
 Despues de `install()` la app ajusta lo suyo con `UIManager.put(...)`. La paleta del kit (`Kit.PRIMARY`, `Kit.SURFACE`, `Kit.CARD_LINE`, `Kit.DARK`,
 `Kit.ON_DARK`, `Kit.MUTED`, `Kit.LINE`, `Kit.ROW_ODD/ROW_EVEN/ROW_SELECTED`) son campos `static` no finales: se pueden asignar tambien a mano.
 
@@ -53,7 +53,7 @@ Todos son `JPanel` transparentes con MigLayout adentro (no hace falta saber MigL
 Extienden el de Swing (`JTextField txt = Input.text()...` sigue siendo un JTextField), con metodos encadenables.
 - **Todos (`Styled`)**: `.tip(txt)` `.bold()` `.fontSize(n)` `.font(f)` `.color(c)` `.background(c)` `.enabled(b)` `.visible(b)` `.name(s)` `.width(px)` `.height(px)`
 - **Botones y casillas (`Clickable`)**: `.onClick(Runnable|ActionListener)` `.icon(res, size)|.icon(Icon)` `.iconGap(n)` `.selected(b)`
-- `Label.text/title/field/muted(txt)` (+ `.icon .small() .center() .right() .padding(t,l,b,r) .onClick(Runnable)`) · `Hint.of(txt)` / `Hint.ofHtml(txt)` ayuda gris que se parte (`.width(px)`)
+- `Label.text/title/field/muted(txt)` (+ `.icon .small() .center() .right() .padding(t,l,b,r) .onClick(Runnable)`) · `Hint.of(txt)` / `Hint.ofHtml(txt)` ayuda gris que se parte al ancho que reciba (`.width(px)` es solo el ancho que *pide*: en `Col`/`Card`/`Form`/`Row` se estira)
 - `Button.of(txt)` / `Button.primary(txt)` · `Check.of` · `Radio.of` (+ `Radio.group(...)`) · `Toggle.of` (+ `Toggle.group(...)`) · `Switch.of` interruptor estilo iOS
 - `Input.text()` / `Input.password()` / `Input.area(filas)` → `.placeholder(txt) .columns(n) .editable(b) .onChange(Runnable) .onEnter(listener)`; `TextArea.wrap()`
 - `Combo.of(items...)` / `Combo.empty()` → `.onChange .maxRows .editable` · `Spinner.integer(v,min,max,paso)` / `.decimal(...)` → `.onChange`
@@ -115,7 +115,7 @@ WindowPrefs.install(miStore, "com.miapp.");           // con almacen propio (int
 `BaseTableModel<T>` (modelo por columnas con lista de T) · `CheckableListModel<T>` (+ `CheckBoxCellRenderer` interno) · `ComboItem<K>` (etiqueta + valor)
 · `CheckGroup<K>` (clave ↔ radios/checks) · `HighlightColumnRenderer`, `FlexibleColumnRenderer` (resaltar columnas) · `LabelListCell` (filas alternas)
 · `ComboBoxRenderer` · `RoundedBorder`, `DashedBorder` · `ErrorProvider` (borde rojo) / `FloatingErrorProvider` (globo) con `setError(c, msg)`, `clear()`
-(detalle y ejemplos de todos: [docs/COMPONENTS.md](docs/COMPONENTS.md))
+(detalle y ejemplos de todos: [Componentes sueltos](docs/reference/components/README.md))
 · `DragAndDrop` (soltar archivos) · `TextUndoRedoManager` · `TextPlaceholder` (placeholder para JTextArea de Swing puro; `Input.area(n).placeholder(..)` ya lo usa) · `PopupMenuExtension` · `WindowDragListener` · `InteractiveNavbar`.
 
 ## Recursos de la libreria
@@ -131,14 +131,14 @@ de la app (`"com/miapp/img/x.svg"`), no aqui.
 - `WindowPrefs.install(store, paquetes...)`: el almacen va **primero**. Un `JDialog` suelto no se detecta: `WindowPrefs.remember(ventana, clave)`.
 
 ## Documentacion completa
-Cada tema tiene su guia en `docs/` (todo en Markdown, sin sitio web):
-- [docs/GETTING-STARTED.md](docs/GETTING-STARTED.md) instalar y primera ventana · [docs/RECIPES.md](docs/RECIPES.md) pantallas completas · [docs/FAQ.md](docs/FAQ.md) problemas.
-- [docs/KIT.md](docs/KIT.md) contenedores y widgets con todos sus metodos · [docs/NOTIFICATIONS.md](docs/NOTIFICATIONS.md) avisos · [docs/APP.md](docs/APP.md) bandeja y ventanas · [docs/COMPONENTS.md](docs/COMPONENTS.md) componentes sueltos.
+Todo en Markdown dentro de `docs/` (sin sitio web); indice en [docs/README.md](docs/README.md).
+- **Referencia, una pagina por componente** (imagen, cuando usarlo, todos los metodos, errores comunes): [docs/reference/README.md](docs/reference/README.md). Contenedores y widgets de `tessera.kit` en `docs/reference/kit/containers/<nombre>.md` y `docs/reference/kit/widgets/<nombre>.md` (por ejemplo `row.md`, `button.md`, `check.md`); `Theme`/`Icons` en `reference/theme/`; avisos en `reference/notify/`; bandeja y ventanas en `reference/app/`; el resto de piezas sueltas en `reference/components/`.
+- **Guias**: [primeros pasos](docs/guides/getting-started.md) · [pantallas: guia visual de disposiciones](docs/guides/screens.md) · [recetas](docs/guides/recipes.md) · [personalizar](docs/guides/customizing.md) · [migrar](docs/guides/migrating.md) · [FAQ](docs/guides/faq.md).
 
 ## Personalizar y modificar
-- Cambiar colores, esquinas, fuente, y que **no** se puede cambiar desde la app (ej. el radio de `Card` es fijo): [docs/CUSTOMIZING.md](docs/CUSTOMIZING.md).
-- Convencion de pantallas con ejemplo completo: [docs/SCREENS.md](docs/SCREENS.md).
-- Como esta hecha la libreria y como agregar o abrir cosas: [docs/CONTRIBUTING.md](docs/CONTRIBUTING.md).
+- Cambiar colores, esquinas, fuente, y que **no** se puede cambiar desde la app (ej. el radio de `Card` es fijo): [docs/guides/customizing.md](docs/guides/customizing.md).
+- Convencion de pantallas con ejemplo completo: [docs/guides/screens.md](docs/guides/screens.md).
+- Como esta hecha la libreria y como agregar o abrir cosas: [docs/guides/contributing.md](docs/guides/contributing.md).
 
 ## Pasar una app existente
-Ver [docs/MIGRATING.md](docs/MIGRATING.md).
+Ver [docs/guides/migrating.md](docs/guides/migrating.md).

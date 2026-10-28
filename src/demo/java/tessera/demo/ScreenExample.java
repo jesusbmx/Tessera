@@ -15,7 +15,7 @@ import tessera.kit.Radio;
 import tessera.kit.Row;
 
 /**
- * Pantalla de ejemplo de docs/SCREENS.md: es el codigo que aparece alli, compilado, para que no se desactualice.
+ * Pantalla de ejemplo de docs/guides/screens.md: es el codigo que aparece alli, compilado, para que no se desactualice.
  * Su imagen (docs/img/screen-example.png) la genera {@link DocImages}.
  */
 public class ScreenExample extends JPanel {

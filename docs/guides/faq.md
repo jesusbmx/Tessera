@@ -1,7 +1,7 @@
 # Preguntas frecuentes y solucion de problemas
 
 Cada entrada va de **sintoma** a **causa** y **solucion**. Si no encuentras el tuyo, revisa tambien la tabla de
-[errores comunes del kit](KIT.md#errores-comunes).
+[errores comunes del kit](../reference/kit/README.md#errores-comunes).
 
 ## Indice
 
@@ -16,7 +16,7 @@ Cada entrada va de **sintoma** a **causa** y **solucion**. Si no encuentras el t
 ### `NoClassDefFoundError` o `ClassNotFoundException` de `com.formdev...`, `net.miginfocom...` o `com.github.weisj...`
 
 Falta una dependencia en el classpath. La app necesita **seis jars**: `tessera-<version>.jar` mas FlatLaf, FlatLaf Extras, JSVG, MigLayout core y
-MigLayout swing. Ver [GETTING-STARTED.md](GETTING-STARTED.md#2-ponerlo-en-tu-proyecto).
+MigLayout swing. Ver [getting-started.md](getting-started.md#2-ponerlo-en-tu-proyecto).
 
 ### Los iconos SVG no aparecen o lanzan excepcion
 
@@ -44,16 +44,16 @@ produzca bytecode compatible con el Java en que vayas a ejecutarlo.
 ### Todo el texto sale al doble de grande
 
 Es el problema de las fuentes **OTF** con el Java 8 de Oracle, que las escala mal. Tessera empaqueta Inter como **TTF** justamente por eso. Si
-agregas una fuente propia, usa TTF. Ver [CUSTOMIZING.md](CUSTOMIZING.md#4-la-fuente).
+agregas una fuente propia, usa TTF. Ver [customizing.md](customizing.md#4-la-fuente).
 
 ### Cambie el acento (`accent`) y los radios, casillas y barras de progreso siguen azules
 
 Limitacion conocida: `Theme` escribe el acento despues de que FlatLaf ya calculo esos colores. Hay un truco para aplicarlo; esta explicado en
-[CUSTOMIZING.md](CUSTOMIZING.md#nota-sobre-el-acento).
+[customizing.md](customizing.md#nota-sobre-el-acento).
 
 ### Cambie el radio con `arc(...)` pero las tarjetas siguen con esquinas de 12
 
-El radio de `Card` es fijo (12) y no sigue a `Theme.arc`. Ver [CUSTOMIZING.md](CUSTOMIZING.md#5-lo-que-no-se-puede-cambiar-desde-la-app).
+El radio de `Card` es fijo (12) y no sigue a `Theme.arc`. Ver [customizing.md](customizing.md#5-lo-que-no-se-puede-cambiar-desde-la-app).
 
 ### Asigne `Kit.PRIMARY` (u otro color) y los botones no cambian
 
@@ -104,7 +104,7 @@ y registralo **despues** de armar la pantalla.
 ### Error `illegal forward reference` en los campos de mi pantalla
 
 Java inicializa los campos en el orden en que aparecen: si un campo usa otro en su inicializador, el usado debe estar **antes**. Ver
-[SCREENS.md](SCREENS.md#reglas).
+[screens.md](screens.md#reglas).
 
 ### Un texto con `<` o `&` sale raro en un `Hint` o en `Card.subtitle`
 
@@ -140,7 +140,7 @@ Necesita **macOS y Java 9 o superior** (usa una API que no existe en Java 8). En
 
 Revisa que la ventana cumpla **todo** esto: su clase empieza con uno de los paquetes que pasaste a `install`, es redimensionable y no es
 `undecorated`. Un `new JDialog(...)` suelto tiene la clase `javax.swing.JDialog`: para ese caso usa `WindowPrefs.remember(dialog, "clave")` antes de
-mostrarlo. Ver [APP.md](APP.md#que-ventanas-cubre).
+mostrarlo. Ver [WindowPrefs](../reference/app/windowprefs.md#que-ventanas-cubre).
 
 ### Puedo mostrar un aviso desde un hilo secundario?
 
@@ -152,17 +152,17 @@ Si: `Notification` y `Toast` se pueden mostrar desde **cualquier hilo**. Lo dema
 ### Tessera esta en Maven Central?
 
 No. Se compila del codigo fuente (`./build.sh` o `mvn package`) y se usa el jar resultante, o se instala en el repositorio Maven local con
-`mvn install`. Ver [GETTING-STARTED.md](GETTING-STARTED.md).
+`mvn install`. Ver [getting-started.md](getting-started.md).
 
 ### Puedo mezclar widgets de Tessera con Swing normal?
 
 Si. Los widgets del kit **son** los de Swing (`Button extends JButton`), y los contenedores aceptan cualquier `Component`. Ver
-[KIT.md](KIT.md#mezclar-con-swing-puro).
+[Referencia del kit](../reference/kit/README.md#mezclar-con-swing-puro).
 
 ### Funciona con el disenador de formularios de NetBeans?
 
 Tessera reemplaza al disenador: las pantallas se arman a mano con el kit. Para pasar una app con formularios `.form` / `GroupLayout`, ver
-[MIGRATING.md](MIGRATING.md).
+[migrating.md](migrating.md).
 
 ### Trae textos en varios idiomas?
 
@@ -170,10 +170,10 @@ No: la libreria no trae un sistema de idiomas. Los textos de tus pantallas los p
 
 ### Tiene pruebas automaticas?
 
-No. Se verifica compilando y mirando el Showcase (`./build.sh --demo`). Ver [CONTRIBUTING.md](CONTRIBUTING.md#verificar).
+No. Se verifica compilando y mirando el Showcase (`./build.sh --demo`). Ver [contributing.md](contributing.md#verificar).
 
 ### Puedo usar los iconos o la fuente que trae?
 
 La fuente **Inter** (SIL Open Font License 1.1) y los iconos de avisos (derivados de Material Symbols, Apache 2.0) viajan dentro del jar. Los iconos
 internos son para la propia libreria, no para tus pantallas: los de tu app van en los recursos de tu app. Detalle en la seccion de licencias del
-[README](../README.md#licencias-de-terceros).
+[README](../../README.md#licencias-de-terceros).

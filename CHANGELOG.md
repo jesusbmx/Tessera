@@ -16,11 +16,17 @@ Los cambios importantes de Tessera. Formato basado en [Keep a Changelog](https:/
 
 ### Documentacion
 
-- [SCREENS.md](docs/SCREENS.md) ahora incluye una **guia visual de disposiciones**: `Row`, `Col`, `Form`, `Grid`, `Card`, `Header`, `Footer`, `Stack`, `Page`, `Tabs`, `Split`, `Pages`,
+- **Documentacion reorganizada** en `docs/guides/` (guias) y `docs/reference/` (referencia): ahora hay **una pagina por componente** (14 contenedores y 13 widgets de `tessera.kit`,
+  `Theme`, `Icons`, `Notification`, `Toast`, `TrayDock`, `WindowPrefs` y una pagina por categoria de `tessera.components`), todas con la misma plantilla: imagen, cuando usarlo,
+  referencia de metodos, errores comunes y ver tambien. Indices en [docs/README.md](docs/README.md) y [docs/reference/README.md](docs/reference/README.md). Los archivos de `docs/`
+  se movieron (`docs/SCREENS.md` -> `docs/guides/screens.md`, `docs/KIT.md` -> `docs/reference/kit/`, etc.).
+- 20 imagenes nuevas de widgets y avisos (`widget-*.png`, `container-*.png`, `notify-*.png`), generadas con `WidgetImages.java` y `NotifyImages.java` (`scripts/doc-images.sh`).
+- Corregido lo que decia la documentacion de `Hint`: `.width(px)` es el ancho que el `Hint` **pide**, no un limite; el texto se parte al ancho real que reciba.
+- [screens.md](docs/guides/screens.md) ahora incluye una **guia visual de disposiciones**: `Row`, `Col`, `Form`, `Grid`, `Card`, `Header`, `Footer`, `Stack`, `Page`, `Tabs`, `Split`, `Pages`,
   espaciado y ocultar componentes, mas 9 pantallas completas (listado con tabla, lista y detalle, menu lateral, asistente, tablero, dos columnas, inicio de sesion centrado, editor y consola,
   ajustes con pestanas). Las 26 imagenes se generan con `LayoutImages.java` (`scripts/doc-images.sh`).
-- Guias nuevas: [Primeros pasos](docs/GETTING-STARTED.md), [referencia del kit](docs/KIT.md), [avisos](docs/NOTIFICATIONS.md),
-  [bandeja y ventanas](docs/APP.md), [componentes](docs/COMPONENTS.md), [recetas](docs/RECIPES.md) y [preguntas frecuentes](docs/FAQ.md).
+- Guias nuevas: [Primeros pasos](docs/guides/getting-started.md), [referencia del kit](docs/reference/kit/README.md), [avisos](docs/reference/notify/README.md),
+  [bandeja y ventanas](docs/reference/app/README.md), [componentes](docs/reference/components/README.md), [recetas](docs/guides/recipes.md) y [preguntas frecuentes](docs/guides/faq.md).
 - Javadoc corregido: `WindowPrefs.install(store, paquetes...)` (el orden de los parametros estaba al reves en el ejemplo), `DragAndDrop` (`dropString`, no
   `dropText`), `Toast.LENGTH_INDEFINITE` (un clic sobre el toast no lo cierra) y `notIsEmail` (devuelve `true` cuando el texto **no** es un correo).
 
@@ -44,5 +50,5 @@ Primera version.
 ### Limitaciones conocidas
 
 - El radio de las esquinas de `Card` es fijo (12) y no sigue a `Theme.arc`.
-- `Theme.accent` no pinta radios, casillas ni barras de progreso (ver [CUSTOMIZING.md](docs/CUSTOMIZING.md#nota-sobre-el-acento)).
+- `Theme.accent` no pinta radios, casillas ni barras de progreso (ver [customizing.md](docs/guides/customizing.md#nota-sobre-el-acento)).
 - La licencia de Tessera todavia no esta definida.

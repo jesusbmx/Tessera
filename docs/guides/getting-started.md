@@ -25,14 +25,14 @@ cd Tessera
 
 `build.sh` hace tres cosas: descarga las dependencias a `lib/` (si faltan), compila con Java 8 y arma `dist/tessera-1.0.0.jar`.
 
-Si el script dice `jar: command not found`, tu PATH no tiene el JDK completo: ver la [FAQ](FAQ.md#buildsh-dice-falta-jar-o-jar-command-not-found).
+Si el script dice `jar: command not found`, tu PATH no tiene el JDK completo: ver la [FAQ](faq.md#buildsh-dice-falta-jar-o-jar-command-not-found).
 
 Con Maven: `mvn package` deja el jar en `target/`, y `mvn install` lo instala en tu repositorio local (`~/.m2`) para usarlo desde otros
 proyectos Maven.
 
 > Si tu equipo no tiene `bash`, descarga a mano estos cinco jars de Maven Central a `lib/`:
 > `flatlaf-3.7`, `flatlaf-extras-3.7`, `jsvg-2.0.0`, `miglayout-core-4.2` y `miglayout-swing-4.2`
-> (las rutas exactas estan en [scripts/fetch-libs.sh](../scripts/fetch-libs.sh)).
+> (las rutas exactas estan en [scripts/fetch-libs.sh](../../scripts/fetch-libs.sh)).
 
 Para ver la libreria funcionando antes de usarla: `./build.sh --demo` abre el **Showcase** con todos los widgets
 (en Windows: `./build.ps1 -Demo`).
@@ -67,7 +67,7 @@ La diferencia es el separador del classpath: `:` en Linux y macOS, `;` en Window
 ### En un IDE (NetBeans, IntelliJ, Eclipse, VS Code)
 
 Agrega los seis jars como librerias del proyecto (en NetBeans: clic derecho en *Libraries* → *Add JAR/Folder*; en IntelliJ: *Project
-Structure* → *Libraries*). La guia de [MIGRATING.md](MIGRATING.md#1-poner-la-libreria-en-el-proyecto) detalla el caso NetBeans.
+Structure* → *Libraries*). La guia de [migrating.md](migrating.md#1-poner-la-libreria-en-el-proyecto) detalla el caso NetBeans.
 
 ### Con Maven
 
@@ -163,17 +163,17 @@ Los botones usan `frame` dentro de su `onClick`: funciona porque `frame` se decl
 3. **Imports explicitos.** `Label`, `Button`, `List` y `TextArea` existen tambien en `java.awt` (y `Stack` en `java.util`): importa
    `tessera.kit.Button`, no `java.awt.*`.
 4. **Medidas en px logicos**, sin multiplicar por el zoom: el kit lo hace.
-5. **La logica arriba, la UI al final.** Para pantallas reales sigue la convencion de [SCREENS.md](SCREENS.md).
+5. **La logica arriba, la UI al final.** Para pantallas reales sigue la convencion de [screens.md](screens.md).
 
 ## 5. Siguientes pasos
 
 | Quiero... | Leer |
 |---|---|
-| ver todos los contenedores y widgets, con todos sus metodos | [KIT.md](KIT.md) |
-| cambiar colores, esquinas, fuente | [CUSTOMIZING.md](CUSTOMIZING.md) |
-| armar pantallas completas con el patron recomendado | [SCREENS.md](SCREENS.md) |
-| ver ejemplos listos para copiar (login, maestro-detalle, asistente...) | [RECIPES.md](RECIPES.md) |
-| mostrar avisos y mensajes | [NOTIFICATIONS.md](NOTIFICATIONS.md) |
-| icono de bandeja o recordar el tamano de las ventanas | [APP.md](APP.md) |
-| tablas, validacion de formularios, arrastrar y soltar | [COMPONENTS.md](COMPONENTS.md) |
-| resolver un problema | [FAQ.md](FAQ.md) |
+| ver todos los contenedores y widgets, con todos sus metodos | [Referencia del kit](../reference/kit/README.md) |
+| cambiar colores, esquinas, fuente | [customizing.md](customizing.md) |
+| armar pantallas completas con el patron recomendado | [screens.md](screens.md) |
+| ver ejemplos listos para copiar (login, maestro-detalle, asistente...) | [recipes.md](recipes.md) |
+| mostrar avisos y mensajes | [Avisos](../reference/notify/README.md) |
+| icono de bandeja o recordar el tamano de las ventanas | [Integracion con el escritorio](../reference/app/README.md) |
+| tablas, validacion de formularios, arrastrar y soltar | [Componentes sueltos](../reference/components/README.md) |
+| resolver un problema | [faq.md](faq.md) |

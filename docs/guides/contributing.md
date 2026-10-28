@@ -1,7 +1,7 @@
 # Como esta hecha Tessera y como modificarla
 
 Para quien va a **cambiar la libreria** (agregar un widget, abrir un valor que hoy es fijo, corregir un bug). Si solo quieres otro aspecto
-en una app, mira [CUSTOMIZING.md](CUSTOMIZING.md): casi siempre basta con `Theme`.
+en una app, mira [customizing.md](customizing.md): casi siempre basta con `Theme`.
 
 ## Mapa del codigo
 
@@ -45,7 +45,8 @@ de usarlo. Nunca poner numeros fijos sin escalar.
 1. Crear `kit/MiWidget.java` extendiendo la clase de Swing e implementando `Styled<MiWidget>` (o `Clickable<MiWidget>` si es un boton).
 2. Constructor `protected`, fabrica estatica (`MiWidget.of(..)`), metodos encadenables que devuelven `this`.
 3. Javadoc corto en espanol con un `<pre>` de uso, como los de `Button` o `Input`.
-4. Agregarlo al `Showcase` (`src/demo/java/tessera/demo/Showcase.java`) y a las tablas de [KIT.md](KIT.md), [AGENTS.md](../AGENTS.md) y del [README](../README.md).
+4. Agregarlo al `Showcase` (`src/demo/java/tessera/demo/Showcase.java`).
+5. Documentarlo: una pagina nueva en `docs/reference/kit/widgets/` (o `containers/`) con la [plantilla de abajo](#plantilla-de-una-pagina-de-referencia), su imagen en `WidgetImages.java`, una fila en la tabla de [Referencia del kit](../reference/kit/README.md) y del [indice de la referencia](../reference/README.md), y la lista de [AGENTS.md](../../AGENTS.md).
 
 ## Abrir un valor fijo a las apps
 
@@ -54,7 +55,7 @@ Ejemplo: que el radio de `Card` siga al tema.
 1. En `Kit`, agregar un campo `public static int CARD_ARC = 12;` (mismo estilo que `PRIMARY`, `SURFACE`...).
 2. En `Theme.Builder`, un metodo `cardArc(int)` que lo guarde y, en `install()`, asignarlo a `Kit.CARD_ARC`.
 3. En `Card.CardBorder`, leer `Kit.CARD_ARC` en lugar de la constante `ARC`.
-4. Documentarlo en [CUSTOMIZING.md](CUSTOMIZING.md) (quitar la fila de "Lo que no se puede cambiar" y agregarla a "Resumen").
+4. Documentarlo en [customizing.md](customizing.md) (quitar la fila de "Lo que no se puede cambiar" y agregarla a "Resumen").
 
 Con el valor por defecto igual al de antes, las apps que no lo llaman no cambian.
 
@@ -65,20 +66,21 @@ Con el valor por defecto igual al de antes, las apps que no lo llaman no cambian
 - **Compatibilidad**: no cambiar la firma de lo que ya existe; las apps lo usan. Agregar metodos nuevos esta bien, renombrar o quitar no.
 - **Estilo**: codigo y comentarios en espanol, 2 espacios de indentacion, el estilo del archivo que se toca.
 - **Sin datos sensibles** (nombres de empresas, correos, URLs, claves) en codigo, docs ni ejemplos: el proyecto puede ser open source.
-- **Docs**: si cambia algo visible para quien usa la libreria, actualizar el Javadoc de la clase, [AGENTS.md](../AGENTS.md), la guia del paquete
-  (ver la tabla de abajo) y, si aplica, [CUSTOMIZING.md](CUSTOMIZING.md) y el [CHANGELOG](../CHANGELOG.md).
+- **Docs**: si cambia algo visible para quien usa la libreria, actualizar el Javadoc de la clase, [AGENTS.md](../../AGENTS.md), la guia del paquete
+  (ver la tabla de abajo) y, si aplica, [customizing.md](customizing.md) y el [CHANGELOG](../../CHANGELOG.md).
 
 | Si tocas... | Actualiza |
 |---|---|
-| `tessera.kit` (contenedores, widgets, `Kit`) | [KIT.md](KIT.md) |
-| `tessera.notify` | [NOTIFICATIONS.md](NOTIFICATIONS.md) |
-| `tessera.app` | [APP.md](APP.md) |
-| `tessera.components` | [COMPONENTS.md](COMPONENTS.md) |
-| `tessera.theme` o un valor fijo que se abre | [CUSTOMIZING.md](CUSTOMIZING.md) |
-| la compilacion, dependencias o requisitos | [GETTING-STARTED.md](GETTING-STARTED.md) y el [README](../README.md) |
-| un problema conocido que se corrige (o aparece) | [FAQ.md](FAQ.md), la lista de "Trampas conocidas" de [AGENTS.md](../AGENTS.md) y el [CHANGELOG](../CHANGELOG.md) |
+| un contenedor o widget de `tessera.kit` | su pagina en `docs/reference/kit/containers/` o `widgets/` (ver [la referencia del kit](../reference/kit/README.md)) |
+| `Styled`, `Clickable`, `Box` o `Kit` | [Referencia del kit](../reference/kit/README.md) |
+| `Notification` o `Toast` | [notification.md](../reference/notify/notification.md) o [toast.md](../reference/notify/toast.md) |
+| `TrayDock` o `WindowPrefs` | [traydock.md](../reference/app/traydock.md) o [windowprefs.md](../reference/app/windowprefs.md) |
+| una clase de `tessera.components` | la pagina de su categoria en [Componentes sueltos](../reference/components/README.md) |
+| `Theme` o `Icons` | [theme.md](../reference/theme/theme.md) o [icons.md](../reference/theme/icons.md), y si cambia lo que se puede personalizar, [customizing.md](customizing.md) |
+| la compilacion, dependencias o requisitos | [getting-started.md](getting-started.md) y el [README](../../README.md) |
+| un problema conocido que se corrige (o aparece) | [faq.md](faq.md), la lista de "Trampas conocidas" de [AGENTS.md](../../AGENTS.md) y el [CHANGELOG](../../CHANGELOG.md) |
 
-Los ejemplos de [RECIPES.md](RECIPES.md) estan compilados contra la libreria: si cambias una firma que usan, vuelve a compilarlos.
+Los ejemplos de [recipes.md](recipes.md) estan compilados contra la libreria: si cambias una firma que usan, vuelve a compilarlos.
 
 ## Verificar
 
@@ -88,9 +90,9 @@ No hay tests automaticos. Se comprueba compilando y mirando el Showcase:
 ./build.sh --demo        (Windows: ./build.ps1 -Demo)
 ```
 
-Las imagenes de las guias (`docs/img/`) las generan `src/demo/java/tessera/demo/DocImages.java` y, para la guia visual de [SCREENS.md](SCREENS.md) (`layout-*.png` y `app-*.png`), `LayoutImages.java`, cuyo codigo es el mismo que muestra la guia. Despues de cambiar el aspecto de algo
+Las imagenes de la documentacion (`docs/img/`) las generan tres clases de `src/demo/java/tessera/demo/`: `DocImages.java` (capturas de las guias), `LayoutImages.java` (la guia visual de [screens.md](screens.md): `layout-*.png` y `app-*.png`, con el mismo codigo que muestra la guia) y `WidgetImages.java` (las paginas de widgets: `widget-*.png` y `container-*.png`). Despues de cambiar el aspecto de algo
 que aparezca en ellas: `./build.sh && ./scripts/doc-images.sh`, y revisar los PNG antes de subirlos. `ScreenExample.java` es el ejemplo de
-[SCREENS.md](SCREENS.md) compilado: si cambia ese ejemplo, se cambian los dos.
+[screens.md](screens.md) compilado: si cambia ese ejemplo, se cambian los dos.
 
 `build.sh` compila con `javac --release 8`, copia los recursos y arma `dist/tessera-<version>.jar`. Las dependencias salen de `lib/`
 (`scripts/fetch-libs.sh` las descarga de Maven Central).
@@ -103,5 +105,35 @@ Despues de cambiar Tessera:
 1. Subir la version en `pom.xml` si cambia la API.
 2. `./build.sh` y tomar `dist/tessera-<version>.jar`.
 3. Copiarlo a `vendor/tessera/` de cada app y, si cambio el nombre, actualizar el classpath del proyecto (en NetBeans:
-   `nbproject/project.properties`, ver [MIGRATING.md](MIGRATING.md)).
+   `nbproject/project.properties`, ver [migrating.md](migrating.md)).
 4. Compilar cada app y abrir sus pantallas.
+
+## Estructura de la documentacion
+
+```
+docs/
+  README.md             indice general
+  guides/               guias (se leen de principio a fin): primeros pasos, pantallas, recetas, personalizar, migrar, FAQ, contribuir
+  reference/            referencia (se consulta): una pagina por componente
+    kit/                README.md (lo comun) + containers/ + widgets/
+    theme/  notify/  app/  components/
+  img/                  imagenes (generadas con scripts/doc-images.sh)
+```
+
+La separacion es la de siempre: las **guias** explican *como hacer algo* y se leen en orden; la **referencia** describe *que hace cada cosa* y se consulta suelta.
+
+### Plantilla de una pagina de referencia
+
+Toda pagina de `docs/reference/kit/` tiene el mismo orden, para que se encuentre lo mismo en el mismo lugar:
+
+| Seccion | Contenido |
+|---|---|
+| Titulo y resumen | el nombre de la clase y una frase: que es |
+| Tabla de datos | paquete, clase (de que extiende), como se crea, `import` |
+| Imagen | como se ve (generada con `WidgetImages`, `LayoutImages` o `DocImages`; el titulo de cada tarjeta es el codigo que la arma) |
+| Cuando usarlo | casos de uso y, en **Cuando no**, que usar en su lugar |
+| Referencia | todos los metodos en tablas, con ejemplos de codigo |
+| Errores comunes | los sintomas que se repiten y su arreglo |
+| Ver tambien | los componentes relacionados |
+
+Reglas: los ejemplos de codigo deben compilar; las imagenes se generan, no se dibujan a mano; un enlace a otra pagina va con su ruta relativa y se comprueba que no este roto.

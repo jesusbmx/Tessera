@@ -43,7 +43,7 @@ import tessera.kit.TextArea;
 import tessera.theme.Theme;
 
 /**
- * Genera las imagenes de la guia visual de disposiciones de docs/SCREENS.md (docs/img/layout-*.png y
+ * Genera las imagenes de la guia visual de disposiciones de docs/guides/screens.md (docs/img/layout-*.png y
  * docs/img/app-*.png). Cada metodo devuelve la expresion tal como aparece en la guia: si cambia uno, se cambia el otro.
  * Todas comparten el mismo tema, asi que salen en una sola ejecucion; scripts/doc-images.sh la lanza.
  *
@@ -590,7 +590,7 @@ public final class LayoutImages {
   // ------------------------------------------------------------------------ //
 
   /** Pinta el componente fuera de pantalla con ese ancho (y ese alto; 0 = el que pida) y lo guarda como PNG. */
-  private static void save(String dir, String name, JComponent content, int width, int height) {
+  static void save(String dir, String name, JComponent content, int width, int height) {
     final JFrame frame = new JFrame();
     frame.setContentPane(content);
     frame.pack();

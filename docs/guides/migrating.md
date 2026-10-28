@@ -51,14 +51,14 @@ se fijan en `Theme.builder()` (`surface`, `cardLine`, `primary`) y no en cada pa
 2. Se borran el `.form`, `initComponents()` y todo lo generado (`GroupLayout`, `// <editor-fold ... GEN-BEGIN`, `// Variables declaration`, `// NOI18N`).
 3. La clase queda con la **logica arriba** y, al final, una zona `// UI: widgets y construcción de la pantalla`
    donde cada bloque lleva sus widgets (con texto, icono, tooltip y eventos del kit) justo encima del metodo que lo arma
-   (`buildUI()` y metodos de bloque con Card/Row/Col/Form/...). Ver [SCREENS.md](SCREENS.md).
+   (`buildUI()` y metodos de bloque con Card/Row/Col/Form/...). Ver [screens.md](screens.md).
 4. Mismo orden y aspecto que antes; los huecos y tamanos fijos que solo existian por como se dibujo en el disenador no se reproducen.
 5. `TitledBorder` pasa a `Card.create(titulo)` o `Card.section(titulo)`.
 6. No cambiar firmas publicas ni logica de negocio. `ItemListener`/`ChangeListener` que reaccionaban a `setSelected` por codigo
    se conservan (no se cambian a `onClick`) y se registran despues de armar la pantalla.
 7. Imports explicitos (`Label`, `Button`, `List`, `TextArea` chocan con `java.awt`).
 
-La referencia de toda la API esta en [AGENTS.md](../AGENTS.md).
+La referencia de toda la API esta en [AGENTS.md](../../AGENTS.md).
 
 ## 5. Verificar
 

@@ -54,7 +54,7 @@ Que hace `install()` por dentro (`theme/Theme.java`):
 | `Button.arc`, `Component.arc`, `ProgressBar.arc`, `TextComponent.arc` | `arc` | esquinas de botones, combos, spinners, campos de texto, barras de progreso |
 | `ScrollBar.trackArc`, `ScrollBar.thumbArc` | `999` | barras de desplazamiento totalmente redondas |
 
-![Tema por defecto](img/theme-default.png)
+![Tema por defecto](../img/theme-default.png)
 
 Un tema propio (`accent` y `primary` verde azulado, fondo gris, `arc(6)`); el boton principal y el fondo cambian, los radios y la barra de progreso no (ver la nota):
 
@@ -63,7 +63,7 @@ Theme.builder().accent("#0F766E").primary("#0F766E").panelBackground("#F3F4F6")
     .surface("#FFFFFF").cardLine("#D1D5DB").arc(6).install();
 ```
 
-![Tema propio](img/theme-custom.png)
+![Tema propio](../img/theme-custom.png)
 
 ### Nota sobre el acento
 
@@ -108,7 +108,7 @@ Input.text().placeholder("Nombre").columns(20).width(240);
 Button.of("Buscar").icon("app/img/search.svg", 16).iconGap(8).onClick(this::buscar);
 ```
 
-![Metodos encadenables](img/styled.png)
+![Metodos encadenables](../img/styled.png)
 
 `.width(px)` y `.height(px)` **solo** los entienden los contenedores del kit (`Row`, `Col`, `Form`, `Card`, `Stack`): se guardan como
 propiedad del componente y el contenedor las convierte en restricciones de MigLayout. Todas las medidas estan en px **sin escalar**; el kit
@@ -139,15 +139,15 @@ El radio de `Theme.arc` cambia botones, combos y campos, pero **no** las tarjeta
 
 | `arc(0)` | `arc(12)` | `arc(24)` |
 |---|---|---|
-| ![arc 0](img/arc-0.png) | ![arc 12](img/arc-12.png) | ![arc 24](img/arc-24.png) |
+| ![arc 0](../img/arc-0.png) | ![arc 12](../img/arc-12.png) | ![arc 24](../img/arc-24.png) |
 
-Estas cosas estan fijas dentro de la libreria. Si el diseno las necesita distintas, se edita Tessera (ver [CONTRIBUTING.md](CONTRIBUTING.md))
+Estas cosas estan fijas dentro de la libreria. Si el diseno las necesita distintas, se edita Tessera (ver [contributing.md](contributing.md))
 y se regenera el jar.
 
 | Cosa | Donde esta | Valor |
 |---|---|---|
 | Radio de las esquinas de `Card` | `kit/Card.java`, constante `ARC` en `CardBorder` | 12 (no sigue a `Theme.arc`) |
-| Ancho por defecto de `Hint` (donde parte el texto) | `kit/Hint.java`, `DEFAULT_WIDTH` | 325 px (cambia por instancia con `.width(px)`) |
+| Ancho **preferido** por defecto de `Hint` (el texto se parte al ancho real que reciba; este es el que pide) | `kit/Hint.java`, `DEFAULT_WIDTH` | 325 px (cambia por instancia con `.width(px)`) |
 | Colores, radio, tamanos y animaciones de `Notification` | `notify/Notification.java` (`CARD_BG`, `SUCCESS_ACCENT`, `ERROR_ACCENT`, `WARNING_ACCENT`, `WINDOW_RADIUS`, `TEXT_WRAP_WIDTH`, `MARGIN`, `GAP`...) | tarjeta oscura de 12 px de radio |
 | Duraciones de `Notification` | `Notification.LENGTH_SHORT` / `LENGTH_LONG` | 4000 / 8000 ms (se pasa otro valor en ms a `setDuration`) |
 | Colores, radio y tamanos de `Toast` | `notify/Toast.java` (`MAX_RADIUS`, `MAX_TEXT_WIDTH`, `NORMAL_ACCENT`...) | radio 18 px |
@@ -156,7 +156,7 @@ y se regenera el jar.
 
 Una forma de abrirlo a las apps sin romper nada: agregar un metodo al `Theme.Builder` (por ejemplo `cardArc(int)`) que guarde el valor en un
 campo `static` de `Kit`, y leer ese campo en lugar de la constante. Asi las apps que no lo llaman siguen igual (ver "Reglas" en
-[CONTRIBUTING.md](CONTRIBUTING.md)).
+[contributing.md](contributing.md)).
 
 ## 6. Ver el resultado
 

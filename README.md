@@ -4,7 +4,7 @@ Libreria de UI para **Swing** (Java 8+): un kit de layout y widgets sobre **Flat
 los avisos, la bandeja del sistema y los componentes de uso comun. Pantallas armadas a mano, cortas y legibles,
 sin disenador de formularios y sin escribir restricciones de layout.
 
-![Showcase](docs/showcase-1.png)
+![Showcase](docs/img/showcase-1.png)
 
 ```java
 Theme.builder().accent("#1976D2").panelBackground("#F7F6F3").install();   // una vez, al iniciar
@@ -32,7 +32,7 @@ Page.create()
 
 La idea: **la logica va arriba de cada clase y la pantalla se arma al final** con el kit, en una zona marcada
 `// UI: widgets y construcción de la pantalla` donde cada bloque lleva sus campos justo encima del metodo que lo arma
-(ver [docs/SCREENS.md](docs/SCREENS.md)).
+(ver [docs/guides/screens.md](docs/guides/screens.md)).
 
 ## Dependencias
 
@@ -54,7 +54,7 @@ Java 8 o superior. Nada mas: la libreria no usa JSON, logging externo ni utilida
 ```
 
 En Windows con PowerShell: `./build.ps1` (o `./build.ps1 -Demo`). Hace falta un **JDK** completo (8 o superior), con `javac` y `jar`, en el PATH
-(si `jar` no se reconoce, ver la [FAQ](docs/FAQ.md#buildsh-dice-falta-jar-o-jar-command-not-found)).
+(si `jar` no se reconoce, ver la [FAQ](docs/guides/faq.md#buildsh-dice-falta-jar-o-jar-command-not-found)).
 Tambien funciona con Maven: `mvn package`.
 
 ## Usarla en una app
@@ -63,43 +63,38 @@ Tambien funciona con Maven: `mvn package`.
 2. Instalar el tema una vez, antes de crear ventanas: `Theme.builder()...install()`.
 3. Construir las pantallas con `tessera.kit`.
 
-Con el detalle paso a paso (IDE, Maven, Gradle, linea de comandos) y una primera ventana completa: [docs/GETTING-STARTED.md](docs/GETTING-STARTED.md).
-Guia para pasar una app existente (formularios NetBeans, GroupLayout) a Tessera: [docs/MIGRATING.md](docs/MIGRATING.md).
+Con el detalle paso a paso (IDE, Maven, Gradle, linea de comandos) y una primera ventana completa: [docs/guides/getting-started.md](docs/guides/getting-started.md).
+Guia para pasar una app existente (formularios NetBeans, GroupLayout) a Tessera: [docs/guides/migrating.md](docs/guides/migrating.md).
 Referencia compacta de toda la API, pensada para que una IA o un dev nuevo la lea en un minuto: [AGENTS.md](AGENTS.md).
 
 ## Documentacion
 
-Todo esta en este repositorio, en Markdown: no depende de ningun sitio web.
+Todo esta en este repositorio, en Markdown: no depende de ningun sitio web. El [indice completo](docs/README.md) tiene dos partes:
 
-**Empezar**
-
-| Quiero... | Leer |
-|---|---|
-| instalarla y ver mi primera ventana | [docs/GETTING-STARTED.md](docs/GETTING-STARTED.md) |
-| ejemplos completos listos para copiar (login, lista y detalle, asistente, ajustes, progreso, bandeja) | [docs/RECIPES.md](docs/RECIPES.md) |
-| resolver un problema o una duda | [docs/FAQ.md](docs/FAQ.md) |
-
-**Referencia**
+**Guias** (para aprender y resolver tareas)
 
 | Quiero... | Leer |
 |---|---|
-| ver **todos los contenedores y widgets**, con todos sus metodos | [docs/KIT.md](docs/KIT.md) |
-| mostrar **avisos** (`Notification`, `Toast`) | [docs/NOTIFICATIONS.md](docs/NOTIFICATIONS.md) |
-| poner un **icono en la bandeja** o recordar el tamano de las ventanas | [docs/APP.md](docs/APP.md) |
-| usar tablas, validacion, arrastrar y soltar, bordes y demas **componentes sueltos** | [docs/COMPONENTS.md](docs/COMPONENTS.md) |
-| conocer toda la API en un minuto (pensado para IA y devs nuevos) | [AGENTS.md](AGENTS.md) |
+| instalarla y ver mi primera ventana | [Primeros pasos](docs/guides/getting-started.md) |
+| ver **como se coloca todo** (`Row`, `Col`, `Form`, `Card`, `Header`, `Footer`, `Stack`, `Page`...) con imagenes y 9 pantallas completas | [Como armar una pantalla](docs/guides/screens.md) |
+| ejemplos completos listos para copiar (login, lista y detalle, asistente, ajustes, progreso, bandeja) | [Recetas](docs/guides/recipes.md) |
+| **cambiar colores, esquinas redondeadas, fuente** | [Personalizar](docs/guides/customizing.md) |
+| pasar una app NetBeans / GroupLayout a Tessera | [Migrar una app](docs/guides/migrating.md) |
+| resolver un problema o una duda | [Preguntas frecuentes](docs/guides/faq.md) |
+| modificar la libreria: agregar un widget, abrir un valor fijo, publicar el jar | [Contribuir](docs/guides/contributing.md) |
 
-**Guias**
+**Referencia por componente** (para consultar cada clase: imagen, cuando usarla, todos sus metodos y errores comunes)
 
-| Quiero... | Leer |
-|---|---|
-| **cambiar colores, esquinas redondeadas, fuente** o saber que se puede personalizar | [docs/CUSTOMIZING.md](docs/CUSTOMIZING.md) |
-| armar una pantalla siguiendo la convencion de las apps, con una **guia visual de disposiciones** (Row, Col, Form, Grid, Card, Header, Footer, Stack, Page...) y 9 pantallas completas | [docs/SCREENS.md](docs/SCREENS.md) |
-| pasar una app NetBeans / GroupLayout a Tessera | [docs/MIGRATING.md](docs/MIGRATING.md) |
-| modificar la libreria: agregar un widget, abrir un valor fijo, publicar el jar | [docs/CONTRIBUTING.md](docs/CONTRIBUTING.md) |
-| ver que cambio entre versiones | [CHANGELOG.md](CHANGELOG.md) |
+| Paquete | Que hay | Empezar por |
+|---|---|---|
+| `tessera.kit` | **contenedores** (`Row`, `Col`, `Form`, `Grid`, `Card`, `Header`, `Footer`, `Page`, `Stack`...) y **widgets** (`Label`, `Button`, `Check`, `Radio`, `Switch`, `Input`, `Combo`, `Table`...) | [Referencia del kit](docs/reference/kit/README.md) |
+| `tessera.theme` | `Theme` e `Icons` | [Theme](docs/reference/theme/theme.md) |
+| `tessera.notify` | `Notification` y `Toast` | [Avisos](docs/reference/notify/README.md) |
+| `tessera.app` | `TrayDock` y `WindowPrefs` | [Escritorio](docs/reference/app/README.md) |
+| `tessera.components` | modelos de tabla, renderizadores, validacion, bordes, arrastrar y soltar... | [Componentes sueltos](docs/reference/components/README.md) |
 
-Cada clase publica tiene ademas Javadoc corto con un ejemplo de uso.
+Todo el indice por componente: [docs/reference/README.md](docs/reference/README.md). Para una lectura rapida de toda la API (pensada para IA y devs nuevos): [AGENTS.md](AGENTS.md).
+Cada clase publica tiene ademas Javadoc corto con un ejemplo de uso. Cambios entre versiones: [CHANGELOG.md](CHANGELOG.md).
 
 ## Personalizar en 30 segundos
 
@@ -115,7 +110,7 @@ Theme.builder()
 ![Tema propio](docs/img/theme-custom.png)
 
 Ojo: el radio de `Card` hoy es fijo (12) y `accent` todavia no pinta radios ni barras de progreso. Todo el detalle, con la lista de lo que se puede y no se puede cambiar, en
-[docs/CUSTOMIZING.md](docs/CUSTOMIZING.md).
+[docs/guides/customizing.md](docs/guides/customizing.md).
 
 ## Estructura
 
@@ -123,9 +118,11 @@ Ojo: el radio de `Card` hoy es fijo (12) y `accent` todavia no pinta radios ni b
 src/main/java/tessera/   la libreria (kit, theme, notify, app, components)
 src/main/resources/      fuente Inter, interruptor y iconos de avisos
 src/demo/java/           Showcase: ejemplo ejecutable y fuente de las capturas de docs/
-docs/                    guias y referencia (ver la tabla de Documentacion); docs/img: imagenes de los ejemplos
+docs/guides/             guias: primeros pasos, pantallas, recetas, personalizar, migrar, FAQ, contribuir
+docs/reference/          referencia por componente: kit (contenedores y widgets), theme, notify, app, components
+docs/img/                imagenes de la documentacion (se generan con scripts/doc-images.sh)
 CHANGELOG.md             cambios entre versiones
-scripts/doc-images.sh    regenera docs/img (ver docs/CONTRIBUTING.md)
+scripts/doc-images.sh    regenera docs/img (ver docs/guides/contributing.md)
 scripts/fetch-libs.sh    descarga las dependencias
 build.sh | build.ps1     compilacion sin Maven ni Gradle
 ```

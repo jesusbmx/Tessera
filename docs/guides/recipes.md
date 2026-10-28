@@ -1,6 +1,6 @@
 # Recetas
 
-Pantallas y situaciones completas, listas para copiar y adaptar. Todas siguen la convencion de [SCREENS.md](SCREENS.md) (la logica arriba y la
+Pantallas y situaciones completas, listas para copiar y adaptar. Todas siguen la convencion de [screens.md](screens.md) (la logica arriba y la
 UI al final, campos justo encima del metodo que los arma) y estan **compiladas contra la libreria**.
 
 En los ejemplos se omiten los `import`. Recuerda que deben ser **explicitos** para las clases del kit (`import tessera.kit.Label;`, no
@@ -295,7 +295,7 @@ public class SettingsPanel extends JPanel {
 
 ## 5. Tarea larga con progreso
 
-Un trabajo en segundo plano que informa su avance en una `Notification` con barra de progreso (ver [NOTIFICATIONS.md](NOTIFICATIONS.md)).
+Un trabajo en segundo plano que informa su avance en una `Notification` con barra de progreso (ver [Avisos](../reference/notify/README.md)).
 
 ```java
 public class ExportPanel extends JPanel {
@@ -356,7 +356,7 @@ public class ExportPanel extends JPanel {
 ## 6. App que vive en la bandeja
 
 Cerrar la ventana no cierra la app: queda un icono en la bandeja con menu, la ventana recuerda su tamano y se puede reabrir desde el icono (o
-desde el Dock en macOS). Ver [APP.md](APP.md).
+desde el Dock en macOS). Ver [Integracion con el escritorio](../reference/app/README.md).
 
 ```java
 public class TrayApp {
