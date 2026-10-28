@@ -11,6 +11,12 @@
 
 ![MenuButton: con flecha y solo con icono](../../../img/widget-menubutton.png)
 
+**En una frase:** al hacer clic abre un menu de acciones; el usuario elige una opcion y **corre algo**. No queda nada elegido ni marcado.
+
+**Reemplaza, en Swing puro:** un `JPopupMenu` + un `JMenuItem` por opcion (con su `addActionListener`) + `popup.show(boton, 0, boton.getHeight())`, y un metodo auxiliar por archivo para crear los items.
+
+**Guia con ejemplos paso a paso:** [Botones que abren un menu, recetas 3 y 5](../../../guides/menus.md#3-hacer-algo-menubutton).
+
 ## Cuando usarlo
 
 - "Agregar" con varias formas de agregar, "Mas opciones", "Insertar columna": un boton que agrupa acciones.
@@ -45,6 +51,16 @@ Comunes a `MenuButton`, [`ChoiceButton`](choicebutton.md) y [`MultiChoiceButton`
 | `.icon(recurso, tam)` / `.icon(Icon)` | un icono propio, antes del texto, **en lugar de** la flecha |
 | `.iconGap(px)` | espacio entre el icono y el texto |
 | `.menu()` | el `Menu` que abre |
+
+### Ejemplo: "Agregar" con varias formas de agregar
+
+![Un MenuButton azul, alineado a la derecha, con su menu abierto](../../../img/menus-action.png)
+
+### Ejemplo: un menu que se llena al momento
+
+![Insertar columna: el menu se llena con las columnas de los datos al hacer clic](../../../img/menus-dynamic.png)
+
+`onOpen` corre justo antes de abrir: el menu se vacia con `clear()` y se vuelve a llenar con lo que haya en ese momento.
 
 ```java
 private final MenuButton btnAdd = MenuButton.of("Agregar")

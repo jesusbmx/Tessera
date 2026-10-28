@@ -13,6 +13,8 @@ Los cambios importantes de Tessera. Formato basado en [Keep a Changelog](https:/
   - [`MultiChoiceButton<T>`](docs/reference/kit/widgets/multichoicebutton.md): marca **varias** opciones con casillas; `getValues()`, `isChecked(v)`, `setChecked(v, b)`.
   - [`MenuButton`](docs/reference/kit/widgets/menubutton.md): **acciones**; el clic en una opcion corre algo y no queda nada elegido. `onOpen` para menus que se llenan al momento.
   - [`Menu` y `MenuItem`](docs/reference/kit/widgets/menu.md): el menu y sus opciones **sin boton**, por ejemplo el clic derecho de una lista (`menu.show(lista, x, y)`).
+  - Guia nueva [Botones que abren un menu](docs/guides/menus.md): cual usar, con 7 imagenes de pantallas con el menu abierto y ejemplos compilados
+    (`MenuImages.java` y `MenuExamples.java`); cada pagina de referencia dice que reemplaza de Swing puro y enlaza a su receta.
 
 ### Corregido
 

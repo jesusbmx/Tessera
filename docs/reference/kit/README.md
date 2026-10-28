@@ -63,6 +63,10 @@ Cada uno **es** el widget de Swing (`Button extends JButton`...) con metodos enc
 
 Los tres botones comparten `color`, `arrowLeft`, `noArrow` e `icon` (clase base `PopupButton`).
 
+![Los tres botones, cada uno con su menu abierto](../../img/menus-overview.png)
+
+Ejemplos con imagenes, paso a paso: [Botones que abren un menu](../../guides/menus.md).
+
 ## Ideas base
 
 1. **Un widget del kit es un widget de Swing.** `Button extends JButton`, `Input extends JTextField`, `Table extends JTable`...

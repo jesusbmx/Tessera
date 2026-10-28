@@ -11,6 +11,12 @@
 
 ![MultiChoiceButton: el menu con una casilla marcada](../../../img/widget-multichoicebutton.png)
 
+**En una frase:** al hacer clic abre un menu de casillas; el usuario marca las que quiera. El texto del boton **no cambia**. Lo que queda es un **conjunto** de valores (`getValues()`).
+
+**Reemplaza, en Swing puro:** un `JPopupMenu` + un `JCheckBoxMenuItem` por opcion + `popup.show(boton, 0, boton.getHeight())` + leer cada casilla con `item.isSelected()`.
+
+**Guia con ejemplos paso a paso:** [Botones que abren un menu, receta 2](../../../guides/menus.md#2-marcar-varias-multichoicebutton).
+
 ## Cuando usarlo
 
 - Un boton de **ajustes** con varias casillas que no merecen una fila cada una: "Configuracion para descomprimir", filtros, columnas visibles.
@@ -34,6 +40,15 @@ Es un `JButton` (`Styled`, y los metodos de [`PopupButton`](menubutton.md#metodo
 | `isChecked(valor)` | esa casilla esta marcada |
 | `setChecked(valor, marcada)` | marca o desmarca una casilla |
 | `setValues(coleccion)` | deja marcadas exactamente esas; avisa **una sola vez** a `onChange` |
+
+### Ejemplo: ajustes de descompresion junto a su casilla
+
+![Una casilla y, al lado, el boton de configuracion con su menu abierto](../../../img/menus-multi.png)
+
+El boton es un `JButton`: se habilita o deshabilita como cualquiera (`unzip.setEnabled(chkUnzip.isSelected())`), y lo marcado se lee con
+`unzip.getValues()` o `unzip.isChecked("residues")`.
+
+### Con un `enum`
 
 ```java
 private enum Unzip { REMOVE_RESIDUES, SAME_FOLDER }

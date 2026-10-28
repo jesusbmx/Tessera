@@ -9,6 +9,7 @@ Todo esta en Markdown dentro de este repositorio: no depende de ningun sitio web
 | instalarla y ver mi primera ventana | [Primeros pasos](guides/getting-started.md) |
 | ver como se coloca todo (Row, Col, Form, Page...) con imagenes y pantallas completas | [Como armar una pantalla](guides/screens.md) |
 | ejemplos completos listos para copiar | [Recetas](guides/recipes.md) |
+| un boton que abre un menu: elegir una opcion, marcar varias o correr una accion; el clic derecho de una lista | [Botones que abren un menu](guides/menus.md) |
 | cambiar colores, esquinas redondeadas, fuente | [Personalizar](guides/customizing.md) |
 | pasar una app NetBeans / GroupLayout a Tessera | [Migrar una app](guides/migrating.md) |
 | resolver un problema o una duda | [Preguntas frecuentes](guides/faq.md) |

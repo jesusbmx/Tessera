@@ -11,6 +11,12 @@
 
 ![Menu: encabezado, opciones, una deshabilitada, separador y una con icono](../../../img/widget-menu.png)
 
+**En una frase:** un menu emergente de acciones que no depende de un boton: se abre donde se haga clic o debajo de cualquier componente.
+
+**Reemplaza, en Swing puro:** `new JPopupMenu()` + `new JMenuItem(texto)` + `addActionListener` por opcion + un metodo auxiliar por archivo para armar los items (`menuItem`, `popup`, `titleItem`...).
+
+**Guia con ejemplos paso a paso:** [Botones que abren un menu, receta 4](../../../guides/menus.md#4-un-menu-sin-boton-el-clic-derecho-con-menu).
+
 ## Cuando usarlo
 
 - El **clic derecho** de una lista o tabla: `menu.show(lista, x, y)`.
@@ -48,6 +54,13 @@ Una opcion con su accion; se guarda en un campo cuando hay que cambiarla despues
 | `.accelerator(KeyStroke)` | atajo de teclado que se muestra junto al texto (sirve tambien en los menus de una `JMenuBar`) |
 | `.padding(vertical, horizontal)` | margen interno en px |
 | `.tip(texto)` `.enabled(b)` `.bold()` `.fontSize(n)` | los de [`Styled`](../README.md#styledt--todos-los-widgets-y-contenedores) |
+
+### Ejemplo: el clic derecho de una lista
+
+![El menu de un servicio abierto en el punto donde se hizo clic](../../../img/menus-context.png)
+
+El titulo (nombre del servicio) y las opciones que dependen de la fila ("Bajar" esta deshabilitada porque es la ultima) se ajustan justo antes de abrir
+el menu; por eso esas opciones se guardan en un campo.
 
 ```java
 private final MenuItem miToggle = MenuItem.of("Deshabilitar", this::toggleSelected);

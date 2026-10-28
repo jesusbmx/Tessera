@@ -11,6 +11,13 @@
 
 ![ChoiceButton: sin eleccion, con una opcion elegida y con la flecha a la izquierda](../../../img/widget-choicebutton.png)
 
+**En una frase:** al hacer clic abre un menu de opciones; el usuario elige **una** y el boton la muestra. Lo que queda es un **valor** (`getValue()`).
+
+**Reemplaza, en Swing puro:** un `JPopupMenu` + un `JRadioButtonMenuItem` por opcion + un `ButtonGroup` + un listener por opcion + `popup.show(boton, 0, boton.getHeight())`
++ mantener a mano el texto del boton y las cadenas de `if (rbX.isSelected())`.
+
+**Guia con ejemplos paso a paso:** [Botones que abren un menu, receta 1](../../../guides/menus.md#1-elegir-una-opcion-choicebutton).
+
 ## Cuando usarlo
 
 - Elegir **una** opcion de pocas (2 a 8) cuando cada una merece una **ayuda breve** o el espacio es poco: el tipo de servicio, el metodo de impresion.
@@ -37,6 +44,23 @@ Es un `JButton`: se puede pasar a `Form.row(...)`, a `ErrorProvider.setError(...
 | `hasValue()` | hay una opcion elegida |
 | `is(valor)` | la opcion elegida es esa |
 | `getValueTip()` | la ayuda de la opcion elegida: sirve para la linea de ayuda junto al selector |
+
+### Ejemplo: elegir y que la pantalla reaccione
+
+![Antes y despues de elegir: el menu abierto y la pantalla ya reaccionando](../../../img/menus-choice.png)
+
+1. El usuario abre el menu (arriba) y elige "Red (IP)".
+2. El boton cambia su texto solo; `onChange` actualiza la linea de ayuda con `getValueTip()` y muestra el campo de la IP (abajo).
+3. El resto del codigo lee `method.getValue()` o pregunta `method.is(NETWORK)`: no hay un `if` por opcion.
+
+### Ejemplo: una opcion que no esta disponible
+
+![Una opcion deshabilitada con su tooltip](../../../img/menus-choice-disabled.png)
+
+`method.optionEnabled(USB, false, "No disponible en este equipo")` deja la opcion en gris y, al dejar el mouse encima, explica por que.
+`method.optionEnabled(USB, true)` la vuelve a habilitar con su ayuda de siempre.
+
+### Con un `enum`
 
 Con un `enum` el resto del codigo deja de depender de cada opcion por separado:
 

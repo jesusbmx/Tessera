@@ -22,5 +22,8 @@ java -cp "build/demo${SEP}build/classes$SEP$CP" tessera.demo.LayoutImages docs/i
 # imagenes de los widgets (docs/reference/kit): widget-*.png y container-*.png
 java -cp "build/demo${SEP}build/classes$SEP$CP" tessera.demo.WidgetImages docs/img
 
+# imagenes de la guia de menus (docs/guides/menus.md): menus-*.png, con el menu abierto encima del boton
+java -cp "build/demo${SEP}build/classes$SEP$CP" tessera.demo.MenuImages docs/img
+
 # imagenes de los avisos (docs/reference/notify): notify-*.png. Muestran las ventanas un instante: necesita un escritorio (no sirve sin pantalla)
 java -cp "build/demo${SEP}build/classes$SEP$CP" tessera.demo.NotifyImages docs/img

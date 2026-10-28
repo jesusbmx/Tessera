@@ -90,7 +90,7 @@ No hay tests automaticos. Se comprueba compilando y mirando el Showcase:
 ./build.sh --demo        (Windows: ./build.ps1 -Demo)
 ```
 
-Las imagenes de la documentacion (`docs/img/`) las generan tres clases de `src/demo/java/tessera/demo/`: `DocImages.java` (capturas de las guias), `LayoutImages.java` (la guia visual de [screens.md](screens.md): `layout-*.png` y `app-*.png`, con el mismo codigo que muestra la guia) y `WidgetImages.java` (las paginas de widgets: `widget-*.png` y `container-*.png`). Despues de cambiar el aspecto de algo
+Las imagenes de la documentacion (`docs/img/`) las generan cuatro clases de `src/demo/java/tessera/demo/`: `DocImages.java` (capturas de las guias), `LayoutImages.java` (la guia visual de [screens.md](screens.md): `layout-*.png` y `app-*.png`, con el mismo codigo que muestra la guia), `WidgetImages.java` (las paginas de widgets: `widget-*.png` y `container-*.png`) y `MenuImages.java` (la guia [menus.md](menus.md): `menus-*.png`, pantallas con el menu abierto encima del boton; los fragmentos de esa guia que no estan ahi viven en `MenuExamples.java`, que solo existe para que compilen). Despues de cambiar el aspecto de algo
 que aparezca en ellas: `./build.sh && ./scripts/doc-images.sh`, y revisar los PNG antes de subirlos. `ScreenExample.java` es el ejemplo de
 [screens.md](screens.md) compilado: si cambia ese ejemplo, se cambian los dos.
 
