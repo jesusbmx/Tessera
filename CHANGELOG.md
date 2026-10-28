@@ -7,6 +7,7 @@ Los cambios importantes de Tessera. Formato basado en [Keep a Changelog](https:/
 
 ### Agregado
 
+- **`@Preview` y `Previewer`** (`tessera.app`): ver una pantalla en su propia ventana mientras se arma, sin arrancar la app. `@Preview` en la clase (o en metodos estaticos con datos de muestra) y un `main` de una linea; F5 la recrea. Ver [preview.md](docs/reference/app/preview.md).
 - **Botones que abren un menu** (`tessera.kit`), uno por cada cosa que se quiere hacer, con una base comun (`PopupButton`: flecha, color, abrir debajo del boton):
   - [`ChoiceButton<T>`](docs/reference/kit/widgets/choicebutton.md): elige **una** opcion y el boton la muestra. Cada opcion lleva valor, texto y ayuda;
     `getValue()`, `setValue(v)`, `is(v)` y `onChange(...)` (tambien al elegir por codigo) reemplazan al `JPopupMenu` + un `JRadioButtonMenuItem` por opcion + `Kit.group`.

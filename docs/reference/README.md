@@ -86,6 +86,7 @@ Comparacion y cuando usar cada uno: [Avisos](notify/README.md).
 |---|---|
 | [`TrayDock`](app/traydock.md) | icono de la bandeja del sistema con menu, y reapertura desde el Dock de macOS |
 | [`WindowPrefs`](app/windowprefs.md) | cada ventana se abre con el tamano que el usuario le dejo |
+| [`Preview` y `Previewer`](app/preview.md) | ver una pantalla en su propia ventana mientras se arma (`@Preview`) |
 
 ## `tessera.components`
 

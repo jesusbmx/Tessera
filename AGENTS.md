@@ -15,7 +15,7 @@ es la referencia completa de la API. Detalle y ejemplos: Javadoc de cada clase (
 tessera.kit         contenedores y widgets (lo que mas se usa)
 tessera.theme       Theme (instala el tema), Icons (SVG, switch)
 tessera.notify      Notification (apiladas), Toast (una a la vez)
-tessera.app         TrayDock (bandeja + Dock macOS), WindowPrefs (tamano de ventanas)
+tessera.app         TrayDock (bandeja + Dock macOS), WindowPrefs (tamano de ventanas), Preview/Previewer (ver una pantalla sin la app)
 tessera.components  modelos/renderers/bordes/validacion sueltos
 ```
 
@@ -110,6 +110,10 @@ TrayDock.onAppReopened(this::mostrar);                // macOS: clic en el Dock 
 
 WindowPrefs.install("com.miapp.");                    // recuerda tamano de las ventanas del paquete
 WindowPrefs.install(miStore, "com.miapp.");           // con almacen propio (interfaz WindowPrefs.Store)
+
+@Preview public class MiPanel extends JPanel {        // vista previa: Run File en el IDE
+  public static void main(String[] a) { Previewer.show(MiTema::install, MiPanel.class); }   // F5 la recrea; @Preview tambien en metodos estaticos con datos de muestra
+}
 ```
 
 ## Componentes sueltos (`tessera.components`)
