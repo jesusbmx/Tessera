@@ -7,9 +7,12 @@ Los cambios importantes de Tessera. Formato basado en [Keep a Changelog](https:/
 
 ### Agregado
 
-- **`Dropdown<T>`** (`tessera.kit`): boton que despliega un menu de opciones y muestra la elegida. Cada opcion lleva un valor, un texto y una ayuda;
-  `getValue()`, `setValue(v)`, `is(v)` y `onChange(...)` (tambien al elegir por codigo) reemplazan al `JPopupMenu` + un `JRadioButtonMenuItem` por opcion + `Kit.group`.
-  Ver [dropdown.md](docs/reference/kit/widgets/dropdown.md).
+- **Botones que abren un menu** (`tessera.kit`), uno por cada cosa que se quiere hacer, con una base comun (`PopupButton`: flecha, color, abrir debajo del boton):
+  - [`ChoiceButton<T>`](docs/reference/kit/widgets/choicebutton.md): elige **una** opcion y el boton la muestra. Cada opcion lleva valor, texto y ayuda;
+    `getValue()`, `setValue(v)`, `is(v)` y `onChange(...)` (tambien al elegir por codigo) reemplazan al `JPopupMenu` + un `JRadioButtonMenuItem` por opcion + `Kit.group`.
+  - [`MultiChoiceButton<T>`](docs/reference/kit/widgets/multichoicebutton.md): marca **varias** opciones con casillas; `getValues()`, `isChecked(v)`, `setChecked(v, b)`.
+  - [`MenuButton`](docs/reference/kit/widgets/menubutton.md): **acciones**; el clic en una opcion corre algo y no queda nada elegido. `onOpen` para menus que se llenan al momento.
+  - [`Menu` y `MenuItem`](docs/reference/kit/widgets/menu.md): el menu y sus opciones **sin boton**, por ejemplo el clic derecho de una lista (`menu.show(lista, x, y)`).
 
 ### Corregido
 

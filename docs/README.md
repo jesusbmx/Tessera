@@ -20,7 +20,7 @@ Una pagina por componente, con imagen, cuando usarlo, todos sus metodos y errore
 
 | Paquete | Contenido |
 |---|---|
-| `tessera.kit` | [contenedores y widgets](reference/kit/README.md): `Row`, `Col`, `Stack`, `Grid`, `Form`, `Card`, `Header`, `Footer`, `Page`, `Pages`, `Scroll`, `Tabs`, `Split`, `Separator`, `Label`, `Hint`, `Button`, `Check`, `Radio`, `Toggle`, `Switch`, `Input`, `Password`, `TextArea`, `Combo`, `Dropdown`, `Spinner`, `Table` |
+| `tessera.kit` | [contenedores y widgets](reference/kit/README.md): `Row`, `Col`, `Stack`, `Grid`, `Form`, `Card`, `Header`, `Footer`, `Page`, `Pages`, `Scroll`, `Tabs`, `Split`, `Separator`, `Label`, `Hint`, `Button`, `Check`, `Radio`, `Toggle`, `Switch`, `Input`, `Password`, `TextArea`, `Combo`, `ChoiceButton`, `MultiChoiceButton`, `MenuButton`, `Menu`, `Spinner`, `Table` |
 | `tessera.theme` | [`Theme`](reference/theme/theme.md), [`Icons`](reference/theme/icons.md) |
 | `tessera.notify` | [`Notification`](reference/notify/notification.md), [`Toast`](reference/notify/toast.md) |
 | `tessera.app` | [`TrayDock`](reference/app/traydock.md), [`WindowPrefs`](reference/app/windowprefs.md) |

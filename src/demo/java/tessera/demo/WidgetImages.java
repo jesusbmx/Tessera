@@ -2,20 +2,29 @@ package tessera.demo;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import javax.swing.ImageIcon;
 import javax.swing.JComponent;
+import javax.swing.JLabel;
 import javax.swing.SwingUtilities;
 import tessera.components.BaseTableModel;
 import tessera.kit.Button;
 import tessera.kit.Card;
 import tessera.kit.Check;
+import tessera.kit.ChoiceButton;
 import tessera.kit.Col;
 import tessera.kit.Combo;
-import tessera.kit.Dropdown;
 import tessera.kit.Hint;
 import tessera.kit.Input;
 import tessera.kit.Kit;
 import tessera.kit.Label;
+import tessera.kit.Menu;
+import tessera.kit.MenuButton;
+import tessera.kit.MenuItem;
+import tessera.kit.MultiChoiceButton;
 import tessera.kit.Password;
+import tessera.kit.PopupButton;
 import tessera.kit.Radio;
 import tessera.kit.Row;
 import tessera.kit.Scroll;
@@ -59,7 +68,10 @@ public final class WidgetImages {
       LayoutImages.save(dir, "widget-password", password(), W, 0);
       LayoutImages.save(dir, "widget-textarea", textArea(), W, 0);
       LayoutImages.save(dir, "widget-combo", combo(), W, 0);
-      LayoutImages.save(dir, "widget-dropdown", dropdown(), W, 0);
+      LayoutImages.save(dir, "widget-choicebutton", choiceButton(), W, 0);
+      LayoutImages.save(dir, "widget-multichoicebutton", multiChoiceButton(), W, 0);
+      LayoutImages.save(dir, "widget-menubutton", menuButton(), W, 0);
+      LayoutImages.save(dir, "widget-menu", menu(), W, 0);
       LayoutImages.save(dir, "widget-spinner", spinner(), W, 0);
       LayoutImages.save(dir, "widget-table", table(), W, 0);
       LayoutImages.save(dir, "container-scroll", scroll(), W, 0);
@@ -196,21 +208,78 @@ public final class WidgetImages {
         Card.section(".enabled(false)").children(Combo.of("Deshabilitado").enabled(false)));
   }
 
-  private static JComponent dropdown() {
-    final Dropdown<Integer> empty = Dropdown.<Integer>of()
+  /** Boton y, debajo, su menu abierto (un menu emergente no se dibuja dentro de otra ventana: se pinta aparte). */
+  private static JComponent withMenu(PopupButton<?> button) {
+    final Menu menu = button.menu();
+    final Dimension size = menu.getPreferredSize();
+    menu.setSize(size);
+    menu.doLayout();
+    final BufferedImage image = new BufferedImage(size.width, size.height, BufferedImage.TYPE_INT_ARGB);
+    final Graphics2D g = image.createGraphics();
+    menu.paint(g);
+    g.dispose();
+    return Col.gap(2).children(button, new JLabel(new ImageIcon(image)));
+  }
+
+  private static JComponent choiceButton() {
+    final ChoiceButton<Integer> empty = ChoiceButton.<Integer>of()
         .placeholder("Elegir metodo")
         .option(0, "Driver", "Imprime con el driver del sistema")
         .option(1, "Red", "Imprime por IP")
         .option(2, "USB", "Imprime directo al puerto USB");
-    final Dropdown<Integer> chosen = Dropdown.<Integer>of()
+    final ChoiceButton<Integer> chosen = ChoiceButton.<Integer>of()
         .option(0, "Driver").option(1, "Red").option(2, "USB").bold();
     chosen.setValue(1);
-    final Dropdown<Integer> left = Dropdown.<Integer>of().option(0, "Driver").option(1, "Red").arrowLeft();
+    final ChoiceButton<Integer> left = ChoiceButton.<Integer>of().option(0, "Driver").option(1, "Red").arrowLeft();
     left.setValue(0);
     return Col.gap(10).padding(12, 16, 12, 16).children(
-        Card.section("Dropdown.<Integer>of().placeholder(texto).option(valor, texto, ayuda)").children(empty),
-        Card.section("setValue(1)  .bold()  -> el boton muestra la opcion elegida").children(chosen),
+        Card.section("ChoiceButton.<Integer>of().placeholder(texto).option(valor, texto, ayuda)").children(withMenu(empty)),
+        Card.section("setValue(1)  .bold()  -> el boton muestra la opcion elegida").children(withMenu(chosen)),
         Card.section(".arrowLeft()  -> la flecha a la izquierda").children(left));
+  }
+
+  private static JComponent multiChoiceButton() {
+    final MultiChoiceButton<String> unzip = MultiChoiceButton.<String>of("Configuracion para descomprimir")
+        .option("residues", "Borrar los residuos del zip").checked("residues")
+        .option("sameFolder", "Extraer en la misma carpeta");
+    return Col.gap(10).padding(12, 16, 12, 16).children(
+        Card.section("MultiChoiceButton.<String>of(texto).option(valor, texto).checked(valor)").children(withMenu(unzip)),
+        Card.section("getValues()  isChecked(valor)  setChecked(valor, true)  onChange(...)").children(
+            Label.muted("Las marcadas: " + unzip.getValues()).small()));
+  }
+
+  private static JComponent menuButton() {
+    final MenuButton add = MenuButton.of("Agregar")
+        .item("Crear servicio", () -> { })
+        .separator()
+        .item("Importar de un archivo", () -> { });
+    final MenuButton more = MenuButton.of("").icon("tessera/img/info.svg", 24)
+        .tip("Mas opciones")
+        .title("Mas opciones")
+        .item("Exportar", () -> { });
+    return Col.gap(10).padding(12, 16, 12, 16).children(
+        Card.section("MenuButton.of(texto).item(texto, accion).separator()").children(withMenu(add)),
+        Card.section(".icon(recurso, tam)  -> un icono en lugar de la flecha").children(withMenu(more)));
+  }
+
+  private static JComponent menu() {
+    final Menu menu = Menu.create()
+        .title("Servicio")
+        .item("Editar", () -> { })
+        .item(MenuItem.of("Duplicar", () -> { }).enabled(false))
+        .separator()
+        .item(MenuItem.of("Importar", () -> { }).icon("tessera/img/info.svg", 16).iconRight());
+    final Dimension size = menu.getPreferredSize();
+    menu.setSize(size);
+    menu.doLayout();
+    final BufferedImage image = new BufferedImage(size.width, size.height, BufferedImage.TYPE_INT_ARGB);
+    final Graphics2D g = image.createGraphics();
+    menu.paint(g);
+    g.dispose();
+    return Col.gap(10).padding(12, 16, 12, 16).children(
+        Card.section("Menu.create().title(texto).item(texto, accion).separator()").children(new JLabel(new ImageIcon(image))),
+        Card.section("menu.show(lista, x, y)  clic derecho   |   menu.showBelow(boton)").children(
+            Label.muted("MenuItem.of(texto, accion).icon(recurso, tam).iconRight().enabled(false)").small()));
   }
 
   private static JComponent spinner() {

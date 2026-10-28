@@ -1,22 +1,18 @@
 package tessera.kit;
 
-import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.function.Consumer;
 import javax.swing.ButtonGroup;
-import javax.swing.JButton;
-import javax.swing.JPopupMenu;
 import javax.swing.JRadioButtonMenuItem;
-import javax.swing.SwingConstants;
 
 /**
- * Boton que despliega un menu para elegir una opcion: el boton muestra la elegida. Sirve para pocas opciones
+ * Boton que abre un menu para elegir <b>una</b> opcion: el boton muestra la elegida. Sirve para pocas opciones
  * que merecen una ayuda breve cada una; para una lista larga usa {@link Combo}.
  *
  * <pre>
- * Dropdown&lt;Integer&gt; method = Dropdown.&lt;Integer&gt;of()
+ * ChoiceButton&lt;Integer&gt; method = ChoiceButton.&lt;Integer&gt;of()
  *     .placeholder("Elegir metodo")
  *     .option(0, "Driver", "Imprime con el driver del sistema")
  *     .option(1, "Red", "Imprime por IP")
@@ -25,12 +21,12 @@ import javax.swing.SwingConstants;
  * Integer chosen = method.getValue(); // null si no hay nada elegido
  * </pre>
  *
+ * Para marcar varias opciones usa {@link MultiChoiceButton}; si no queda nada elegido y solo corre una
+ * accion, {@link MenuButton}.
+ *
  * @param <T> tipo del valor de cada opcion (un enum, un entero, un texto)
  */
-public class Dropdown<T> extends JButton implements Styled<Dropdown<T>> {
-
-  private static final String ARROW = "tessera/img/arrow_down.svg";
-  private static final int ARROW_SIZE = 16;
+public class ChoiceButton<T> extends PopupButton<ChoiceButton<T>> {
 
   /** Una opcion del menu: su valor, el texto que se muestra y su ayuda. */
   private final class Option {
@@ -49,22 +45,19 @@ public class Dropdown<T> extends JButton implements Styled<Dropdown<T>> {
     }
   }
 
-  private final JPopupMenu popup = new JPopupMenu();
   private final ButtonGroup group = new ButtonGroup();
   private final List<Option> options = new ArrayList<>();
   private final List<Consumer<T>> listeners = new ArrayList<>();
   private Option selected;
   private String placeholder = "";
 
-  protected Dropdown() {
-    setIcon(Kit.icon(ARROW, ARROW_SIZE));
-    setHorizontalTextPosition(SwingConstants.LEADING);
-    addActionListener(e -> popup.show(this, 0, getHeight()));
+  protected ChoiceButton() {
+    super("");
   }
 
-  /** Desplegable sin opciones (se agregan con {@link #option}). Se escribe {@code Dropdown.<Tipo>of()}. */
-  public static <T> Dropdown<T> of() {
-    return new Dropdown<>();
+  /** Boton sin opciones (se agregan con {@link #option}). Se escribe {@code ChoiceButton.<Tipo>of()}. */
+  public static <T> ChoiceButton<T> of() {
+    return new ChoiceButton<>();
   }
 
   // ------------------------------------------------------------------------ //
@@ -72,7 +65,7 @@ public class Dropdown<T> extends JButton implements Styled<Dropdown<T>> {
   // ------------------------------------------------------------------------ //
 
   /** Texto del boton mientras no hay nada elegido. */
-  public Dropdown<T> placeholder(String text) {
+  public ChoiceButton<T> placeholder(String text) {
     placeholder = text == null ? "" : text;
     if (selected == null) {
       setText(placeholder);
@@ -80,27 +73,27 @@ public class Dropdown<T> extends JButton implements Styled<Dropdown<T>> {
     return this;
   }
 
-  /** Agrega una opcion: su valor y el texto que muestra el menu (y el boton al elegirla). */
-  public Dropdown<T> option(T value, String text) {
+  /** Agrega una opcion: su valor y el texto del menu (y del boton al elegirla). */
+  public ChoiceButton<T> option(T value, String text) {
     return option(value, text, null);
   }
 
   /** Agrega una opcion con una ayuda breve que sale al dejar el mouse sobre ella en el menu. */
-  public Dropdown<T> option(T value, String text, String tip) {
+  public ChoiceButton<T> option(T value, String text, String tip) {
     final Option option = new Option(value, text, tip);
     options.add(option);
     group.add(option.item);
-    popup.add(option.item);
+    menu().add(option.item);
     return this;
   }
 
   /** Habilita o deshabilita una opcion (sin efecto si ese valor no existe). */
-  public Dropdown<T> optionEnabled(T value, boolean enabled) {
+  public ChoiceButton<T> optionEnabled(T value, boolean enabled) {
     return optionEnabled(value, enabled, null);
   }
 
   /** Igual, y mientras la opcion esta deshabilitada el menu muestra {@code disabledTip} en lugar de su ayuda. */
-  public Dropdown<T> optionEnabled(T value, boolean enabled, String disabledTip) {
+  public ChoiceButton<T> optionEnabled(T value, boolean enabled, String disabledTip) {
     final Option option = find(value);
     if (option != null) {
       option.item.setEnabled(enabled);
@@ -110,27 +103,13 @@ public class Dropdown<T> extends JButton implements Styled<Dropdown<T>> {
   }
 
   /** Que hacer cada vez que cambia la opcion elegida (tambien si se elige por codigo), con su valor. */
-  public Dropdown<T> onChange(Consumer<T> action) {
+  public ChoiceButton<T> onChange(Consumer<T> action) {
     listeners.add(action);
     return this;
   }
 
-  public Dropdown<T> onChange(Runnable action) {
+  public ChoiceButton<T> onChange(Runnable action) {
     return onChange(value -> action.run());
-  }
-
-  /** La flecha a la izquierda del texto en lugar de a la derecha. */
-  public Dropdown<T> arrowLeft() {
-    setHorizontalTextPosition(SwingConstants.TRAILING);
-    return this;
-  }
-
-  /** Color del texto y de la flecha. */
-  @Override
-  public Dropdown<T> color(Color color) {
-    setForeground(color);
-    setIcon(Kit.icon(ARROW, ARROW_SIZE, color));
-    return this;
   }
 
   // ------------------------------------------------------------------------ //

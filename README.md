@@ -24,7 +24,7 @@ Page.create()
 
 | Paquete | Contenido |
 |---|---|
-| `tessera.kit` | Contenedores `Row`, `Col`, `Stack`, `Grid`, `Form`, `Card`, `Header`, `Footer`, `Page`, `Pages`, `Scroll`, `Tabs`, `Split`, `Separator`. Widgets con metodos encadenables: `Label`, `Hint`, `Button`, `Input`, `Password`, `TextArea`, `Combo`, `Dropdown`, `Check`, `Radio`, `Toggle`, `Switch`, `Spinner`, `Table`. Paleta y utilidades en `Kit`. |
+| `tessera.kit` | Contenedores `Row`, `Col`, `Stack`, `Grid`, `Form`, `Card`, `Header`, `Footer`, `Page`, `Pages`, `Scroll`, `Tabs`, `Split`, `Separator`. Widgets con metodos encadenables: `Label`, `Hint`, `Button`, `Input`, `Password`, `TextArea`, `Combo`, `ChoiceButton`, `MultiChoiceButton`, `MenuButton`, `Menu`, `Check`, `Radio`, `Toggle`, `Switch`, `Spinner`, `Table`. Paleta y utilidades en `Kit`. |
 | `tessera.theme` | `Theme` (FlatLaf, fuente Inter empaquetada, acento, fondo, esquinas redondeadas) e `Icons` (SVG nitidos, interruptor estilo iOS). |
 | `tessera.notify` | `Notification` (tarjetas apiladas en la esquina de la pantalla, con progreso y acciones) y `Toast` (mensaje breve sobre la ventana, con cola). |
 | `tessera.app` | `TrayDock` (icono de bandeja + reapertura desde el Dock de macOS) y `WindowPrefs` (cada ventana se abre con el tamano que el usuario le dejo). |

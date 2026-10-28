@@ -13,15 +13,17 @@ import javax.swing.table.DefaultTableModel;
 import tessera.kit.Button;
 import tessera.kit.Card;
 import tessera.kit.Check;
+import tessera.kit.ChoiceButton;
 import tessera.kit.Col;
 import tessera.kit.Combo;
-import tessera.kit.Dropdown;
 import tessera.kit.Footer;
 import tessera.kit.Form;
 import tessera.kit.Header;
 import tessera.kit.Hint;
 import tessera.kit.Input;
 import tessera.kit.Label;
+import tessera.kit.MenuButton;
+import tessera.kit.MultiChoiceButton;
 import tessera.kit.Page;
 import tessera.kit.Radio;
 import tessera.kit.Row;
@@ -132,7 +134,7 @@ public final class Showcase {
         new Object[][] {{"Impresora A", "192.168.0.10", "Listo"}, {"Impresora B", "USB001", "Sin papel"}},
         new Object[] {"Impresora", "Puerto", "Estado"})).rowHeight(28).singleSelection();
 
-    final Dropdown<Integer> method = Dropdown.<Integer>of()
+    final ChoiceButton<Integer> method = ChoiceButton.<Integer>of()
         .placeholder("Elegir metodo")
         .option(0, "Driver", "Imprime con el driver del sistema")
         .option(1, "Red", "Imprime por IP")
@@ -140,11 +142,21 @@ public final class Showcase {
         .bold();
     method.setValue(0);
 
+    final MultiChoiceButton<String> unzip = MultiChoiceButton.<String>of("Descomprimir")
+        .option("residues", "Borrar los residuos del zip").checked("residues")
+        .option("sameFolder", "Extraer en la misma carpeta");
+
+    final MenuButton add = MenuButton.of("Agregar")
+        .item("Crear servicio", () -> { })
+        .separator()
+        .item("Importar de un archivo", () -> { });
+
     return Scroll.of(Col.gap(10).padding(8, 0, 12, 0).children(
         Card.section("Botones y selectores").children(
             Row.gap(10).children(Button.of("Normal"), Button.primary("Principal"), Toggle.of("Lista"), Toggle.of("Tarjetas")),
             Row.gap(18).children(Check.of("Casilla").selected(true), Switch.of("Interruptor").selected(true), Switch.of("Apagado")),
-            Row.gap(10).children(Label.text("Metodo"), method)),
+            Row.gap(10).children(Label.text("Elige una"), method, Label.text("Marca varias"), unzip,
+                Label.text("Acciones"), add)),
         Card.section("Campos").children(
             Form.create()
                 .row("Nombre", Input.text().placeholder("Nombre completo"))

@@ -45,9 +45,23 @@ Cada uno **es** el widget de Swing (`Button extends JButton`...) con metodos enc
 | [`Password`](widgets/password.md) | **Campo de clave**: el contenido no se ve. |
 | [`TextArea`](widgets/textarea.md) | **Area de texto** de varias lineas. |
 | [`Combo`](widgets/combo.md) | **Lista desplegable** (`JComboBox<T>`). |
-| [`Dropdown`](widgets/dropdown.md) | **Boton que despliega un menu** de opciones: el boton muestra la elegida. |
+| [`ChoiceButton`](widgets/choicebutton.md) | **Boton que abre un menu para elegir una opcion**: el boton muestra la elegida. |
+| [`MultiChoiceButton`](widgets/multichoicebutton.md) | **Boton que abre un menu de casillas** para marcar varias opciones. |
+| [`MenuButton`](widgets/menubutton.md) | **Boton que abre un menu de acciones**: el clic corre algo, no queda nada elegido. |
+| [`Menu`](widgets/menu.md) | **Menu emergente de acciones** (y su `MenuItem`), con o sin boton: el clic derecho de una lista. |
 | [`Spinner`](widgets/spinner.md) | **Selector numerico** con flechas (`JSpinner`). |
 | [`Table`](widgets/table.md) | **Tabla** (`JTable`). |
+
+### Botones que abren un menu: cual uso
+
+| Quiero que el usuario... | Uso | Que queda |
+|---|---|---|
+| **elija una** opcion y el boton la muestre | [`ChoiceButton<T>`](widgets/choicebutton.md) | un valor: `getValue()` |
+| **marque varias** opciones con casillas | [`MultiChoiceButton<T>`](widgets/multichoicebutton.md) | un conjunto: `getValues()` |
+| haga clic y **pase algo** (agregar, exportar, insertar) | [`MenuButton`](widgets/menubutton.md) | nada: cada opcion corre su accion |
+| haga clic derecho en una lista, o abra un menu **sin boton** | [`Menu`](widgets/menu.md) | nada: igual que `MenuButton` |
+
+Los tres botones comparten `color`, `arrowLeft`, `noArrow` e `icon` (clase base `PopupButton`).
 
 ## Ideas base
 
