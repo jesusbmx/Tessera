@@ -10,6 +10,7 @@ import tessera.kit.Card;
 import tessera.kit.Check;
 import tessera.kit.Col;
 import tessera.kit.Combo;
+import tessera.kit.Dropdown;
 import tessera.kit.Hint;
 import tessera.kit.Input;
 import tessera.kit.Kit;
@@ -58,6 +59,7 @@ public final class WidgetImages {
       LayoutImages.save(dir, "widget-password", password(), W, 0);
       LayoutImages.save(dir, "widget-textarea", textArea(), W, 0);
       LayoutImages.save(dir, "widget-combo", combo(), W, 0);
+      LayoutImages.save(dir, "widget-dropdown", dropdown(), W, 0);
       LayoutImages.save(dir, "widget-spinner", spinner(), W, 0);
       LayoutImages.save(dir, "widget-table", table(), W, 0);
       LayoutImages.save(dir, "container-scroll", scroll(), W, 0);
@@ -192,6 +194,23 @@ public final class WidgetImages {
             Combo.of("USB", "Red", "Archivo")),
         Card.section(".editable(true)  -> el usuario puede escribir otro valor").children(editable),
         Card.section(".enabled(false)").children(Combo.of("Deshabilitado").enabled(false)));
+  }
+
+  private static JComponent dropdown() {
+    final Dropdown<Integer> empty = Dropdown.<Integer>of()
+        .placeholder("Elegir metodo")
+        .option(0, "Driver", "Imprime con el driver del sistema")
+        .option(1, "Red", "Imprime por IP")
+        .option(2, "USB", "Imprime directo al puerto USB");
+    final Dropdown<Integer> chosen = Dropdown.<Integer>of()
+        .option(0, "Driver").option(1, "Red").option(2, "USB").bold();
+    chosen.setValue(1);
+    final Dropdown<Integer> left = Dropdown.<Integer>of().option(0, "Driver").option(1, "Red").arrowLeft();
+    left.setValue(0);
+    return Col.gap(10).padding(12, 16, 12, 16).children(
+        Card.section("Dropdown.<Integer>of().placeholder(texto).option(valor, texto, ayuda)").children(empty),
+        Card.section("setValue(1)  .bold()  -> el boton muestra la opcion elegida").children(chosen),
+        Card.section(".arrowLeft()  -> la flecha a la izquierda").children(left));
   }
 
   private static JComponent spinner() {

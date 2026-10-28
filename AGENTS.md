@@ -56,7 +56,7 @@ Extienden el de Swing (`JTextField txt = Input.text()...` sigue siendo un JTextF
 - `Label.text/title/field/muted(txt)` (+ `.icon .small() .center() .right() .padding(t,l,b,r) .onClick(Runnable)`) · `Hint.of(txt)` / `Hint.ofHtml(txt)` ayuda gris que se parte al ancho que reciba (`.width(px)` es solo el ancho que *pide*: en `Col`/`Card`/`Form`/`Row` se estira)
 - `Button.of(txt)` / `Button.primary(txt)` · `Check.of` · `Radio.of` (+ `Radio.group(...)`) · `Toggle.of` (+ `Toggle.group(...)`) · `Switch.of` interruptor estilo iOS
 - `Input.text()` / `Input.password()` / `Input.area(filas)` → `.placeholder(txt) .columns(n) .editable(b) .onChange(Runnable) .onEnter(listener)`; `TextArea.wrap()`
-- `Combo.of(items...)` / `Combo.empty()` → `.onChange .maxRows .editable` · `Spinner.integer(v,min,max,paso)` / `.decimal(...)` → `.onChange`
+- `Combo.of(items...)` / `Combo.empty()` → `.onChange .maxRows .editable` · `Dropdown.<T>of()` boton que abre un menu de opciones → `.placeholder .option(valor, texto[, ayuda]) .optionEnabled(valor, b[, ayuda]) .onChange(Consumer<T>|Runnable) .arrowLeft`, `getValue() setValue(v) is(v) hasValue() getValueTip()` · `Spinner.integer(v,min,max,paso)` / `.decimal(...)` → `.onChange`
 - `Table.of(model)` → `.rowHeight(px) .singleSelection() .onSelect(Runnable) .columnWidth(col, px)` (dentro de un `Scroll`)
 - Utilidades en `Kit`: `Kit.px(n)` (escala con el zoom), `Kit.font(size, bold)`, `Kit.icon(recurso, size[, color])`, `Kit.group(botones...)`, `Kit.makePrimary(boton)`.
 - Si algo es muy puntual: `contenedor.add(comp, "growx, wrap")` acepta restricciones MigLayout crudas (evitarlo).

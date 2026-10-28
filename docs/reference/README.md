@@ -11,7 +11,7 @@ Una pagina por componente: **imagen, cuando usarlo, todos sus metodos y los erro
 | agrupar contenido en un bloque con titulo | [`Card`](kit/containers/card.md) |
 | varias vistas en el mismo lugar | [`Tabs`](kit/containers/tabs.md) · [`Pages`](kit/containers/pages.md) · [`Stack`](kit/containers/stack.md) · [`Split`](kit/containers/split.md) |
 | textos, botones y opciones | [`Label`](kit/widgets/label.md) · [`Button`](kit/widgets/button.md) · [`Check`](kit/widgets/check.md) · [`Radio`](kit/widgets/radio.md) · [`Switch`](kit/widgets/switch.md) |
-| campos de entrada | [`Input`](kit/widgets/input.md) · [`Password`](kit/widgets/password.md) · [`TextArea`](kit/widgets/textarea.md) · [`Combo`](kit/widgets/combo.md) · [`Spinner`](kit/widgets/spinner.md) |
+| campos de entrada | [`Input`](kit/widgets/input.md) · [`Password`](kit/widgets/password.md) · [`TextArea`](kit/widgets/textarea.md) · [`Combo`](kit/widgets/combo.md) · [`Dropdown`](kit/widgets/dropdown.md) · [`Spinner`](kit/widgets/spinner.md) |
 | una tabla de datos | [`Table`](kit/widgets/table.md) + [`BaseTableModel`](components/tables.md#basetablemodel) |
 | cambiar colores, fuente y esquinas | [`Theme`](theme/theme.md) |
 | avisar al usuario | [`Notification`](notify/notification.md) · [`Toast`](notify/toast.md) |
@@ -56,6 +56,7 @@ Vista general, metodos comunes (`Styled`, `Clickable`, `Box`) y utilidades: [Ref
 | [`Password`](kit/widgets/password.md) | **Campo de clave**: el contenido no se ve. |
 | [`TextArea`](kit/widgets/textarea.md) | **Area de texto** de varias lineas. |
 | [`Combo`](kit/widgets/combo.md) | **Lista desplegable** (`JComboBox<T>`). |
+| [`Dropdown`](kit/widgets/dropdown.md) | **Boton que despliega un menu** de opciones: el boton muestra la elegida. |
 | [`Spinner`](kit/widgets/spinner.md) | **Selector numerico** con flechas (`JSpinner`). |
 | [`Table`](kit/widgets/table.md) | **Tabla** (`JTable`). |
 

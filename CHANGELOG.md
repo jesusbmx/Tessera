@@ -5,6 +5,12 @@ Los cambios importantes de Tessera. Formato basado en [Keep a Changelog](https:/
 
 ## Sin publicar
 
+### Agregado
+
+- **`Dropdown<T>`** (`tessera.kit`): boton que despliega un menu de opciones y muestra la elegida. Cada opcion lleva un valor, un texto y una ayuda;
+  `getValue()`, `setValue(v)`, `is(v)` y `onChange(...)` (tambien al elegir por codigo) reemplazan al `JPopupMenu` + un `JRadioButtonMenuItem` por opcion + `Kit.group`.
+  Ver [dropdown.md](docs/reference/kit/widgets/dropdown.md).
+
 ### Corregido
 
 - `TextArea.placeholder(...)` (y `Input.area(n).placeholder(...)`) **ahora se ve**: FlatLaf 3.7 no pinta el placeholder en un `JTextArea`, asi que `TextArea`

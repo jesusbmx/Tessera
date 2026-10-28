@@ -15,6 +15,7 @@ import tessera.kit.Card;
 import tessera.kit.Check;
 import tessera.kit.Col;
 import tessera.kit.Combo;
+import tessera.kit.Dropdown;
 import tessera.kit.Footer;
 import tessera.kit.Form;
 import tessera.kit.Header;
@@ -131,10 +132,19 @@ public final class Showcase {
         new Object[][] {{"Impresora A", "192.168.0.10", "Listo"}, {"Impresora B", "USB001", "Sin papel"}},
         new Object[] {"Impresora", "Puerto", "Estado"})).rowHeight(28).singleSelection();
 
+    final Dropdown<Integer> method = Dropdown.<Integer>of()
+        .placeholder("Elegir metodo")
+        .option(0, "Driver", "Imprime con el driver del sistema")
+        .option(1, "Red", "Imprime por IP")
+        .option(2, "USB", "Imprime directo al puerto USB")
+        .bold();
+    method.setValue(0);
+
     return Scroll.of(Col.gap(10).padding(8, 0, 12, 0).children(
         Card.section("Botones y selectores").children(
             Row.gap(10).children(Button.of("Normal"), Button.primary("Principal"), Toggle.of("Lista"), Toggle.of("Tarjetas")),
-            Row.gap(18).children(Check.of("Casilla").selected(true), Switch.of("Interruptor").selected(true), Switch.of("Apagado"))),
+            Row.gap(18).children(Check.of("Casilla").selected(true), Switch.of("Interruptor").selected(true), Switch.of("Apagado")),
+            Row.gap(10).children(Label.text("Metodo"), method)),
         Card.section("Campos").children(
             Form.create()
                 .row("Nombre", Input.text().placeholder("Nombre completo"))

@@ -45,6 +45,7 @@ Cada uno **es** el widget de Swing (`Button extends JButton`...) con metodos enc
 | [`Password`](widgets/password.md) | **Campo de clave**: el contenido no se ve. |
 | [`TextArea`](widgets/textarea.md) | **Area de texto** de varias lineas. |
 | [`Combo`](widgets/combo.md) | **Lista desplegable** (`JComboBox<T>`). |
+| [`Dropdown`](widgets/dropdown.md) | **Boton que despliega un menu** de opciones: el boton muestra la elegida. |
 | [`Spinner`](widgets/spinner.md) | **Selector numerico** con flechas (`JSpinner`). |
 | [`Table`](widgets/table.md) | **Tabla** (`JTable`). |
 
