@@ -17,7 +17,6 @@ import tessera.kit.Col;
 import tessera.kit.Combo;
 import tessera.kit.Hint;
 import tessera.kit.Input;
-import tessera.kit.Kit;
 import tessera.kit.Label;
 import tessera.kit.Menu;
 import tessera.kit.MenuButton;
@@ -34,6 +33,7 @@ import tessera.kit.Switch;
 import tessera.kit.Table;
 import tessera.kit.TextArea;
 import tessera.kit.Toggle;
+import tessera.theme.Icons;
 import tessera.theme.Theme;
 
 /**
@@ -113,7 +113,7 @@ public final class WidgetImages {
         Card.section(".icon(recurso, tam).iconGap(8)").children(
             Row.gap(10).children(
                 Button.of("Buscar").icon("tessera/img/info.svg", 16).iconGap(8),
-                Button.primary("Guardar").icon(Kit.icon("tessera/img/info.svg", 16, Color.WHITE)).iconGap(8))),
+                Button.primary("Guardar").icon(Icons.of("tessera/img/info.svg", 16, Color.WHITE)).iconGap(8))),
         Card.section(".enabled(false)  /  boton.primary()").children(
             Row.gap(10).children(
                 Button.of("Deshabilitado").enabled(false),

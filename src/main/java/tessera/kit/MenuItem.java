@@ -5,6 +5,7 @@ import javax.swing.Icon;
 import javax.swing.JMenuItem;
 import javax.swing.KeyStroke;
 import javax.swing.SwingConstants;
+import tessera.theme.Icons;
 
 /**
  * Opcion de un {@link Menu}: texto, icono opcional y la accion que corre al elegirla.
@@ -44,7 +45,7 @@ public class MenuItem extends JMenuItem implements Styled<MenuItem> {
 
   /** Icono desde un recurso del classpath (SVG o imagen) a ese tamano. */
   public MenuItem icon(String resource, int size) {
-    return icon(Kit.icon(resource, size));
+    return icon(Icons.of(resource, size));
   }
 
   public MenuItem icon(Icon icon) {

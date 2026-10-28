@@ -130,6 +130,8 @@ El espacio entre hijos (`gap`) se da al crear el contenedor (`Row.gap(10)`) o co
 
 ## Utilidades (`Kit`)
 
+Los **iconos** no estan aqui: `Icons.of(recurso, tam[, color])` en [`Icons`](../theme/icons.md).
+
 `Kit` tambien guarda la **paleta** del kit como campos `public static` (no finales): `PRIMARY`, `SURFACE`, `CARD_LINE`, `DARK`, `ON_DARK`, `MUTED`,
 `LINE`, `ROW_ODD`, `ROW_EVEN`, `ROW_SELECTED`. Sus valores y como cambiarlos: [customizing.md](../../guides/customizing.md#2-paleta-del-kit-kit).
 
@@ -137,8 +139,6 @@ El espacio entre hijos (`gap`) se da al crear el contenedor (`Row.gap(10)`) o co
 |---|---|
 | `Kit.px(int)` | escala un tamano en px con el zoom de la interfaz (igual en 100%) |
 | `Kit.font(tamano, negrita)` | la fuente de la interfaz (la del tema) con ese tamano y estilo, escalada |
-| `Kit.icon(recurso, tam)` | icono de un recurso del classpath: **SVG** (vectorial) o imagen (PNG, tal cual). Devuelve `null` si una imagen no existe |
-| `Kit.icon(svg, tam, color)` | SVG de un solo color (blanco sobre un boton principal) |
 | `Kit.makePrimary(AbstractButton)` | estilo de boton principal para cualquier boton ya creado |
 | `Kit.group(AbstractButton...)` | agrupa botones: solo uno queda seleccionado |
 | `Kit.fill(c, horizontal, vertical)` | marca que el componente ocupa el espacio que sobra en esos ejes dentro de un `Row`, `Col`, `Form`, `Card` o `Stack` |

@@ -122,8 +122,8 @@ las multiplica por el zoom de la pantalla con `Kit.px(n)`. Para medidas propias 
 
 ### Iconos
 
-- `Kit.icon("ruta/icono.svg", 16)` o `Icons.svg(...)`: SVG vectorial, nitido con cualquier zoom. La ruta es del classpath **de la app**.
-- `Kit.icon("ruta.svg", 16, Color.WHITE)`: SVG recoloreado completo (util sobre botones oscuros).
+- `Icons.of("ruta/icono.svg", 16)` (o `Icons.svg(...)` con ancho y alto distintos): SVG vectorial, nitido con cualquier zoom. La ruta es del classpath **de la app**.
+- `Icons.of("ruta.svg", 16, Color.WHITE)`: SVG recoloreado completo (util sobre botones oscuros).
 - Los iconos propios de la libreria (`tessera/img/*.svg`: interruptor, avisos) no son para la app.
 
 ## 4. La fuente

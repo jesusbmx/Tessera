@@ -20,6 +20,11 @@ Los cambios importantes de Tessera. Formato basado en [Keep a Changelog](https:/
   - Guia nueva [Botones que abren un menu](docs/guides/menus.md): cual usar, con 7 imagenes de pantallas con el menu abierto y ejemplos compilados
     (`MenuImages.java` y `MenuExamples.java`); cada pagina de referencia dice que reemplaza de Swing puro y enlaza a su receta.
 
+### Cambiado
+
+- **`Kit.icon(...)` ahora es `Icons.of(...)`** (`tessera.theme.Icons`): los iconos viven todos en `Icons` (`of`, `svg`, `setupSwitch`). Es un cambio de API: en el codigo que usaba
+  `Kit.icon("ruta.svg", 16)` o `Kit.icon("ruta.svg", 16, color)`, reemplazar por `Icons.of(...)` con los mismos argumentos y agregar `import tessera.theme.Icons;`.
+
 ### Corregido
 
 - `TextArea.placeholder(...)` (y `Input.area(n).placeholder(...)`) **ahora se ve**: FlatLaf 3.7 no pinta el placeholder en un `JTextArea`, asi que `TextArea`

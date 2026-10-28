@@ -3,6 +3,7 @@ package tessera.kit;
 import java.awt.event.ActionListener;
 import javax.swing.AbstractButton;
 import javax.swing.Icon;
+import tessera.theme.Icons;
 
 /**
  * Metodos encadenables de los widgets que son botones (Button, Check, Radio, Toggle): clic, icono, estado.
@@ -24,7 +25,7 @@ public interface Clickable<T> extends Styled<T> {
 
   /** Icono desde un recurso del classpath (SVG o imagen) a ese tamano. */
   default T icon(String resource, int size) {
-    return icon(Kit.icon(resource, size));
+    return icon(Icons.of(resource, size));
   }
 
   default T icon(Icon icon) {

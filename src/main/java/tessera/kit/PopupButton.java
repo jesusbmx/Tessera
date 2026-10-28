@@ -4,6 +4,7 @@ import java.awt.Color;
 import javax.swing.Icon;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
+import tessera.theme.Icons;
 
 /**
  * Base de los botones que abren un menu al hacer clic: {@link MenuButton}, {@link ChoiceButton} y
@@ -57,7 +58,7 @@ public abstract class PopupButton<B extends PopupButton<B>> extends JButton impl
 
   /** Un icono propio, antes del texto, en lugar de la flecha. */
   public B icon(String resource, int size) {
-    return icon(Kit.icon(resource, size));
+    return icon(Icons.of(resource, size));
   }
 
   public B icon(Icon icon) {
@@ -85,7 +86,7 @@ public abstract class PopupButton<B extends PopupButton<B>> extends JButton impl
     if (customIcon != null) {
       setIcon(customIcon);
     } else if (arrow) {
-      setIcon(arrowColor == null ? Kit.icon(ARROW, ARROW_SIZE) : Kit.icon(ARROW, ARROW_SIZE, arrowColor));
+      setIcon(arrowColor == null ? Icons.of(ARROW, ARROW_SIZE) : Icons.of(ARROW, ARROW_SIZE, arrowColor));
     } else {
       setIcon(null);
     }

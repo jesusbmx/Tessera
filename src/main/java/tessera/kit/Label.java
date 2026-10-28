@@ -7,6 +7,7 @@ import javax.swing.Icon;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+import tessera.theme.Icons;
 
 /**
  * Etiqueta de texto con estilos listos: {@link #title} (titulos), {@link #field} (nombre de un campo),
@@ -47,7 +48,7 @@ public class Label extends JLabel implements Styled<Label> {
 
   /** Icono desde un recurso del classpath (SVG o imagen) a ese tamano. */
   public Label icon(String resource, int size) {
-    setIcon(Kit.icon(resource, size));
+    setIcon(Icons.of(resource, size));
     return this;
   }
 

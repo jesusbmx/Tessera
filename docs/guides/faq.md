@@ -66,7 +66,7 @@ claros. Se puede partir de FlatLaf directamente, pero los colores del kit (`Kit.
 
 ### Mis iconos PNG se ven pequenos o borrosos en pantallas de alta resolucion
 
-`Kit.icon` carga los PNG **tal cual**, sin escalarlos. Los **SVG** se dibujan vectorialmente a cualquier zoom: usa SVG siempre que puedas.
+`Icons.of` carga los PNG **tal cual**, sin escalarlos. Los **SVG** se dibujan vectorialmente a cualquier zoom: usa SVG siempre que puedas.
 
 ### Quiero cambiar el tema con la app abierta
 

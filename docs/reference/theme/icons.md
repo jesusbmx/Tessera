@@ -1,32 +1,35 @@
 # Icons
 
-Iconos **SVG** (vectoriales, nitidos con cualquier escala de pantalla) y el **interruptor** estilo iOS.
+Iconos (**SVG** vectorial, nitido con cualquier escala de pantalla, o imagen) y el **interruptor** estilo iOS.
 
 | | |
 |---|---|
 | **Paquete** | `tessera.theme` |
 | **Clase** | `Icons` (clase final de utilidades estaticas) |
-| **Metodos** | `Icons.svg(...)` · `Icons.setupSwitch(boton)` |
+| **Metodos** | `Icons.of(...)` · `Icons.svg(...)` · `Icons.setupSwitch(boton)` |
 | **Importar** | `import tessera.theme.Icons;` |
 
 ## Cuando usarlo
 
-- Para un icono SVG con ancho y alto **distintos**, o recoloreado a un color fijo.
+- Para un icono de un recurso de tu app (SVG o PNG), cuadrado, o recoloreado a un color fijo: `Icons.of(...)`.
+- Para un icono SVG con ancho y alto **distintos**: `Icons.svg(...)`.
 - Para dar forma de interruptor a un `JCheckBox` o `JToggleButton` que no es del kit.
 
-**Cuando no:** para un icono cuadrado de un widget usa `Button.icon("ruta.svg", 16)` o `Kit.icon("ruta.svg", 16)`; para un interruptor, el widget [`Switch`](../kit/widgets/switch.md).
+**Cuando no:** para el icono de un widget usa `Button.icon("ruta.svg", 16)` (`Label`, `Card`, `MenuItem`... tienen el suyo); para tenerlo suelto, `Icons.of("ruta.svg", 16)`; para un interruptor, el widget [`Switch`](../kit/widgets/switch.md).
 
 ## Referencia
 
 | Metodo | Que hace |
 |---|---|
+| `Icons.of(recurso, tam)` | icono **cuadrado** de un recurso del classpath: **SVG** (vectorial, a ese tamano) o imagen (PNG, tal cual). Devuelve `null` si una imagen no existe |
+| `Icons.of(svg, tam, Color)` | SVG cuadrado de un solo color (blanco sobre un boton principal) |
 | `Icons.svg(path, ancho, alto)` | icono SVG de un recurso del classpath **de tu app** (`"app/img/print.svg"`); devuelve un `FlatSVGIcon` |
 | `Icons.svg(path, ancho, alto, Color)` | igual, **recoloreado por completo** a un color fijo (por ejemplo blanco sobre un boton principal) |
 | `Icons.setupSwitch(AbstractButton)` | da forma de **interruptor** a un `JCheckBox` o `JToggleButton`: iconos para cada estado, sin borde ni foco, cursor de mano |
 
 ```java
-final JLabel lbl = new JLabel(Icons.svg("app/img/print.svg", 24, 24));
-final Icon white = Icons.svg("app/img/print.svg", 16, 16, Color.WHITE);
+final JLabel lbl = new JLabel(Icons.of("app/img/print.svg", 24));
+final Icon white = Icons.of("app/img/print.svg", 16, Color.WHITE);
 
 final JCheckBox chk = new JCheckBox("Iniciar con el sistema");
 Icons.setupSwitch(chk);                    // con el kit, usa Switch.of("...")
@@ -42,5 +45,4 @@ Icons.setupSwitch(chk);                    // con el kit, usa Switch.of("...")
 ## Ver tambien
 
 - [`Switch`](../kit/widgets/switch.md) y [`Button`](../kit/widgets/button.md): usan estos iconos.
-- [Referencia del kit: utilidades](../kit/README.md#utilidades-kit): `Kit.icon(...)`.
 - [`Theme`](theme.md).

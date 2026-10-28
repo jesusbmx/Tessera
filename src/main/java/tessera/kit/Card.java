@@ -10,6 +10,7 @@ import javax.swing.Icon;
 import javax.swing.JComponent;
 import javax.swing.SwingConstants;
 import javax.swing.border.AbstractBorder;
+import tessera.theme.Icons;
 
 /**
  * Bloque con fondo suave y borde redondeado: titulo (con icono opcional), texto de ayuda y debajo sus hijos en columna
@@ -85,7 +86,7 @@ public class Card extends Box<Card> {
 
   /** Icono al lado del titulo (solo si el titulo es de texto); SVG de 24 px. */
   public Card icon(String resource) {
-    return icon(Kit.icon(resource, 24));
+    return icon(Icons.of(resource, 24));
   }
 
   public Card icon(Icon icon) {

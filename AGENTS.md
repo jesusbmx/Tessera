@@ -13,7 +13,7 @@ es la referencia completa de la API. Detalle y ejemplos: Javadoc de cada clase (
 ## Mapa
 ```
 tessera.kit         contenedores y widgets (lo que mas se usa)
-tessera.theme       Theme (instala el tema), Icons (SVG, switch)
+tessera.theme       Theme (instala el tema), Icons (SVG o imagen con `Icons.of`, switch)
 tessera.notify      Notification (apiladas), Toast (una a la vez)
 tessera.app         TrayDock (bandeja + Dock macOS), WindowPrefs (tamano de ventanas), Preview/Previewer (ver una pantalla sin la app)
 tessera.components  modelos/renderers/bordes/validacion sueltos
@@ -59,7 +59,7 @@ Extienden el de Swing (`JTextField txt = Input.text()...` sigue siendo un JTextF
 - `Combo.of(items...)` / `Combo.empty()` → `.onChange .maxRows .editable` · `Spinner.integer(v,min,max,paso)` / `.decimal(...)` → `.onChange`
 - **Botones que abren un menu** (extienden `PopupButton`: `.color .arrowLeft .noArrow .icon(res,tam) .iconGap .menu()`): `ChoiceButton.<T>of()` elige **una** y el boton la muestra → `.placeholder .option(valor, texto[, ayuda]) .optionEnabled(valor, b[, ayuda]) .onChange(Consumer<T>|Runnable)`, `getValue() setValue(v) is(v) hasValue() getValueTip()` · `MultiChoiceButton.<T>of(texto)` marca **varias** → `.option .checked(v) .onChange(Consumer<Set<T>>|Runnable)`, `getValues() isChecked(v) setChecked(v,b) setValues(c)` · `MenuButton.of(texto)` **acciones**, no queda nada elegido → `.item(texto, accion) .item(MenuItem) .title .separator .clear .onOpen(Consumer<Menu>)`. Sin boton (clic derecho): `Menu.create().item(..).title(..).separator()` + `menu.show(comp, x, y)` / `menu.showBelow(comp)`; `MenuItem.of(texto, accion)` → `.icon .iconRight .padding .accelerator(KeyStroke) .onClick`, `MenuItem.title(texto)`. `Menu` y `MenuItem` chocan con `java.awt`: imports explicitos. Cual usar y ejemplos con imagenes: [docs/guides/menus.md](docs/guides/menus.md). Que widget elegir (Check/Switch/Toggle, Radio/Combo/ChoiceButton, Input/TextArea/Spinner...) y que widget avisa de un cambio hecho por codigo: [docs/guides/widgets.md](docs/guides/widgets.md)
 - `Table.of(model)` → `.rowHeight(px) .singleSelection() .onSelect(Runnable) .columnWidth(col, px)` (dentro de un `Scroll`)
-- Utilidades en `Kit`: `Kit.px(n)` (escala con el zoom), `Kit.font(size, bold)`, `Kit.icon(recurso, size[, color])`, `Kit.group(botones...)`, `Kit.makePrimary(boton)`.
+- Utilidades en `Kit`: `Kit.px(n)` (escala con el zoom), `Kit.font(size, bold)`, `Kit.group(botones...)`, `Kit.makePrimary(boton)`.
 - Si algo es muy puntual: `contenedor.add(comp, "growx, wrap")` acepta restricciones MigLayout crudas (evitarlo).
 
 ## Patron de una pantalla
@@ -87,7 +87,7 @@ public class MiPanel extends JPanel {
 ```
 Reglas: los campos de cada bloque van justo encima del metodo que lo arma (si hay varios bloques: campos -> metodo, campos -> metodo);
 un campo que usa otro va despues de el (orden de inicializacion de Java); eventos con `.onClick(this::metodo)`; si el original reaccionaba a `setSelected` por codigo usa `ItemListener`
-(onClick solo atiende clics del usuario) y registralo despues de armar la pantalla; iconos SVG con `Kit.icon`/`Icons.svg`;
+(onClick solo atiende clics del usuario) y registralo despues de armar la pantalla; iconos SVG con `Icons.of`/`Icons.svg`;
 textos de la app con su propio sistema de idiomas (la libreria no trae uno).
 
 ## Avisos

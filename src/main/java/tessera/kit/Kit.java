@@ -1,18 +1,14 @@
 package tessera.kit;
 
 import com.formdev.flatlaf.FlatClientProperties;
-import com.formdev.flatlaf.extras.FlatSVGIcon;
 import com.formdev.flatlaf.util.UIScale;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
-import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.AbstractButton;
 import javax.swing.ButtonGroup;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.UIManager;
 
@@ -90,24 +86,6 @@ public final class Kit {
       base = new Font(Font.SANS_SERIF, Font.PLAIN, 12);
     }
     return base.deriveFont(bold ? Font.BOLD : Font.PLAIN, UIScale.scale((float) size));
-  }
-
-  // ------------------------------------------------------------------------ //
-  //   I C O N O S
-  // ------------------------------------------------------------------------ //
-
-  /** Icono de un recurso del classpath: SVG (vectorial, a ese tamano) o imagen (PNG, tal cual). */
-  public static Icon icon(String resource, int size) {
-    if (resource.endsWith(".svg")) {
-      return new FlatSVGIcon(resource, size, size);
-    }
-    URL url = Kit.class.getResource(resource.startsWith("/") ? resource : "/" + resource);
-    return url == null ? null : new ImageIcon(url);
-  }
-
-  /** Icono SVG de un solo color (ej. blanco sobre un boton principal). */
-  public static Icon icon(String svg, int size, Color color) {
-    return new FlatSVGIcon(svg, size, size).setColorFilter(new FlatSVGIcon.ColorFilter(c -> color));
   }
 
   // ------------------------------------------------------------------------ //

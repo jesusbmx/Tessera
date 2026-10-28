@@ -3,14 +3,31 @@ package tessera.theme;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 import java.awt.Color;
 import java.awt.Cursor;
+import java.net.URL;
 import javax.swing.AbstractButton;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 
-/** Iconos SVG (vectoriales, nitidos con cualquier escala de pantalla) y el interruptor estilo iOS. */
+/** Iconos (SVG vectorial, nitido con cualquier escala de pantalla, o imagen) y el interruptor estilo iOS. */
 public final class Icons {
 
   private static final String SWITCH = "tessera/img/switch_";
 
   private Icons() {
+  }
+
+  /** Icono de un recurso del classpath: SVG (vectorial, a ese tamano) o imagen (PNG, tal cual). {@code null} si una imagen no existe. */
+  public static Icon of(String resource, int size) {
+    if (resource.endsWith(".svg")) {
+      return new FlatSVGIcon(resource, size, size);
+    }
+    URL url = Icons.class.getResource(resource.startsWith("/") ? resource : "/" + resource);
+    return url == null ? null : new ImageIcon(url);
+  }
+
+  /** Icono SVG cuadrado de un solo color (ej. blanco sobre un boton principal). */
+  public static Icon of(String svg, int size, Color color) {
+    return svg(svg, size, size, color);
   }
 
   /** Icono SVG de un recurso del classpath ("app/img/print.svg"). */
