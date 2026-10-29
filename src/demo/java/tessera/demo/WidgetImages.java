@@ -35,6 +35,7 @@ import tessera.kit.TextArea;
 import tessera.kit.Toggle;
 import tessera.theme.Icons;
 import tessera.theme.Theme;
+import tessera.theme.Variant;
 
 /**
  * Genera las imagenes de widgets de docs/img/ (widget-*.png) que ilustran las paginas de docs/reference/kit.
@@ -60,6 +61,8 @@ public final class WidgetImages {
       LayoutImages.save(dir, "widget-label", label(), W, 0);
       LayoutImages.save(dir, "widget-hint", hint(), W, 0);
       LayoutImages.save(dir, "widget-button", button(), W, 0);
+      LayoutImages.save(dir, "widget-button-variants", buttonVariants(), W, 0);
+      LayoutImages.save(dir, "widget-label-variants", labelVariants(), W, 0);
       LayoutImages.save(dir, "widget-check", check(), W, 0);
       LayoutImages.save(dir, "widget-radio", radio(), W, 0);
       LayoutImages.save(dir, "widget-toggle", toggle(), W, 0);
@@ -119,6 +122,33 @@ public final class WidgetImages {
                 Button.of("Deshabilitado").enabled(false),
                 Button.primary("Principal deshabilitado").enabled(false),
                 Button.of("Convertido").primary())));
+  }
+
+  private static JComponent buttonVariants() {
+    return Col.gap(10).padding(12, 16, 12, 16).children(
+        Card.section("Button.primary / accent / secondary / inverse").children(
+            Row.gap(8).children(Button.primary("Primary"), Button.accent("Accent"), Button.secondary("Secondary"), Button.inverse("Inverse"))),
+        Card.section("Button.success / danger / warning / info").children(
+            Row.gap(8).children(Button.success("Success"), Button.danger("Danger"), Button.warning("Warning"), Button.info("Info"))),
+        Card.section("Button.outline(Variant.X, texto)").children(
+            Row.gap(8).children(Button.outline(Variant.PRIMARY, "Primary"), Button.outline(Variant.SUCCESS, "Success"),
+                Button.outline(Variant.DANGER, "Danger"), Button.outline(Variant.WARNING, "Warning"))),
+        Card.section("boton.variant(v)  /  .enabled(false)  /  Toggle.variant(v)").children(
+            Row.gap(8).children(Button.of("Normal").variant(Variant.DANGER), Button.danger("Deshabilitado").enabled(false),
+                Toggle.of("Lista").variant(Variant.SUCCESS).selected(true), Toggle.of("Tarjetas"))));
+  }
+
+  private static JComponent labelVariants() {
+    return Col.gap(10).padding(12, 16, 12, 16).children(
+        Card.section("Label.success / danger / warning / info ...").children(
+            Col.gap(4).children(
+                Label.success("Label.success(\"Guardado\")"),
+                Label.danger("Label.danger(\"No se pudo conectar\")"),
+                Label.warning("Label.warning(\"Quedan 2 dias\")"),
+                Label.info("Label.info(\"Hay una version nueva\")"),
+                Label.primary("Label.primary / accent / secondary / inverse"))),
+        Card.section("Hint.of(texto).variant(Variant.DANGER)").children(
+            Hint.of("Campo obligatorio").variant(Variant.DANGER)));
   }
 
   private static JComponent check() {

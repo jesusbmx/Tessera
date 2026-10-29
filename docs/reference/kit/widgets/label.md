@@ -54,6 +54,8 @@ Etiqueta de texto (`JLabel`).
 | `Label.muted(txt)` | texto secundario: gris (`Kit.MUTED`) |
 | `Label.primary / accent / secondary / success / danger / warning / info / inverse(txt)` | texto del color de esa [`Variant`](../../theme/theme.md) (como Bootstrap) |
 
+![Label: variantes de color y Hint.variant](../../../img/widget-label-variants.png)
+
 | Metodo | Que hace |
 |---|---|
 | `.variant(Variant)` | el texto toma el color de la variante |

@@ -57,6 +57,8 @@ que se espera del usuario. Hereda [`Clickable`](../README.md#clickablet--button-
 
 ### Variantes de color (como Bootstrap)
 
+![Button: primary, accent, secondary, inverse, success, danger, warning, info, outline y Toggle.variant](../../../img/widget-button-variants.png)
+
 `Button.secondary / accent / success / danger / warning / info / inverse(txt)`, `Button.of(Variant, txt)` y `Button.outline(Variant, txt)` (solo borde; se rellena al pasar el mouse).
 El texto va blanco, u oscuro si el color es claro (amarillo, celeste). `primary`, `accent` e `inverse` siguen al tema; los demas se cambian con
 `Theme.builder().success("#2E7D32").danger("#C62828")...` (ver [Theme](../../theme/theme.md)).
