@@ -19,7 +19,7 @@ import tessera.theme.Variant;
  * Label.text("Administra tus clientes").color(Kit.MUTED)
  * Label.field("Nombre:").tip("El nombre del cliente")
  * Label.text("Ayuda").icon("app/img/help_blue.svg", 16).onClick(this::openHelp)
- * Label.success("Guardado")        // tambien danger, warning, info, secondary, primary, accent, inverse
+ * Label.success("Guardado")        // tambien danger, warning, info, secondary, primary, accent, light, dark
  * Label.text("Quedan 2 dias").variant(Variant.WARNING)
  * </pre>
  */
@@ -82,9 +82,14 @@ public class Label extends JLabel implements Styled<Label> {
     return of(Variant.INFO, text);
   }
 
-  /** Texto del color oscuro del tema ({@code Kit.DARK}). */
-  public static Label inverse(String text) {
-    return of(Variant.INVERSE, text);
+  /** Texto casi blanco (para fondos oscuros). */
+  public static Label light(String text) {
+    return of(Variant.LIGHT, text);
+  }
+
+  /** Texto casi negro. */
+  public static Label dark(String text) {
+    return of(Variant.DARK, text);
   }
 
   /** El texto toma el color de la variante. */

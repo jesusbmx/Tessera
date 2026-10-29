@@ -55,21 +55,35 @@ que se espera del usuario. Hereda [`Clickable`](../README.md#clickablet--button-
 | `.selected(boolean)` | estado inicial |
 | `.variant(Variant)` / `.outline(Variant)` | relleno / solo borde con el color de la variante |
 
+Ademas los de [`Styled`](../README.md#styledt--todos-los-widgets-y-contenedores) (`tip`, `bold`, `color`, `enabled`...), y los de Swing de siempre (`isSelected()`, `setSelected(b)`, `addItemListener(...)`).
+
 ### Variantes de color (como Bootstrap)
 
-![Button: primary, accent, secondary, inverse, success, danger, warning, info, outline y Toggle.variant](../../../img/widget-button-variants.png)
-
-`Button.secondary / accent / success / danger / warning / info / inverse(txt)`, `Button.of(Variant, txt)` y `Button.outline(Variant, txt)` (solo borde; se rellena al pasar el mouse).
-El texto va blanco, u oscuro si el color es claro (amarillo, celeste). `primary`, `accent` e `inverse` siguen al tema; los demas se cambian con
+`Button.secondary / accent / success / danger / warning / info / light / dark(txt)`, `Button.of(Variant, txt)` y `Button.outline(Variant, txt)` (solo borde; se rellena al pasar el mouse).
+El texto va blanco, u oscuro si el color es claro (amarillo, celeste). `primary` y `accent` siguen al tema; los demas se cambian con
 `Theme.builder().success("#2E7D32").danger("#C62828")...` (ver [Theme](../../theme/theme.md)).
 
-```java
-Button.success("Aprobar")
-Button.danger("Eliminar")
-Button.outline(Variant.DANGER, "Eliminar")
-```
+![Button: rellenos, solo borde, variant() y Toggle.variant](../../../img/example-button-variants.png)
 
-Ademas los de [`Styled`](../README.md#styledt--todos-los-widgets-y-contenedores) (`tip`, `bold`, `color`, `enabled`...), y los de Swing de siempre (`isSelected()`, `setSelected(b)`, `addItemListener(...)`).
+```java
+final Card solid = Card.section("Rellenos").children(
+    Row.gap(8).children(Button.primary("Primary"), Button.accent("Accent"), Button.secondary("Secondary")),
+    Row.gap(8).children(Button.success("Success"), Button.danger("Danger"), Button.warning("Warning")),
+    Row.gap(8).children(Button.info("Info"), Button.light("Light"), Button.dark("Dark")));
+
+final Card outline = Card.section("Solo borde (se rellena al pasar el mouse)").children(
+    Row.gap(8).children(
+        Button.outline(Variant.PRIMARY, "Primary"), Button.outline(Variant.SUCCESS, "Success"),
+        Button.outline(Variant.DANGER, "Danger"), Button.outline(Variant.WARNING, "Warning")));
+
+final Card others = Card.section("Otras formas de usarlas").children(
+    Row.gap(8).children(
+        Button.of("Normal").variant(Variant.DANGER),               // pintar un boton ya creado
+        Button.danger("Deshabilitado").enabled(false),
+        Toggle.of("Lista").variant(Variant.SUCCESS).selected(true), // presionado se pinta de verde
+        Toggle.of("Tarjetas")));
+```
+`import tessera.theme.Variant;`. Sin tema propio, `primary` es `Kit.PRIMARY` y `accent` el de `Theme`; los demas son los de Bootstrap (se cambian en [Theme](../../theme/theme.md)).
 
 | Para... | Hacer |
 |---|---|

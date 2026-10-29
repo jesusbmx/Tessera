@@ -221,13 +221,22 @@ public final class Theme {
       return variant(Variant.INFO, hex);
     }
 
-    /** Color de {@code Variant.INVERSE}: fondo oscuro con texto claro. */
-    public Builder inverse(Color color) {
-      return variant(Variant.INVERSE, color);
+    /** Color de {@code Variant.LIGHT}: fondo claro con texto oscuro. */
+    public Builder light(Color color) {
+      return variant(Variant.LIGHT, color);
     }
 
-    public Builder inverse(String hex) {
-      return variant(Variant.INVERSE, hex);
+    public Builder light(String hex) {
+      return variant(Variant.LIGHT, hex);
+    }
+
+    /** Color de {@code Variant.DARK}: fondo oscuro con texto claro. */
+    public Builder dark(Color color) {
+      return variant(Variant.DARK, color);
+    }
+
+    public Builder dark(String hex) {
+      return variant(Variant.DARK, hex);
     }
 
     /** Radio (px) de las esquinas de botones, campos y barras (12 por defecto). */

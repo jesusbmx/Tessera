@@ -15,8 +15,7 @@ import tessera.kit.Kit;
  * Theme.builder().variant(Variant.SUCCESS, "#2E7D32").install();    // cambiar un color para toda la app
  * </pre>
  *
- * {@link #PRIMARY}, {@link #ACCENT} e {@link #INVERSE} siguen al tema ({@code Kit.PRIMARY}, {@code Theme.accent()},
- * {@code Kit.DARK}); el resto trae su color (el de Bootstrap) y se cambia con {@link #setColor(Color)}.
+ * {@link #PRIMARY} y {@link #ACCENT} siguen al tema ({@code Kit.PRIMARY} y {@code Theme.accent()}); el resto trae su color (el de Bootstrap) y se cambia con {@link #setColor(Color)}.
  */
 public enum Variant {
 
@@ -34,11 +33,16 @@ public enum Variant {
   WARNING(Color.decode("#FFC107")),
   /** Informacion neutra: celeste (con texto oscuro encima). */
   INFO(Color.decode("#0DCAF0")),
-  /** Fondo oscuro con texto claro (el {@code Kit.DARK} del tema). */
-  INVERSE(null);
+  /** Fondo claro con texto oscuro. */
+  LIGHT(Color.decode("#F8F9FA")),
+  /** Fondo oscuro con texto claro. */
+  DARK(Color.decode("#212529"));
 
   /** Por encima de esta luminancia (0..1) el texto sobre el color va oscuro; por debajo, blanco. */
   private static final double LIGHT_BACKGROUND = 0.4;
+
+  /** Por encima de esta luminancia el color es casi blanco y oscurecerlo al 70% se veria gris. */
+  private static final double VERY_LIGHT = 0.8;
 
   private static final Color ON_LIGHT = Color.decode("#212529");
 
@@ -59,8 +63,6 @@ public enum Variant {
         return Kit.PRIMARY;
       case ACCENT:
         return Theme.accent();
-      case INVERSE:
-        return Kit.DARK;
       default:
         return defaultColor;
     }
@@ -76,14 +78,20 @@ public enum Variant {
     return luminance(color()) > LIGHT_BACKGROUND ? ON_LIGHT : Color.WHITE;
   }
 
-  /** El color al pasar el mouse por encima. */
+  /** El color al pasar el mouse por encima: mas oscuro (apenas, si el color es casi blanco como {@link #LIGHT}). */
   public Color hover() {
-    return color().darker();
+    final Color color = color();
+    return luminance(color) > VERY_LIGHT ? shade(color, 0.85) : color.darker();
   }
 
   /** El color al presionar. */
   public Color pressed() {
-    return hover().darker();
+    final Color hover = hover();
+    return luminance(color()) > VERY_LIGHT ? shade(hover, 0.9) : hover.darker();
+  }
+
+  private static Color shade(Color color, double factor) {
+    return new Color((int) (color.getRed() * factor), (int) (color.getGreen() * factor), (int) (color.getBlue() * factor));
   }
 
   /** Luminancia relativa (0 negro .. 1 blanco) segun WCAG. */

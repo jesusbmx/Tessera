@@ -52,9 +52,25 @@ Etiqueta de texto (`JLabel`).
 | `Label.title(txt)` | titulo: negrita, 18 |
 | `Label.field(txt)` | nombre de un campo: negrita, 15 |
 | `Label.muted(txt)` | texto secundario: gris (`Kit.MUTED`) |
-| `Label.primary / accent / secondary / success / danger / warning / info / inverse(txt)` | texto del color de esa [`Variant`](../../theme/theme.md) (como Bootstrap) |
+| `Label.primary / accent / secondary / success / danger / warning / info / light / dark(txt)` | texto del color de esa [`Variant`](../../theme/theme.md) (como Bootstrap) |
 
-![Label: variantes de color y Hint.variant](../../../img/widget-label-variants.png)
+### Ejemplo: variantes de color
+
+![Label: variantes de color y Hint.variant](../../../img/example-label-variants.png)
+
+```java
+final Card states = Card.section("Estados").children(
+    Label.success("Guardado"),
+    Label.danger("No se pudo conectar"),
+    Label.warning("Quedan 2 dias"),
+    Label.info("Hay una version nueva"),
+    Label.text("Texto con el color de otra variante").variant(Variant.SECONDARY));
+
+final Card field = Card.section("Un campo con su aviso").children(
+    Form.create().row("Correo", Input.text().placeholder("nombre@correo.com")),
+    Hint.of("Campo obligatorio").variant(Variant.DANGER));
+```
+`import tessera.theme.Variant;`. `Hint` y `Toggle` tambien aceptan `.variant(v)`.
 
 | Metodo | Que hace |
 |---|---|

@@ -71,9 +71,14 @@ public class Button extends JButton implements Clickable<Button> {
     return of(Variant.INFO, text);
   }
 
+  /** Boton claro con texto oscuro. */
+  public static Button light(String text) {
+    return of(Variant.LIGHT, text);
+  }
+
   /** Boton oscuro con texto claro. */
-  public static Button inverse(String text) {
-    return of(Variant.INVERSE, text);
+  public static Button dark(String text) {
+    return of(Variant.DARK, text);
   }
 
   /** Boton solo con borde y texto del color de la variante; se rellena al pasar el mouse. */

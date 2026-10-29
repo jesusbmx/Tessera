@@ -42,7 +42,7 @@ Theme.builder()
 | `primary(Color)` / `primary(String hex)` | color de los botones principales (`Button.primary`) | el de `Kit.PRIMARY` |
 | `surface(Color)` / `surface(String hex)` | relleno de las tarjetas (`Card`) | el de `Kit.SURFACE` |
 | `cardLine(Color)` / `cardLine(String hex)` | borde de las tarjetas (`Card`) | el de `Kit.CARD_LINE` |
-| `success(...)` / `danger(...)` / `warning(...)` / `info(...)` / `secondary(...)` / `inverse(...)` (`Color` o hex) | color de esa [`Variant`](#variantes-de-color) | Bootstrap: `#198754`, `#DC3545`, `#FFC107`, `#0DCAF0`, `#6C757D`; `inverse` = `Kit.DARK` |
+| `success(...)` / `danger(...)` / `warning(...)` / `info(...)` / `secondary(...)` / `light(...)` / `dark(...)` (`Color` o hex) | color de esa [`Variant`](#variantes-de-color) | Bootstrap: `#198754`, `#DC3545`, `#FFC107`, `#0DCAF0`, `#6C757D`; `light` `#F8F9FA`, `dark` `#212529` |
 | `variant(Variant, Color)` / `variant(Variant, String hex)` | lo mismo para cualquier variante | |
 | `panelBackground(Color)` / `panelBackground(String hex)` | fondo de paneles, scrolls y viewports (las listas y tablas siguen blancas) | blanco |
 | `arc(int)` | radio (px) de las esquinas de botones, campos y barras | 12 |
@@ -53,8 +53,8 @@ Los metodos devuelven el `Builder`, asi que se encadenan; solo `install()` cierr
 
 ### Variantes de color
 
-`tessera.theme.Variant` (`PRIMARY ACCENT SECONDARY SUCCESS DANGER WARNING INFO INVERSE`) son los colores semanticos que usan `Button`, `Toggle`, `Label` y `Hint`
-(`Button.danger(..)`, `Label.success(..)`, `.variant(v)`). `PRIMARY` sigue a `primary(...)`, `ACCENT` a `accent(...)` e `INVERSE` a `Kit.DARK`; los demas traen los colores de Bootstrap.
+`tessera.theme.Variant` (`PRIMARY ACCENT SECONDARY SUCCESS DANGER WARNING INFO LIGHT DARK`) son los colores semanticos que usan `Button`, `Toggle`, `Label` y `Hint`
+(`Button.danger(..)`, `Label.success(..)`, `.variant(v)`). `PRIMARY` sigue a `primary(...)`, y `ACCENT` a `accent(...)`; los demas traen los colores de Bootstrap.
 `Variant.X.color()`, `.onColor()` (texto que contrasta), `.hover()` y `.pressed()` sirven para codigo propio, y `Variant.X.setColor(c)` cambia uno en cualquier momento (antes de crear las ventanas).
 
 ```java

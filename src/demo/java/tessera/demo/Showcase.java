@@ -156,7 +156,7 @@ public final class Showcase {
         Card.section("Botones y selectores").children(
             Row.gap(10).children(Button.of("Normal"), Button.primary("Principal"), Toggle.of("Lista"), Toggle.of("Tarjetas")),
             Row.gap(8).children(Button.secondary("Secondary"), Button.accent("Accent"), Button.success("Success"), Button.danger("Danger"),
-                Button.warning("Warning"), Button.info("Info"), Button.inverse("Inverse"), Button.outline(Variant.DANGER, "Outline")),
+                Button.warning("Warning"), Button.info("Info"), Button.light("Light"), Button.dark("Dark"), Button.outline(Variant.DANGER, "Outline")),
             Row.gap(18).children(Check.of("Casilla").selected(true), Switch.of("Interruptor").selected(true), Switch.of("Apagado")),
             Row.gap(10).children(Label.text("Elige una"), method, Label.text("Marca varias"), unzip,
                 Label.text("Acciones"), add)),

@@ -28,6 +28,7 @@ import tessera.kit.Table;
 import tessera.kit.TextArea;
 import tessera.kit.Toggle;
 import tessera.theme.Theme;
+import tessera.theme.Variant;
 
 /**
  * Los ejemplos de las paginas de widgets (docs/reference/kit/widgets) y de la guia docs/guides/widgets.md: cada uno es una pantalla
@@ -53,6 +54,8 @@ public final class WidgetExamples {
       LayoutImages.save(dir, "example-label", label(), W, 0);
       LayoutImages.save(dir, "example-hint", hint(), W, 0);
       LayoutImages.save(dir, "example-button", button(), W, 0);
+      LayoutImages.save(dir, "example-button-variants", buttonVariants(), W, 0);
+      LayoutImages.save(dir, "example-label-variants", labelVariants(), W, 0);
       LayoutImages.save(dir, "example-check", check(), W, 0);
       LayoutImages.save(dir, "example-radio", radio(), W, 0);
       LayoutImages.save(dir, "example-toggle", toggle(), W, 0);
@@ -114,6 +117,44 @@ public final class WidgetExamples {
         Button.primary("Guardar").onClick(() -> { }));          // un solo primary por pantalla: el ultimo de la derecha
     // fin
     return screen(connection, footer);
+  }
+
+  private static JComponent buttonVariants() {
+    // ejemplo:button-variants
+    final Card solid = Card.section("Rellenos").children(
+        Row.gap(8).children(Button.primary("Primary"), Button.accent("Accent"), Button.secondary("Secondary")),
+        Row.gap(8).children(Button.success("Success"), Button.danger("Danger"), Button.warning("Warning")),
+        Row.gap(8).children(Button.info("Info"), Button.light("Light"), Button.dark("Dark")));
+
+    final Card outline = Card.section("Solo borde (se rellena al pasar el mouse)").children(
+        Row.gap(8).children(
+            Button.outline(Variant.PRIMARY, "Primary"), Button.outline(Variant.SUCCESS, "Success"),
+            Button.outline(Variant.DANGER, "Danger"), Button.outline(Variant.WARNING, "Warning")));
+
+    final Card others = Card.section("Otras formas de usarlas").children(
+        Row.gap(8).children(
+            Button.of("Normal").variant(Variant.DANGER),               // pintar un boton ya creado
+            Button.danger("Deshabilitado").enabled(false),
+            Toggle.of("Lista").variant(Variant.SUCCESS).selected(true), // presionado se pinta de verde
+            Toggle.of("Tarjetas")));
+    // fin
+    return screen(solid, outline, others);
+  }
+
+  private static JComponent labelVariants() {
+    // ejemplo:label-variants
+    final Card states = Card.section("Estados").children(
+        Label.success("Guardado"),
+        Label.danger("No se pudo conectar"),
+        Label.warning("Quedan 2 dias"),
+        Label.info("Hay una version nueva"),
+        Label.text("Texto con el color de otra variante").variant(Variant.SECONDARY));
+
+    final Card field = Card.section("Un campo con su aviso").children(
+        Form.create().row("Correo", Input.text().placeholder("nombre@correo.com")),
+        Hint.of("Campo obligatorio").variant(Variant.DANGER));
+    // fin
+    return screen(states, field);
   }
 
   private static JComponent check() {
