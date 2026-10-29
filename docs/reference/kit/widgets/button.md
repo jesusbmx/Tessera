@@ -53,6 +53,19 @@ que se espera del usuario. Hereda [`Clickable`](../README.md#clickablet--button-
 | `.icon(recurso, tam)` / `.icon(Icon)` | icono (SVG o imagen del classpath) |
 | `.iconGap(px)` | espacio entre el icono y el texto |
 | `.selected(boolean)` | estado inicial |
+| `.variant(Variant)` / `.outline(Variant)` | relleno / solo borde con el color de la variante |
+
+### Variantes de color (como Bootstrap)
+
+`Button.secondary / accent / success / danger / warning / info / inverse(txt)`, `Button.of(Variant, txt)` y `Button.outline(Variant, txt)` (solo borde; se rellena al pasar el mouse).
+El texto va blanco, u oscuro si el color es claro (amarillo, celeste). `primary`, `accent` e `inverse` siguen al tema; los demas se cambian con
+`Theme.builder().success("#2E7D32").danger("#C62828")...` (ver [Theme](../../theme/theme.md)).
+
+```java
+Button.success("Aprobar")
+Button.danger("Eliminar")
+Button.outline(Variant.DANGER, "Eliminar")
+```
 
 Ademas los de [`Styled`](../README.md#styledt--todos-los-widgets-y-contenedores) (`tip`, `bold`, `color`, `enabled`...), y los de Swing de siempre (`isSelected()`, `setSelected(b)`, `addItemListener(...)`).
 

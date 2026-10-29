@@ -7,6 +7,7 @@ import javax.swing.JLabel;
 import javax.swing.UIManager;
 import javax.swing.plaf.basic.BasicHTML;
 import javax.swing.text.View;
+import tessera.theme.Variant;
 
 /**
  * Texto de ayuda: pequeno, gris, y se parte en lineas al ancho que le toque.
@@ -40,6 +41,12 @@ public class Hint extends JLabel implements Styled<Hint> {
   /** Como {@link #of}, para un texto que ya viene envuelto en {@code <html>...</html>}: quita esas marcas. */
   public static Hint ofHtml(String text) {
     return new Hint(text.replaceAll("(?i)^\\s*<html>|</html>\\s*$", "").trim());
+  }
+
+  /** La ayuda toma el color de la variante: {@code Hint.of("Obligatorio").variant(Variant.DANGER)}. */
+  public Hint variant(Variant variant) {
+    setForeground(variant.color());
+    return this;
   }
 
   /** Ancho (px) al que se parte el texto cuando hay espacio (325 por defecto). */

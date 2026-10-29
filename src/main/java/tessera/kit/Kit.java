@@ -11,6 +11,7 @@ import javax.swing.AbstractButton;
 import javax.swing.ButtonGroup;
 import javax.swing.JComponent;
 import javax.swing.UIManager;
+import tessera.theme.Variant;
 
 /**
  * Colores, medidas y utilidades comunes del kit de UI (tessera.kit).
@@ -94,17 +95,36 @@ public final class Kit {
 
   /** Estilo de boton principal (azul) para un boton puntual: la accion que se espera del usuario. */
   public static void makePrimary(AbstractButton button) {
-    final Color hover = PRIMARY.darker();
-    final Color pressed = hover.darker();
+    makeVariant(button, Variant.PRIMARY);
+  }
 
+  /** Boton relleno con el color de la variante (success, danger...) y texto que contrasta. */
+  public static void makeVariant(AbstractButton button, Variant variant) {
     final Map<String, Object> style = new HashMap<>();
-    style.put("background", PRIMARY);
-    style.put("foreground", Color.WHITE);
-    style.put("hoverBackground", hover);
-    style.put("pressedBackground", pressed);
-    style.put("borderColor", hover);
-    style.put("hoverBorderColor", pressed);
-    style.put("focusedBorderColor", pressed);
+    style.put("background", variant.color());
+    style.put("foreground", variant.onColor());
+    style.put("hoverBackground", variant.hover());
+    style.put("pressedBackground", variant.pressed());
+    style.put("borderColor", variant.hover());
+    style.put("hoverBorderColor", variant.pressed());
+    style.put("focusedBorderColor", variant.pressed());
+    style.put("borderWidth", 1f);
+    button.putClientProperty(FlatClientProperties.STYLE, style);
+  }
+
+  /** Boton solo con borde y texto del color de la variante; se rellena al pasar el mouse. */
+  public static void makeOutline(AbstractButton button, Variant variant) {
+    final Color color = variant.color();
+    final Map<String, Object> style = new HashMap<>();
+    style.put("background", new Color(0, 0, 0, 0));
+    style.put("foreground", color);
+    style.put("hoverBackground", color);
+    style.put("hoverForeground", variant.onColor());
+    style.put("pressedBackground", variant.hover());
+    style.put("pressedForeground", variant.onColor());
+    style.put("borderColor", color);
+    style.put("hoverBorderColor", color);
+    style.put("focusedBorderColor", variant.hover());
     style.put("borderWidth", 1f);
     button.putClientProperty(FlatClientProperties.STYLE, style);
   }

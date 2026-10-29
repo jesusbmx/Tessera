@@ -8,6 +8,7 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import tessera.theme.Icons;
+import tessera.theme.Variant;
 
 /**
  * Etiqueta de texto con estilos listos: {@link #title} (titulos), {@link #field} (nombre de un campo),
@@ -18,6 +19,8 @@ import tessera.theme.Icons;
  * Label.text("Administra tus clientes").color(Kit.MUTED)
  * Label.field("Nombre:").tip("El nombre del cliente")
  * Label.text("Ayuda").icon("app/img/help_blue.svg", 16).onClick(this::openHelp)
+ * Label.success("Guardado")        // tambien danger, warning, info, secondary, primary, accent, inverse
+ * Label.text("Quedan 2 dias").variant(Variant.WARNING)
  * </pre>
  */
 public class Label extends JLabel implements Styled<Label> {
@@ -44,6 +47,50 @@ public class Label extends JLabel implements Styled<Label> {
   /** Texto secundario: gris. */
   public static Label muted(String text) {
     return new Label(text).color(Kit.MUTED);
+  }
+
+  /** Texto del color de una variante (primary, success, danger...). */
+  public static Label of(Variant variant, String text) {
+    return new Label(text).variant(variant);
+  }
+
+  public static Label primary(String text) {
+    return of(Variant.PRIMARY, text);
+  }
+
+  public static Label accent(String text) {
+    return of(Variant.ACCENT, text);
+  }
+
+  public static Label secondary(String text) {
+    return of(Variant.SECONDARY, text);
+  }
+
+  public static Label success(String text) {
+    return of(Variant.SUCCESS, text);
+  }
+
+  public static Label danger(String text) {
+    return of(Variant.DANGER, text);
+  }
+
+  public static Label warning(String text) {
+    return of(Variant.WARNING, text);
+  }
+
+  public static Label info(String text) {
+    return of(Variant.INFO, text);
+  }
+
+  /** Texto del color oscuro del tema ({@code Kit.DARK}). */
+  public static Label inverse(String text) {
+    return of(Variant.INVERSE, text);
+  }
+
+  /** El texto toma el color de la variante. */
+  public Label variant(Variant variant) {
+    setForeground(variant.color());
+    return this;
   }
 
   /** Icono desde un recurso del classpath (SVG o imagen) a ese tamano. */
