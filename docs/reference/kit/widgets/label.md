@@ -56,7 +56,7 @@ Etiqueta de texto (`JLabel`).
 
 | Metodo | Que hace |
 |---|---|
-| `.variant(Variant)` o `.primary() .accent() .secondary() .success() .danger() .warning() .info() .inverse()` | el texto toma el color de la variante (`Label.text("x").danger()`) |
+| `.variant(Variant)` | el texto toma el color de la variante |
 | `.icon(recurso, tam)` / `.icon(Icon)` | icono |
 | `.iconGap(px)` | espacio entre icono y texto |
 | `.small()` | un punto mas pequena que el texto normal |

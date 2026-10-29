@@ -53,7 +53,6 @@ que se espera del usuario. Hereda [`Clickable`](../README.md#clickablet--button-
 | `.icon(recurso, tam)` / `.icon(Icon)` | icono (SVG o imagen del classpath) |
 | `.iconGap(px)` | espacio entre el icono y el texto |
 | `.selected(boolean)` | estado inicial |
-| `.primary()` `.secondary()` `.accent()` `.success()` `.danger()` `.warning()` `.info()` `.inverse()` | pintan un boton ya creado (`Button.of("x").danger()`) |
 | `.variant(Variant)` / `.outline(Variant)` | relleno / solo borde con el color de la variante |
 
 ### Variantes de color (como Bootstrap)

@@ -38,44 +38,4 @@ public class Toggle extends JToggleButton implements Clickable<Toggle> {
     putClientProperty(FlatClientProperties.STYLE, style);
     return this;
   }
-
-  /** Presionado se pinta en el color principal del tema. */
-  public Toggle primary() {
-    return variant(Variant.PRIMARY);
-  }
-
-  /** Presionado se pinta en gris. */
-  public Toggle secondary() {
-    return variant(Variant.SECONDARY);
-  }
-
-  /** Presionado se pinta en color de acento del tema. */
-  public Toggle accent() {
-    return variant(Variant.ACCENT);
-  }
-
-  /** Presionado se pinta en verde. */
-  public Toggle success() {
-    return variant(Variant.SUCCESS);
-  }
-
-  /** Presionado se pinta en rojo. */
-  public Toggle danger() {
-    return variant(Variant.DANGER);
-  }
-
-  /** Presionado se pinta en amarillo. */
-  public Toggle warning() {
-    return variant(Variant.WARNING);
-  }
-
-  /** Presionado se pinta en celeste. */
-  public Toggle info() {
-    return variant(Variant.INFO);
-  }
-
-  /** Presionado se pinta en oscuro con texto claro. */
-  public Toggle inverse() {
-    return variant(Variant.INVERSE);
-  }
 }

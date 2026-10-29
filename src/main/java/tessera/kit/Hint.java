@@ -49,46 +49,6 @@ public class Hint extends JLabel implements Styled<Hint> {
     return this;
   }
 
-  /** Ayuda en el color principal del tema. */
-  public Hint primary() {
-    return variant(Variant.PRIMARY);
-  }
-
-  /** Ayuda en gris. */
-  public Hint secondary() {
-    return variant(Variant.SECONDARY);
-  }
-
-  /** Ayuda en color de acento del tema. */
-  public Hint accent() {
-    return variant(Variant.ACCENT);
-  }
-
-  /** Ayuda en verde. */
-  public Hint success() {
-    return variant(Variant.SUCCESS);
-  }
-
-  /** Ayuda en rojo. */
-  public Hint danger() {
-    return variant(Variant.DANGER);
-  }
-
-  /** Ayuda en amarillo. */
-  public Hint warning() {
-    return variant(Variant.WARNING);
-  }
-
-  /** Ayuda en celeste. */
-  public Hint info() {
-    return variant(Variant.INFO);
-  }
-
-  /** Ayuda en oscuro con texto claro. */
-  public Hint inverse() {
-    return variant(Variant.INVERSE);
-  }
-
   /** Ancho (px) al que se parte el texto cuando hay espacio (325 por defecto). */
   public Hint width(int width) {
     this.width = width;
