@@ -53,8 +53,8 @@ Los metodos devuelven el `Builder`, asi que se encadenan; solo `install()` cierr
 
 ### Variantes de color
 
-`tessera.theme.Variant` (`PRIMARY ACCENT SECONDARY SUCCESS DANGER WARNING INFO LIGHT DARK`) son los colores semanticos que usan `Button`, `Toggle`, `Label` y `Hint`
-(`Button.danger(..)`, `Label.success(..)`, `.variant(v)`). `PRIMARY` sigue a `primary(...)`, y `ACCENT` a `accent(...)`; los demas traen los colores de Bootstrap.
+`tessera.theme.Variant` (`PRIMARY SECONDARY SUCCESS DANGER WARNING INFO LIGHT DARK`) son los colores semanticos que usan `Button`, `Toggle`, `Label` y `Hint`
+(`Button.danger(..)`, `Label.success(..)`, `.variant(v)`). `PRIMARY` sigue a `primary(...)`; los demas traen los colores de Bootstrap.
 `Variant.X.color()`, `.onColor()` (texto que contrasta), `.hover()` y `.pressed()` sirven para codigo propio, y `Variant.X.setColor(c)` cambia uno en cualquier momento (antes de crear las ventanas).
 
 ```java

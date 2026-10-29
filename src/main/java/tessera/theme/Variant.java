@@ -15,14 +15,12 @@ import tessera.kit.Kit;
  * Theme.builder().variant(Variant.SUCCESS, "#2E7D32").install();    // cambiar un color para toda la app
  * </pre>
  *
- * {@link #PRIMARY} y {@link #ACCENT} siguen al tema ({@code Kit.PRIMARY} y {@code Theme.accent()}); el resto trae su color (el de Bootstrap) y se cambia con {@link #setColor(Color)}.
+ * {@link #PRIMARY} sigue al tema ({@code Kit.PRIMARY}); el resto trae su color (el de Bootstrap) y se cambia con {@link #setColor(Color)}.
  */
 public enum Variant {
 
   /** La accion principal (el {@code Kit.PRIMARY} del tema). */
   PRIMARY(null),
-  /** El color de acento del tema. */
-  ACCENT(null),
   /** Accion o texto de segundo plano: gris. */
   SECONDARY(Color.decode("#6C757D")),
   /** Todo salio bien: verde. */
@@ -61,8 +59,6 @@ public enum Variant {
     switch (this) {
       case PRIMARY:
         return Kit.PRIMARY;
-      case ACCENT:
-        return Theme.accent();
       default:
         return defaultColor;
     }

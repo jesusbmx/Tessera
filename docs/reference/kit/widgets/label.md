@@ -52,7 +52,7 @@ Etiqueta de texto (`JLabel`).
 | `Label.title(txt)` | titulo: negrita, 18 |
 | `Label.field(txt)` | nombre de un campo: negrita, 15 |
 | `Label.muted(txt)` | texto secundario: gris (`Kit.MUTED`) |
-| `Label.primary / accent / secondary / success / danger / warning / info / light / dark(txt)` | texto del color de esa [`Variant`](../../theme/theme.md) (como Bootstrap) |
+| `Label.primary / secondary / success / danger / warning / info / light / dark(txt)` | texto del color de esa [`Variant`](../../theme/theme.md) (como Bootstrap) |
 
 ### Ejemplo: variantes de color
 

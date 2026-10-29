@@ -59,17 +59,17 @@ Ademas los de [`Styled`](../README.md#styledt--todos-los-widgets-y-contenedores)
 
 ### Variantes de color (como Bootstrap)
 
-`Button.secondary / accent / success / danger / warning / info / light / dark(txt)`, `Button.of(Variant, txt)` y `Button.outline(Variant, txt)` (solo borde; se rellena al pasar el mouse).
-El texto va blanco, u oscuro si el color es claro (amarillo, celeste). `primary` y `accent` siguen al tema; los demas se cambian con
+`Button.secondary / success / danger / warning / info / light / dark(txt)`, `Button.of(Variant, txt)` y `Button.outline(Variant, txt)` (solo borde; se rellena al pasar el mouse).
+El texto va blanco, u oscuro si el color es claro (amarillo, celeste). `primary` sigue al tema; los demas se cambian con
 `Theme.builder().success("#2E7D32").danger("#C62828")...` (ver [Theme](../../theme/theme.md)).
 
 ![Button: rellenos, solo borde, variant() y Toggle.variant](../../../img/example-button-variants.png)
 
 ```java
 final Card solid = Card.section("Rellenos").children(
-    Row.gap(8).children(Button.primary("Primary"), Button.accent("Accent"), Button.secondary("Secondary")),
-    Row.gap(8).children(Button.success("Success"), Button.danger("Danger"), Button.warning("Warning")),
-    Row.gap(8).children(Button.info("Info"), Button.light("Light"), Button.dark("Dark")));
+    Row.gap(8).children(Button.primary("Primary"), Button.secondary("Secondary"), Button.success("Success")),
+    Row.gap(8).children(Button.danger("Danger"), Button.warning("Warning"), Button.info("Info")),
+    Row.gap(8).children(Button.light("Light"), Button.dark("Dark")));
 
 final Card outline = Card.section("Solo borde (se rellena al pasar el mouse)").children(
     Row.gap(8).children(
@@ -83,7 +83,7 @@ final Card others = Card.section("Otras formas de usarlas").children(
         Toggle.of("Lista").variant(Variant.SUCCESS).selected(true), // presionado se pinta de verde
         Toggle.of("Tarjetas")));
 ```
-`import tessera.theme.Variant;`. Sin tema propio, `primary` es `Kit.PRIMARY` y `accent` el de `Theme`; los demas son los de Bootstrap (se cambian en [Theme](../../theme/theme.md)).
+`import tessera.theme.Variant;`. Sin tema propio, `primary` es `Kit.PRIMARY`; los demas son los de Bootstrap (se cambian en [Theme](../../theme/theme.md)).
 
 | Para... | Hacer |
 |---|---|

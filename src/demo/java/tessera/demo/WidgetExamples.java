@@ -122,9 +122,9 @@ public final class WidgetExamples {
   private static JComponent buttonVariants() {
     // ejemplo:button-variants
     final Card solid = Card.section("Rellenos").children(
-        Row.gap(8).children(Button.primary("Primary"), Button.accent("Accent"), Button.secondary("Secondary")),
-        Row.gap(8).children(Button.success("Success"), Button.danger("Danger"), Button.warning("Warning")),
-        Row.gap(8).children(Button.info("Info"), Button.light("Light"), Button.dark("Dark")));
+        Row.gap(8).children(Button.primary("Primary"), Button.secondary("Secondary"), Button.success("Success")),
+        Row.gap(8).children(Button.danger("Danger"), Button.warning("Warning"), Button.info("Info")),
+        Row.gap(8).children(Button.light("Light"), Button.dark("Dark")));
 
     final Card outline = Card.section("Solo borde (se rellena al pasar el mouse)").children(
         Row.gap(8).children(

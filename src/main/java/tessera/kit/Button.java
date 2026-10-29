@@ -46,11 +46,6 @@ public class Button extends JButton implements Clickable<Button> {
     return of(Variant.SECONDARY, text);
   }
 
-  /** Boton con el color de acento del tema. */
-  public static Button accent(String text) {
-    return of(Variant.ACCENT, text);
-  }
-
   /** Boton de confirmacion (verde). */
   public static Button success(String text) {
     return of(Variant.SUCCESS, text);
