@@ -87,6 +87,41 @@ public class Button extends JButton implements Clickable<Button> {
     return this;
   }
 
+  /** Pinta este boton en gris. */
+  public Button secondary() {
+    return variant(Variant.SECONDARY);
+  }
+
+  /** Pinta este boton en color de acento del tema. */
+  public Button accent() {
+    return variant(Variant.ACCENT);
+  }
+
+  /** Pinta este boton en verde. */
+  public Button success() {
+    return variant(Variant.SUCCESS);
+  }
+
+  /** Pinta este boton en rojo. */
+  public Button danger() {
+    return variant(Variant.DANGER);
+  }
+
+  /** Pinta este boton en amarillo. */
+  public Button warning() {
+    return variant(Variant.WARNING);
+  }
+
+  /** Pinta este boton en celeste. */
+  public Button info() {
+    return variant(Variant.INFO);
+  }
+
+  /** Pinta este boton en oscuro con texto claro. */
+  public Button inverse() {
+    return variant(Variant.INVERSE);
+  }
+
   /** Deja este boton solo con borde y texto del color de la variante. */
   public Button outline(Variant variant) {
     Kit.makeOutline(this, variant);

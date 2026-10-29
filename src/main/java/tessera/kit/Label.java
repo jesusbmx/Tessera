@@ -93,6 +93,46 @@ public class Label extends JLabel implements Styled<Label> {
     return this;
   }
 
+  /** Texto en el color principal del tema. */
+  public Label primary() {
+    return variant(Variant.PRIMARY);
+  }
+
+  /** Texto en gris. */
+  public Label secondary() {
+    return variant(Variant.SECONDARY);
+  }
+
+  /** Texto en color de acento del tema. */
+  public Label accent() {
+    return variant(Variant.ACCENT);
+  }
+
+  /** Texto en verde. */
+  public Label success() {
+    return variant(Variant.SUCCESS);
+  }
+
+  /** Texto en rojo. */
+  public Label danger() {
+    return variant(Variant.DANGER);
+  }
+
+  /** Texto en amarillo. */
+  public Label warning() {
+    return variant(Variant.WARNING);
+  }
+
+  /** Texto en celeste. */
+  public Label info() {
+    return variant(Variant.INFO);
+  }
+
+  /** Texto en oscuro con texto claro. */
+  public Label inverse() {
+    return variant(Variant.INVERSE);
+  }
+
   /** Icono desde un recurso del classpath (SVG o imagen) a ese tamano. */
   public Label icon(String resource, int size) {
     setIcon(Icons.of(resource, size));
