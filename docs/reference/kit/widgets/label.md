@@ -80,6 +80,7 @@ final Card field = Card.section("Un campo con su aviso").children(
 | `.small()` | un punto mas pequena que el texto normal |
 | `.center()` / `.right()` | alineacion horizontal del texto |
 | `.padding(arriba, izq, abajo, der)` | margen alrededor del texto |
+| `.paddingVertical(px)` / `.paddingHorizontal(px)` | margen solo arriba y abajo / solo izquierda y derecha; el otro eje queda como estaba |
 | `.onClick(Runnable)` | la etiqueta se comporta como un **enlace**: cursor de mano y una accion al hacer clic |
 
 ```java

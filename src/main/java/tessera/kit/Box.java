@@ -54,6 +54,16 @@ public abstract class Box<T extends Box<T>> extends JPanel implements Styled<T> 
     return self();
   }
 
+  /** Espacio (px) arriba y abajo; izquierda y derecha quedan como estaban. */
+  public T paddingVertical(int vertical) {
+    return padding(vertical, padding.left, vertical, padding.right);
+  }
+
+  /** Espacio (px) a la izquierda y a la derecha; arriba y abajo quedan como estaban. */
+  public T paddingHorizontal(int horizontal) {
+    return padding(padding.top, horizontal, padding.bottom, horizontal);
+  }
+
   /** Agrega los hijos en orden, cada uno con el comportamiento por defecto de este contenedor. */
   public T children(Component... children) {
     for (Component child : children) {

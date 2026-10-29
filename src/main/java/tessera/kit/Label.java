@@ -1,6 +1,7 @@
 package tessera.kit;
 
 import java.awt.Cursor;
+import java.awt.Insets;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.Icon;
@@ -24,6 +25,9 @@ import tessera.theme.Variant;
  * </pre>
  */
 public class Label extends JLabel implements Styled<Label> {
+
+  /** Margen (px logicos) alrededor del texto; se recuerda para poder cambiar solo el vertical o el horizontal. */
+  private Insets padding = new Insets(0, 0, 0, 0);
 
   protected Label(String text) {
     super(text);
@@ -131,8 +135,19 @@ public class Label extends JLabel implements Styled<Label> {
 
   /** Margen (px) alrededor del texto: arriba, izquierda, abajo, derecha. */
   public Label padding(int top, int left, int bottom, int right) {
+    this.padding = new Insets(top, left, bottom, right);
     setBorder(new EmptyBorder(Kit.px(top), Kit.px(left), Kit.px(bottom), Kit.px(right)));
     return this;
+  }
+
+  /** Margen (px) arriba y abajo del texto; izquierda y derecha quedan como estaban. */
+  public Label paddingVertical(int vertical) {
+    return padding(vertical, padding.left, vertical, padding.right);
+  }
+
+  /** Margen (px) a la izquierda y a la derecha del texto; arriba y abajo quedan como estaban. */
+  public Label paddingHorizontal(int horizontal) {
+    return padding(padding.top, horizontal, padding.bottom, horizontal);
   }
 
   /** La etiqueta se comporta como un enlace: cursor de mano y una accion al hacer clic. */

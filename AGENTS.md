@@ -31,7 +31,7 @@ Despues de `install()` la app ajusta lo suyo con `UIManager.put(...)`. La paleta
 
 ## Kit: contenedores
 Todos son `JPanel` transparentes con MigLayout adentro (no hace falta saber MigLayout). Todos: `.padding(todo)`, `.padding(vert, horiz)`,
-`.padding(arriba, izq, abajo, der)`, `.children(...)`, `.build()`.
+`.padding(arriba, izq, abajo, der)`, `.paddingVertical(px)` / `.paddingHorizontal(px)` (cambian solo ese eje y conservan el otro), `.children(...)`, `.build()`.
 
 | Clase | Uso |
 |---|---|
