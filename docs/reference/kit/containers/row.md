@@ -54,3 +54,4 @@ Row.gap(14).children(rbtnPrinter, rbtnIp, rbtnUsb)       // opciones una al lado
 - [`Col`](col.md) · [`Form`](form.md) · [`Grid`](grid.md) · [`Stack`](stack.md) · [`Footer`](footer.md)
 - [Referencia del kit](../README.md): ideas base y metodos comunes (`Styled`, `Clickable`, `Box`).
 - [Guia visual de disposiciones](../../../guides/screens.md#guia-visual-de-disposiciones): cada contenedor con imagenes y pantallas completas.
+- [Row, Col y Stack: todo lo que se puede hacer](../../../guides/layout.md): recetario con una imagen por cada cosa que se puede pedir.

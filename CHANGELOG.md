@@ -39,6 +39,7 @@ Los cambios importantes de Tessera. Formato basado en [Keep a Changelog](https:/
 
 ### Documentacion
 
+- Guia nueva [Row, Col y Stack: todo lo que se puede hacer](docs/guides/layout.md): un recetario visual con 27 imagenes (`box-*.png`, generadas con `BoxImages.java` por `scripts/doc-images.sh`) que cubre `gap`, `fill`, `fillEqual`, `fillBoth`, `glue`, alineacion vertical, `padding`, anchos fijos, ocultar sin dejar hueco, anidar contenedores, las cuatro alineaciones de `Stack` y patrones listos (barras de herramientas, paginacion, inicio de sesion, tablero, formulario). El codigo de cada bloque es el de su imagen.
 - **Documentacion reorganizada** en `docs/guides/` (guias) y `docs/reference/` (referencia): ahora hay **una pagina por componente** (14 contenedores y 13 widgets de `tessera.kit`,
   `Theme`, `Icons`, `Notification`, `Toast`, `TrayDock`, `WindowPrefs` y una pagina por categoria de `tessera.components`), todas con la misma plantilla: imagen, cuando usarlo,
   referencia de metodos, errores comunes y ver tambien. Indices en [docs/README.md](docs/README.md) y [docs/reference/README.md](docs/reference/README.md). Los archivos de `docs/`

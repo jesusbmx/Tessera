@@ -51,3 +51,4 @@ Col.gap(8).children(Row.gap(10).fill(txtIp).children(btnScan)).fillBoth(scrollTa
 - [`Row`](row.md) · [`Form`](form.md) · [`Card`](card.md) · [`Scroll`](scroll.md)
 - [Referencia del kit](../README.md): ideas base y metodos comunes (`Styled`, `Clickable`, `Box`).
 - [Guia visual de disposiciones](../../../guides/screens.md#guia-visual-de-disposiciones): cada contenedor con imagenes y pantallas completas.
+- [Row, Col y Stack: todo lo que se puede hacer](../../../guides/layout.md): recetario con una imagen por cada cosa que se puede pedir.
