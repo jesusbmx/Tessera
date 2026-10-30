@@ -6,7 +6,7 @@ Una pagina por componente: **imagen, cuando usarlo, todos sus metodos y los erro
 
 | Quiero... | Mira |
 |---|---|
-| acomodar widgets en fila, columna, formulario o cuadricula | [`Row`](kit/containers/row.md) · [`Col`](kit/containers/col.md) · [`Form`](kit/containers/form.md) · [`Grid`](kit/containers/grid.md) |
+| acomodar widgets en fila, columna, formulario o cuadricula (y ver **todo lo que hace cada uno**) | [`Row`](kit/containers/row.md) · [`Col`](kit/containers/col.md) · [`Form`](kit/containers/form.md) · [`Grid`](kit/containers/grid.md) · [todos los contenedores](kit/containers/README.md) |
 | una ventana con cabecera, centro y pie | [`Page`](kit/containers/page.md) · [`Header`](kit/containers/header.md) · [`Footer`](kit/containers/footer.md) |
 | agrupar contenido en un bloque con titulo | [`Card`](kit/containers/card.md) |
 | varias vistas en el mismo lugar | [`Tabs`](kit/containers/tabs.md) · [`Pages`](kit/containers/pages.md) · [`Stack`](kit/containers/stack.md) · [`Split`](kit/containers/split.md) |
@@ -24,6 +24,8 @@ Una pagina por componente: **imagen, cuando usarlo, todos sus metodos y los erro
 Vista general, metodos comunes (`Styled`, `Clickable`, `Box`) y utilidades: [Referencia del kit](kit/README.md).
 
 ### Contenedores
+
+La tabla de **cual uso para cada cosa** y lo que comparten todos (`gap`, `padding`, tamano fijo, ocultar) esta en [Contenedores](kit/containers/README.md) y [`Box`](kit/containers/box.md). Cada pagina tiene una imagen por cada cosa que se puede hacer.
 
 | Clase | Para que |
 |---|---|

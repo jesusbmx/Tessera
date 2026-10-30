@@ -90,9 +90,21 @@ No hay tests automaticos. Se comprueba compilando y mirando el Showcase:
 ./build.sh --demo        (Windows: ./build.ps1 -Demo)
 ```
 
-Las imagenes de la documentacion (`docs/img/`) las generan cinco clases de `src/demo/java/tessera/demo/`: `WidgetExamples.java` (un ejemplo por widget, `example-*.png`, y las imagenes de comparacion de [widgets.md](widgets.md), `widgets-*.png`; su codigo es el que muestran las paginas), `DocImages.java` (capturas de las guias), `LayoutImages.java` (la guia visual de [screens.md](screens.md): `layout-*.png` y `app-*.png`, con el mismo codigo que muestra la guia), `WidgetImages.java` (las paginas de widgets: `widget-*.png` y `container-*.png`) y `MenuImages.java` (la guia [menus.md](menus.md): `menus-*.png`, pantallas con el menu abierto encima del boton; los fragmentos de esa guia que no estan ahi viven en `MenuExamples.java`, que solo existe para que compilen). Despues de cambiar el aspecto de algo
-que aparezca en ellas: `./build.sh && ./scripts/doc-images.sh`, y revisar los PNG antes de subirlos. `ScreenExample.java` es el ejemplo de
-[screens.md](screens.md) compilado: si cambia ese ejemplo, se cambian los dos.
+Las imagenes de la documentacion (`docs/img/`) las generan ocho clases de `src/demo/java/tessera/demo/`; todas salen de `./scripts/doc-images.sh`:
+
+| Clase | Imagenes | Para |
+|---|---|---|
+| `WidgetExamples.java` | `example-*.png`, `widgets-*.png` | un ejemplo por widget y las comparaciones de [widgets.md](widgets.md); su codigo es el que muestran las paginas |
+| `WidgetImages.java` | `widget-*.png` | la imagen de cada pagina de widget |
+| `BoxImages.java` | `box-*.png` | [`Row`](../reference/kit/containers/row.md), [`Col`](../reference/kit/containers/col.md) y [`Stack`](../reference/kit/containers/stack.md): una imagen por cada cosa que hacen |
+| `ContainerImages.java` | `container-*.png` | `Tabs`, `Split`, `Pages`, `Scroll`, `Separator` y `Page` |
+| `LayoutImages.java` | `layout-*.png`, `app-*.png` | `Form`, `Grid`, `Card`, `Header`, `Footer`, `Page`, [`Box`](../reference/kit/containers/box.md) y las pantallas completas de [screens.md](screens.md), con el mismo codigo que muestran |
+| `MenuImages.java` | `menus-*.png` | [menus.md](menus.md), con el menu abierto encima del boton (los fragmentos que no estan ahi viven en `MenuExamples.java`, que solo existe para que compilen) |
+| `NotifyImages.java` | `notify-*.png` | los avisos (necesita un escritorio: muestra las ventanas un instante) |
+| `DocImages.java` | `screen-example.png`, `containers.png`, `theme-*.png`, `arc-*.png`, `styled.png` | capturas de las guias |
+
+Despues de cambiar el aspecto de algo que aparezca en ellas: `./build.sh && ./scripts/doc-images.sh`, y revisar los PNG antes de subirlos. `ScreenExample.java` es el
+ejemplo de [screens.md](screens.md) compilado: si cambia ese ejemplo, se cambian los dos.
 
 `build.sh` compila con `javac --release 8`, copia los recursos y arma `dist/tessera-<version>.jar`. Las dependencias salen de `lib/`
 (`scripts/fetch-libs.sh` las descarga de Maven Central).
@@ -113,9 +125,9 @@ Despues de cambiar Tessera:
 ```
 docs/
   README.md             indice general
-  guides/               guias (se leen de principio a fin): primeros pasos, pantallas, recetas, personalizar, migrar, FAQ, contribuir
+  guides/               guias (se leen de principio a fin): primeros pasos, pantallas, combinar contenedores, recetas, que widget uso, menus, personalizar, migrar, FAQ, contribuir
   reference/            referencia (se consulta): una pagina por componente
-    kit/                README.md (lo comun) + containers/ + widgets/
+    kit/                README.md (lo comun) + containers/ (README, box.md y una pagina por contenedor) + widgets/
     theme/  notify/  app/  components/
   img/                  imagenes (generadas con scripts/doc-images.sh)
 ```
@@ -131,11 +143,33 @@ Toda pagina de `docs/reference/kit/` tiene el mismo orden, para que se encuentre
 | Titulo y resumen | el nombre de la clase y una frase: que es |
 | Tabla de datos | paquete, clase (de que extiende), como se crea, `import` |
 | En una frase | que es y **que reemplaza en Swing puro** (un par de lineas) |
-| Imagen | como se ve (generada con `WidgetImages`, `LayoutImages` o `DocImages`; el titulo de cada tarjeta es el codigo que la arma) |
+| Imagen | como se ve (generada con `WidgetImages` o `DocImages`; el titulo de cada tarjeta es el codigo que la arma) |
 | Cuando usarlo | casos de uso y, en **Cuando no**, que usar en su lugar |
 | Ejemplo | una pantalla pequena y real, con su imagen (`example-*.png`) y el codigo que la arma, tomado de `WidgetExamples.java` entre las marcas `// ejemplo:nombre` y `// fin` |
 | Referencia | todos los metodos en tablas, con ejemplos de codigo |
 | Errores comunes | los sintomas que se repiten y su arreglo |
 | Ver tambien | los componentes relacionados |
+
+Las paginas de **contenedores** (`docs/reference/kit/containers/`) llevan este orden, que cambia dos secciones:
+
+| Seccion | Contenido |
+|---|---|
+| Titulo, tabla de datos | igual que arriba |
+| Cuando usarlo | casos de uso y, en **Cuando no**, que usar en su lugar |
+| **Lo que se puede hacer** | una **galeria**: por cada cosa que se puede pedir, un titulo, **una imagen** y el codigo que la produce (generadas con `BoxImages`, `ContainerImages` o `LayoutImages`) |
+| Referencia | todos los metodos en tablas |
+| **Ejemplos completos donde se usa** | enlaces a las pantallas y recetas que usan ese contenedor (solo si alguna lo usa) |
+| Errores comunes, Ver tambien | igual que arriba; **Ver tambien** enlaza a [Contenedores](../reference/kit/containers/README.md) y a [`Box`](../reference/kit/containers/box.md) |
+
+### Donde va cada cosa
+
+- **Lo que hace un componente** (todas sus variantes, con imagen y codigo) va en **su pagina de referencia**, nunca en una guia. Lo que comparten todos los
+  contenedores (`gap`, `padding`, tamano fijo, ocultar) va en [`Box`](../reference/kit/containers/box.md).
+- Las **guias de ejemplos** ([screens.md](screens.md), [recipes.md](recipes.md), [layout.md](layout.md)) arman pantallas con varias piezas. Cada ejemplo lleva, justo
+  debajo de su titulo, una linea **Usa:** con un enlace a la pagina de cada pieza que emplea: asi quien ve el ejemplo llega, en un clic, a la explicacion a fondo.
+  Si agregas un ejemplo, escribe su linea **Usa:**.
+- Las **guias de decision** ([widgets.md](widgets.md), [menus.md](menus.md)) ayudan a **elegir** entre piezas parecidas y enlazan a sus paginas; no repiten sus metodos.
+- Los **indices** ([docs/README.md](../README.md), [referencia](../reference/README.md), [kit](../reference/kit/README.md), [contenedores](../reference/kit/containers/README.md))
+  solo orientan: una frase por pagina y el enlace.
 
 Reglas: los ejemplos de codigo deben compilar; las imagenes se generan, no se dibujan a mano; un enlace a otra pagina va con su ruta relativa y se comprueba que no este roto.

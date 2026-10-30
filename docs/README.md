@@ -7,8 +7,9 @@ Todo esta en Markdown dentro de este repositorio: no depende de ningun sitio web
 | Quiero... | Leer |
 |---|---|
 | instalarla y ver mi primera ventana | [Primeros pasos](guides/getting-started.md) |
-| ver como se coloca todo (Row, Col, Form, Page...) con imagenes y pantallas completas | [Como armar una pantalla](guides/screens.md) |
-| ver **todo lo que se puede hacer con Row, Col y Stack** (fill, glue, padding, alinear, ocultar...), una imagen por cada cosa | [Row, Col y Stack](guides/layout.md) |
+| ver **todo lo que se puede hacer con cada contenedor** (Row, Col, Stack, Form, Grid, Card, Page, Tabs...), con una imagen por cada cosa, y cual elegir | [Contenedores](reference/kit/containers/README.md) |
+| ver pantallas completas (listado con tabla, lista y detalle, menu lateral, asistente...), con enlace a cada pieza que usan | [Como armar una pantalla](guides/screens.md) |
+| combinar Row, Col y Stack en formularios, barras, tableros y busquedas | [Combinar Row, Col y Stack](guides/layout.md) |
 | ejemplos completos listos para copiar | [Recetas](guides/recipes.md) |
 | saber **que widget usar** (Check, Switch o Toggle; Radio, Combo o ChoiceButton...) y como reaccionar a un cambio | [Que widget uso](guides/widgets.md) |
 | un boton que abre un menu: elegir una opcion, marcar varias o correr una accion; el clic derecho de una lista | [Botones que abren un menu](guides/menus.md) |

@@ -16,10 +16,10 @@ for name in screen-example containers styled theme-default theme-custom arc-0 ar
   echo "docs/img/$name.png"
 done
 
-# guia visual de disposiciones (docs/guides/screens.md): layout-*.png y app-*.png, todas en una sola ejecucion
+# piezas de Form, Grid, Card, Header, Footer, Page (layout-*.png) y pantallas completas de docs/guides/screens.md (app-*.png), en una sola ejecucion
 java -cp "build/demo${SEP}build/classes$SEP$CP" tessera.demo.LayoutImages docs/img
 
-# imagenes de los widgets (docs/reference/kit): widget-*.png y container-*.png
+# imagenes de los widgets (docs/reference/kit/widgets): widget-*.png
 java -cp "build/demo${SEP}build/classes$SEP$CP" tessera.demo.WidgetImages docs/img
 
 # ejemplos de las paginas de widgets y de la guia docs/guides/widgets.md: example-*.png y widgets-*.png
@@ -28,8 +28,11 @@ java -cp "build/demo${SEP}build/classes$SEP$CP" tessera.demo.WidgetExamples docs
 # imagenes de la guia de menus (docs/guides/menus.md): menus-*.png, con el menu abierto encima del boton
 java -cp "build/demo${SEP}build/classes$SEP$CP" tessera.demo.MenuImages docs/img
 
-# imagenes de la guia de Row, Col y Stack (docs/guides/layout.md): box-*.png
+# imagenes de las paginas de Row, Col y Stack (docs/reference/kit/containers): box-*.png
 java -cp "build/demo${SEP}build/classes$SEP$CP" tessera.demo.BoxImages docs/img
+
+# imagenes de las paginas de Tabs, Split, Pages, Scroll, Separator y Page: container-*.png
+java -cp "build/demo${SEP}build/classes$SEP$CP" tessera.demo.ContainerImages docs/img
 
 # imagenes de los avisos (docs/reference/notify): notify-*.png. Muestran las ventanas un instante: necesita un escritorio (no sirve sin pantalla)
 java -cp "build/demo${SEP}build/classes$SEP$CP" tessera.demo.NotifyImages docs/img

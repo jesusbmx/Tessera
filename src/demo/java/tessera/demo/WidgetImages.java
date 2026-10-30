@@ -27,7 +27,6 @@ import tessera.kit.PopupButton;
 import tessera.kit.Radio;
 import tessera.kit.Row;
 import tessera.kit.Scroll;
-import tessera.kit.Separator;
 import tessera.kit.Spinner;
 import tessera.kit.Switch;
 import tessera.kit.Table;
@@ -74,8 +73,6 @@ public final class WidgetImages {
       LayoutImages.save(dir, "widget-menu", menu(), W, 0);
       LayoutImages.save(dir, "widget-spinner", spinner(), W, 0);
       LayoutImages.save(dir, "widget-table", table(), W, 0);
-      LayoutImages.save(dir, "container-scroll", scroll(), W, 0);
-      LayoutImages.save(dir, "container-separator", separator(), W, 0);
     });
     System.exit(0);
   }
@@ -301,26 +298,5 @@ public final class WidgetImages {
     return Col.gap(10).padding(12, 16, 12, 16).children(
         Card.section("Scroll.of(Table.of(model).rowHeight(28).singleSelection())").children(
             Scroll.of(table)));
-  }
-
-  private static JComponent scroll() {
-    final Col content = Col.gap(6);
-    for (int i = 1; i <= 12; i++) {
-      content.children(Check.of("Etiqueta de producto " + i));
-    }
-    return Col.gap(10).padding(12, 16, 12, 16).children(
-        Card.section("Scroll.of(contenido).vertical()  -> solo barra vertical").children(
-            Scroll.of(content).vertical().height(130)));
-  }
-
-  private static JComponent separator() {
-    return Col.gap(10).padding(12, 16, 12, 16).children(
-        Card.section("Separator.horizontal()  -> una linea fina entre secciones").children(
-            Label.text("Seccion de arriba"),
-            Separator.horizontal(),
-            Label.text("Seccion de abajo")),
-        Card.section("Separator.vertical().height(24)  -> entre elementos de una fila").children(
-            Row.gap(10).children(
-                Button.of("Cortar"), Button.of("Copiar"), Separator.vertical().height(24), Button.of("Eliminar"))));
   }
 }

@@ -65,21 +65,13 @@ public final class LayoutImages {
 
     SwingUtilities.invokeAndWait(() -> {
       // piezas
-      save(dir, "layout-row-fill", rowFill(), W, 0);
-      save(dir, "layout-row-align", rowAlign(), W, 0);
-      save(dir, "layout-col-rules", colRules(), W, 0);
-      save(dir, "layout-col-fill", colFill(), W, 0);
       save(dir, "layout-form", formVariants(), W, 0);
       save(dir, "layout-form-labels", formLabels(), W, 0);
       save(dir, "layout-grid", gridColumns(), W, 0);
       save(dir, "layout-card", cardVariants(), W, 0);
       save(dir, "layout-header", headerVariants(), W, 0);
       save(dir, "layout-footer", footerVariants(), W, 0);
-      save(dir, "layout-stack", stackAlternatives(), W, 0);
-      save(dir, "layout-stack-align", stackAlign(), W, 0);
-      save(dir, "layout-stack-patterns", stackPatterns(), W, 0);
       save(dir, "layout-page", pageRegions(), W, 300);
-      save(dir, "layout-tabs-split", tabsAndSplit(), W, 0);
       save(dir, "layout-gap-padding", gapAndPadding(), W, 0);
       save(dir, "layout-visibility", visibility(), W, 0);
       // aplicaciones completas
@@ -127,66 +119,6 @@ public final class LayoutImages {
   private static Col captioned(String caption, JComponent component) {
     return Col.gap(4).children(Label.muted(caption).small()).fillBoth(component);
   }
-
-  // ------------------------------------------------------------------------ //
-  //   P I E Z A S
-  // ------------------------------------------------------------------------ //
-
-  private static JComponent rowFill() {
-    return Col.gap(10).padding(12, 16, 12, 16).children(
-        Card.section("Row.gap(10).children(a, b, c)").children(
-            Row.gap(10).children(Button.of("Uno"), Button.of("Dos"), Button.of("Tres"))),
-        Card.section("Row.gap(10).fill(campo).children(boton)").children(
-            Row.gap(10).fill(Input.text().placeholder("Ruta del archivo")).children(Button.of("Buscar"))),
-        Card.section("Row.gap(10).fill(campo1, campo2)").children(
-            Row.gap(10).fill(Input.text().placeholder("Nombre"), Input.text().placeholder("Apellido"))),
-        Card.section("Row.gap(8).children(info).glue().children(botones)").children(
-            Row.gap(8).children(Label.muted("3 cambios sin guardar"))
-                .glue()
-                .children(Button.of("Cancelar"), Button.primary("Guardar"))),
-        Card.section("Row.gap(10).fillEqual(a, b)").children(
-            Row.gap(10).fillEqual(zone("A (corto)"), zone("B (un texto bastante mas largo)"))));
-  }
-
-  private static JComponent rowAlign() {
-    return Col.gap(10).padding(12, 16, 12, 16).children(
-        Card.section("Row.gap(10).children(...)  -> centrados (por defecto)").children(
-            Row.gap(10).children(
-                Label.field("Notas"), Scroll.of(Input.area(3).wrap()).width(260), Button.of("Guardar"))),
-        Card.section("Row.gap(10).top().children(...)  -> alineados arriba").children(
-            Row.gap(10).top().children(
-                Label.field("Notas"), Scroll.of(Input.area(3).wrap()).width(260), Button.of("Guardar"))));
-  }
-
-  private static JComponent colRules() {
-    return Col.gap(10).padding(12, 16, 12, 16).children(
-        Row.gap(12).fillEqual(
-            Card.section("Col.gap(6).children(...)").children(
-                Col.gap(6).children(
-                    Label.text("Etiqueta: ancho natural"),
-                    Button.of("Boton: ancho natural"),
-                    Input.text().placeholder("Campo: todo el ancho"),
-                    Combo.of("Combo: todo el ancho"))),
-            Card.section("Col.gap(6).fill(boton).start(campo)").children(
-                Col.gap(6)
-                    .fill(Button.of("fill: el boton ocupa todo el ancho"))
-                    .start(Input.text().placeholder("start").columns(10)))));
-  }
-
-  private static JComponent colFill() {
-    return Col.gap(10).padding(12, 16, 12, 16).children(
-        Row.gap(12).fillEqual(
-            captioned("Col.children(...).glue().children(boton)",
-                outline(Col.gap(8).padding(8)
-                    .children(Label.title("Titulo"), Input.text().placeholder("Campo"))
-                    .glue()
-                    .children(Button.primary("Pegado abajo"))).height(190)),
-            captioned("Col.children(campo).fillBoth(scroll)",
-                outline(Col.gap(8).padding(8)
-                    .children(Input.text().placeholder("Buscar"))
-                    .fillBoth(Scroll.of(Input.area(4)))).height(190))));
-  }
-
   private static JComponent formVariants() {
     return Col.gap(10).padding(12, 16, 12, 16).children(
         Card.section("Form.create().row(...).rowTop(...).wide(...)").children(
@@ -292,62 +224,6 @@ public final class LayoutImages {
             Stack.fill(cbPrinters, txtIp, cbUsb),
             Button.of("Buscar")));
   }
-
-  private static JComponent stackAlternatives() {
-    return Col.gap(10).padding(12, 16, 12, 16).children(
-        stackState("Stack.fill(cbPrinters, txtIp, cbUsb)  -> se ve cbPrinters", 0),
-        stackState("...  -> se ve txtIp (los otros dos no ocupan espacio)", 1),
-        stackState("...  -> se ve cbUsb", 2));
-  }
-
-  private static JComponent stackAlign() {
-    return Col.gap(10).padding(12, 16, 12, 16).children(
-        Card.section("Stack.fill(boton)  -> ocupa todo el ancho").children(
-            Stack.fill(Button.of("Boton"))),
-        Card.section("Stack.start(boton)  -> ancho natural, a la izquierda").children(
-            Stack.start(Button.of("Boton"))),
-        Card.section("Stack.center(boton)  -> ancho natural, centrado").children(
-            Stack.center(Button.of("Boton"))),
-        Card.section("Stack.end(boton)  -> ancho natural, a la derecha").children(
-            Stack.end(Button.of("Boton"))));
-  }
-
-  /** Dos botones en el mismo lugar: se ve "Iniciar" o "Detener" segun el estado. */
-  private static JComponent stackToggle(String title, boolean running) {
-    final Button start = Button.primary("Iniciar").visible(!running);
-    final Button stop = Button.of("Detener").visible(running);
-    return Card.section(title).children(
-        Row.gap(10)
-            .children(Label.text(running ? "Servicio en marcha" : "Servicio detenido"))
-            .glue()
-            .children(Stack.start(start, stop)));
-  }
-
-  /** Un mensaje de "no hay datos" y la lista en el mismo lugar: se ve uno u otro. */
-  private static JComponent stackEmptyState(String title, boolean empty) {
-    final BaseTableModel.TArray model = new BaseTableModel.TArray("Impresora", "Puerto");
-    if (!empty) {
-      model.addRow(new Object[] {"Zebra ZD420", "192.168.0.10"});
-      model.addRow(new Object[] {"TSC TE200", "USB001"});
-    }
-    final Table table = Table.of(model).rowHeight(26);
-    table.setPreferredScrollableViewportSize(new Dimension(200, 80));
-
-    final Hint emptyMessage = Hint.of("Todavia no hay impresoras. Presiona Nueva para agregar una.").visible(empty);
-    final Scroll list = Scroll.of(table).visible(!empty);
-    return Card.section(title).children(Stack.fill(emptyMessage, list));
-  }
-
-  private static JComponent stackPatterns() {
-    return Col.gap(10).padding(12, 16, 12, 16).children(
-        Row.gap(12).fillEqual(
-            stackToggle("Detenido: se ve Iniciar", false),
-            stackToggle("En marcha: se ve Detener", true)),
-        Row.gap(12).fillEqual(
-            stackEmptyState("Sin datos: se ve el mensaje", true),
-            stackEmptyState("Con datos: se ve la lista", false)));
-  }
-
   private static JComponent pageRegions() {
     return Page.create()
         .top(zone("top  ->  Header, barra de herramientas", new Color(0xDBEAFE), 14, 16))
@@ -356,19 +232,6 @@ public final class LayoutImages {
         .center(zone("center  ->  ocupa todo el espacio que sobra", new Color(0xE5E7EB), 20, 16))
         .bottom(zone("bottom  ->  Footer, barra de estado", new Color(0xFFE4E6), 14, 16));
   }
-
-  private static JComponent tabsAndSplit() {
-    return Col.gap(10).padding(12, 16, 12, 16).children(
-        Card.section("Tabs.create().tab(\"General\", a).tab(\"Avanzado\", b)").children(
-            Tabs.create()
-                .tab("General", Col.gap(6).padding(10).children(Check.of("Opcion 1").selected(true), Check.of("Opcion 2")))
-                .tab("Avanzado", Col.gap(6).padding(10).children(Check.of("Opcion avanzada")))),
-        Card.section("Split.horizontal(lista, detalle).divider(160)").children(
-            Split.horizontal(zone("lista", 22, 10), zone("detalle", new Color(0xE5E7EB), 22, 10)).divider(160)),
-        Card.section("Split.vertical(editor, consola).weight(0.7)").children(
-            Split.vertical(zone("editor", 22, 10), zone("consola", new Color(0xE5E7EB), 22, 10)).weight(0.7)));
-  }
-
   private static JComponent gapAndPadding() {
     return Col.gap(10).padding(12, 16, 12, 16).children(
         Row.gap(12).fillEqual(

@@ -32,6 +32,7 @@ Despues de `install()` la app ajusta lo suyo con `UIManager.put(...)`. La paleta
 ## Kit: contenedores
 Todos son `JPanel` transparentes con MigLayout adentro (no hace falta saber MigLayout). Todos: `.padding(todo)`, `.padding(vert, horiz)`,
 `.padding(arriba, izq, abajo, der)`, `.paddingVertical(px)` / `.paddingHorizontal(px)` (cambian solo ese eje y conservan el otro), `.padding()` (devuelve una copia `Insets`), `.children(...)`, `.build()`.
+Todo lo que hace cada contenedor, **con una imagen por cosa**, esta en [docs/reference/kit/containers/README.md](docs/reference/kit/containers/README.md) (tabla "que uso para cada cosa") y lo que comparten todos en [box.md](docs/reference/kit/containers/box.md).
 
 | Clase | Uso |
 |---|---|
@@ -139,7 +140,7 @@ de la app (`"com/miapp/img/x.svg"`), no aqui.
 ## Documentacion completa
 Todo en Markdown dentro de `docs/` (sin sitio web); indice en [docs/README.md](docs/README.md).
 - **Referencia, una pagina por componente** (imagen, cuando usarlo, todos los metodos, errores comunes): [docs/reference/README.md](docs/reference/README.md). Contenedores y widgets de `tessera.kit` en `docs/reference/kit/containers/<nombre>.md` y `docs/reference/kit/widgets/<nombre>.md` (por ejemplo `row.md`, `button.md`, `check.md`); `Theme`/`Icons` en `reference/theme/`; avisos en `reference/notify/`; bandeja y ventanas en `reference/app/`; el resto de piezas sueltas en `reference/components/`.
-- **Guias**: [primeros pasos](docs/guides/getting-started.md) · [pantallas: guia visual de disposiciones](docs/guides/screens.md) · [Row, Col y Stack: recetario con imagenes](docs/guides/layout.md) · [recetas](docs/guides/recipes.md) · [personalizar](docs/guides/customizing.md) · [migrar](docs/guides/migrating.md) · [FAQ](docs/guides/faq.md).
+- **Guias**: [primeros pasos](docs/guides/getting-started.md) · [pantallas completas con enlace a cada pieza que usan](docs/guides/screens.md) · [combinar Row, Col y Stack](docs/guides/layout.md) · [recetas](docs/guides/recipes.md) · [personalizar](docs/guides/customizing.md) · [migrar](docs/guides/migrating.md) · [FAQ](docs/guides/faq.md).
 
 ## Personalizar y modificar
 - Cambiar colores, esquinas, fuente, y que **no** se puede cambiar desde la app (ej. el radio de `Card` es fijo): [docs/guides/customizing.md](docs/guides/customizing.md).

@@ -7,7 +7,8 @@ metodos y los errores comunes. Esta pagina explica lo que comparten todos.
 
 ## Contenedores
 
-Acomodan a sus hijos; son `JPanel` con MigLayout adentro (no hace falta saber MigLayout). Ver la [guia visual de disposiciones](../../guides/screens.md#guia-visual-de-disposiciones).
+Acomodan a sus hijos; son `JPanel` con MigLayout adentro (no hace falta saber MigLayout). Cada pagina tiene **una imagen por cada cosa que se puede hacer**; para
+elegir uno, la tabla [Contenedores: que uso para cada cosa](containers/README.md#que-uso-para-cada-cosa).
 
 | Contenedor | Para que |
 |---|---|
@@ -123,10 +124,13 @@ Extiende `Styled`.
 | `.padding(todo)` | espacio entre el borde y los hijos, igual por los cuatro lados |
 | `.padding(vertical, horizontal)` | arriba/abajo y izquierda/derecha |
 | `.padding(arriba, izq, abajo, der)` | el mismo orden de `java.awt.Insets` |
+| `.paddingVertical(px)` / `.paddingHorizontal(px)` | cambian **solo ese eje** y conservan el otro |
+| `.padding()` | una **copia** del margen actual (`Insets`) |
 | `.children(Component...)` | agrega los hijos en orden, cada uno con el comportamiento por defecto del contenedor. Los `null` se ignoran |
 | `.build()` | devuelve el contenedor (opcional: ya es un `JPanel`) |
 
-El espacio entre hijos (`gap`) se da al crear el contenedor (`Row.gap(10)`) o con `.gap(n)` en `Card`.
+El espacio entre hijos (`gap`) se da al crear el contenedor (`Row.gap(10)`) o con `.gap(n)` en `Card`. Todo esto, con imagenes, y como ocultar sin dejar hueco o
+fijar un tamano: [`Box`](containers/box.md).
 
 ## Utilidades (`Kit`)
 

@@ -8,14 +8,16 @@ En los ejemplos se omiten los `import`. Recuerda que deben ser **explicitos** pa
 
 | Receta | Muestra |
 |---|---|
-| [1. Dialogo de inicio de sesion](#1-dialogo-de-inicio-de-sesion) | `Form`, `Password`, `onEnter`, validacion con `ErrorProvider` |
-| [2. Lista y detalle](#2-lista-y-detalle) | `Split`, `Table` + `BaseTableModel`, `onSelect` |
-| [3. Asistente de pasos](#3-asistente-de-pasos) | `Pages`, `Header` que cambia, botones Atras / Siguiente |
-| [4. Pantalla de ajustes](#4-pantalla-de-ajustes) | `Card.section`, `Switch`, `Combo`, `Spinner`, `Grid`, `Toast` |
-| [5. Tarea larga con progreso](#5-tarea-larga-con-progreso) | `Notification` con barra de progreso y `SwingWorker` |
-| [6. App que vive en la bandeja](#6-app-que-vive-en-la-bandeja) | `TrayDock`, `WindowPrefs`, `Theme` |
+| [1. Dialogo de inicio de sesion](#1-dialogo-de-inicio-de-sesion) | [`Form`](../reference/kit/containers/form.md), [`Password`](../reference/kit/widgets/password.md), `onEnter`, validacion con [`ErrorProvider`](../reference/components/forms.md) |
+| [2. Lista y detalle](#2-lista-y-detalle) | [`Split`](../reference/kit/containers/split.md), [`Table`](../reference/kit/widgets/table.md) + [`BaseTableModel`](../reference/components/tables.md#basetablemodel), `onSelect` |
+| [3. Asistente de pasos](#3-asistente-de-pasos) | [`Pages`](../reference/kit/containers/pages.md), [`Header`](../reference/kit/containers/header.md) que cambia, botones Atras / Siguiente |
+| [4. Pantalla de ajustes](#4-pantalla-de-ajustes) | `Card.section`, [`Switch`](../reference/kit/widgets/switch.md), [`Combo`](../reference/kit/widgets/combo.md), [`Spinner`](../reference/kit/widgets/spinner.md), [`Grid`](../reference/kit/containers/grid.md), [`Toast`](../reference/notify/toast.md) |
+| [5. Tarea larga con progreso](#5-tarea-larga-con-progreso) | [`Notification`](../reference/notify/notification.md) con barra de progreso y `SwingWorker` |
+| [6. App que vive en la bandeja](#6-app-que-vive-en-la-bandeja) | [`TrayDock`](../reference/app/traydock.md), [`WindowPrefs`](../reference/app/windowprefs.md), [`Theme`](../reference/theme/theme.md) |
 
 ## 1. Dialogo de inicio de sesion
+
+**Usa:** [`Col`](../reference/kit/containers/col.md) · [`Form`](../reference/kit/containers/form.md) · [`Card`](../reference/kit/containers/card.md) · [`Header`](../reference/kit/containers/header.md) · [`Footer`](../reference/kit/containers/footer.md) · [`Page`](../reference/kit/containers/page.md) · [`Button`](../reference/kit/widgets/button.md) · [`Input`](../reference/kit/widgets/input.md) · [`Password`](../reference/kit/widgets/password.md)
 
 Un dialogo modal con dos campos, Enter para entrar y validacion que marca el campo vacio.
 
@@ -91,6 +93,8 @@ if (dialog.isAccepted()) { /* seguir */ }
 
 ## 2. Lista y detalle
 
+**Usa:** [`Col`](../reference/kit/containers/col.md) · [`Form`](../reference/kit/containers/form.md) · [`Card`](../reference/kit/containers/card.md) · [`Scroll`](../reference/kit/containers/scroll.md) · [`Split`](../reference/kit/containers/split.md) · [`Label`](../reference/kit/widgets/label.md) · [`Table`](../reference/kit/widgets/table.md)
+
 Una tabla a la izquierda y el detalle de la fila elegida a la derecha, con una barra que se arrastra entre las dos.
 
 ```java
@@ -163,6 +167,8 @@ Puntos clave: `Scroll.of(table)` (la tabla siempre va en un `Scroll`), `onSelect
 `convertRowIndexToModel` para cuando la tabla este ordenada o filtrada.
 
 ## 3. Asistente de pasos
+
+**Usa:** [`Col`](../reference/kit/containers/col.md) · [`Form`](../reference/kit/containers/form.md) · [`Card`](../reference/kit/containers/card.md) · [`Header`](../reference/kit/containers/header.md) · [`Footer`](../reference/kit/containers/footer.md) · [`Page`](../reference/kit/containers/page.md) · [`Pages`](../reference/kit/containers/pages.md) · [`Hint`](../reference/kit/widgets/hint.md) · [`Button`](../reference/kit/widgets/button.md) · [`Input`](../reference/kit/widgets/input.md) · [`Combo`](../reference/kit/widgets/combo.md)
 
 Varios pasos en el mismo lugar con `Pages`; el `Header` cambia de descripcion y los botones se adaptan al paso.
 
@@ -237,6 +243,8 @@ public class WizardDialog extends JDialog {
 
 ## 4. Pantalla de ajustes
 
+**Usa:** [`Col`](../reference/kit/containers/col.md) · [`Grid`](../reference/kit/containers/grid.md) · [`Card`](../reference/kit/containers/card.md) · [`Header`](../reference/kit/containers/header.md) · [`Footer`](../reference/kit/containers/footer.md) · [`Page`](../reference/kit/containers/page.md) · [`Scroll`](../reference/kit/containers/scroll.md) · [`Label`](../reference/kit/widgets/label.md) · [`Hint`](../reference/kit/widgets/hint.md) · [`Button`](../reference/kit/widgets/button.md) · [`Check`](../reference/kit/widgets/check.md) · [`Switch`](../reference/kit/widgets/switch.md) · [`Combo`](../reference/kit/widgets/combo.md) · [`Spinner`](../reference/kit/widgets/spinner.md) · [`Toast`](../reference/notify/toast.md)
+
 Varios bloques compactos con `Card.section`, interruptores y un `Toast` al guardar.
 
 ```java
@@ -294,6 +302,8 @@ public class SettingsPanel extends JPanel {
 ```
 
 ## 5. Tarea larga con progreso
+
+**Usa:** [`Col`](../reference/kit/containers/col.md) · [`Card`](../reference/kit/containers/card.md) · [`Button`](../reference/kit/widgets/button.md) · [`Notification`](../reference/notify/notification.md)
 
 Un trabajo en segundo plano que informa su avance en una `Notification` con barra de progreso (ver [Avisos](../reference/notify/README.md)).
 
@@ -354,6 +364,8 @@ public class ExportPanel extends JPanel {
 ```
 
 ## 6. App que vive en la bandeja
+
+**Usa:** [`Col`](../reference/kit/containers/col.md) · [`Header`](../reference/kit/containers/header.md) · [`Page`](../reference/kit/containers/page.md) · [`Button`](../reference/kit/widgets/button.md) · [`Notification`](../reference/notify/notification.md) · [`TrayDock`](../reference/app/traydock.md) · [`WindowPrefs`](../reference/app/windowprefs.md) · [`Theme`](../reference/theme/theme.md)
 
 Cerrar la ventana no cierra la app: queda un icono en la bandeja con menu, la ventana recuerda su tamano y se puede reabrir desde el icono (o
 desde el Dock en macOS). Ver [Integracion con el escritorio](../reference/app/README.md).

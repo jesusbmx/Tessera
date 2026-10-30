@@ -40,11 +40,11 @@ public final class BoxImages {
   /** Ancho de las imagenes. */
   private static final int W = 620;
 
-  private static final Color BLUE = new Color(0xDBEAFE);
-  private static final Color GREEN = new Color(0xD1FAE5);
-  private static final Color AMBER = new Color(0xFEF3C7);
-  private static final Color ROSE = new Color(0xFFE4E6);
-  private static final Color GRAY = new Color(0xE5E7EB);
+  static final Color BLUE = new Color(0xDBEAFE);
+  static final Color GREEN = new Color(0xD1FAE5);
+  static final Color AMBER = new Color(0xFEF3C7);
+  static final Color ROSE = new Color(0xFFE4E6);
+  static final Color GRAY = new Color(0xE5E7EB);
 
   private BoxImages() {
   }
@@ -89,7 +89,7 @@ public final class BoxImages {
     System.exit(0);
   }
 
-  private static void save(String dir, String name, JComponent content) {
+  static void save(String dir, String name, JComponent content) {
     LayoutImages.save(dir, name, content, W, 0);
   }
 
@@ -98,15 +98,15 @@ public final class BoxImages {
   // ------------------------------------------------------------------------ //
 
   /** Bloque de color con texto: sirve para dibujar "una pieza" sin que importe su contenido. */
-  private static Label zone(String text) {
+  static Label zone(String text) {
     return zone(text, BLUE, 6, 12);
   }
 
-  private static Label zone(String text, Color color) {
+  static Label zone(String text, Color color) {
     return zone(text, color, 6, 12);
   }
 
-  private static Label zone(String text, Color color, int vertical, int horizontal) {
+  static Label zone(String text, Color color, int vertical, int horizontal) {
     final Label label = Label.text(text).center().background(color);
     label.setBorder(BorderFactory.createCompoundBorder(
         BorderFactory.createLineBorder(color.darker()),
@@ -115,23 +115,23 @@ public final class BoxImages {
   }
 
   /** Dibuja con linea punteada el borde de un contenedor, para ver hasta donde llega. */
-  private static <T extends JComponent> T outline(T container) {
+  static <T extends JComponent> T outline(T container) {
     container.setBorder(new DashedBorder(8, new Color(0x94A3B8)));
     return container;
   }
 
   /** Un titulo pequeno encima del componente (el componente ocupa el resto). */
-  private static Col captioned(String caption, JComponent component) {
+  static Col captioned(String caption, JComponent component) {
     return Col.gap(4).children(Label.muted(caption).small()).fillBoth(component);
   }
 
   /** Tarjeta con el codigo como titulo. */
-  private static Card card(String title, JComponent... children) {
+  static Card card(String title, JComponent... children) {
     return Card.section(title).children(children);
   }
 
   /** Pagina de la imagen: tarjetas una debajo de otra. */
-  private static Col page(JComponent... children) {
+  static Col page(JComponent... children) {
     return Col.gap(10).padding(12, 16, 12, 16).children(children);
   }
 
