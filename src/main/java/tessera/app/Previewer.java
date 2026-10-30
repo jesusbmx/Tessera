@@ -137,9 +137,21 @@ public final class Previewer {
         final JFrame frame = new JFrame();
         frame.setContentPane(component);
         frame.pack();
-        final Dimension size = component.getPreferredSize();
+        // validate() y no doLayout(): este solo reacomoda el contenedor de afuera, y los de adentro conservarian la distribucion
+        // de pack() (a otro alto), asi que el pie de la pantalla saldria cortado. Se repite hasta que el tamano se estabiliza
+        // porque el alto de un texto que se parte en lineas solo se conoce con el ancho ya aplicado.
+        Dimension size = component.getPreferredSize();
+        for (int pass = 0; pass < 3; pass++) {
+          component.setSize(size);
+          component.validate();
+          final Dimension next = component.getPreferredSize();
+          if (next.equals(size)) {
+            break;
+          }
+          size = next;
+        }
         component.setSize(size);
-        component.doLayout();
+        component.validate();
         final BufferedImage image = new BufferedImage(size.width, size.height, BufferedImage.TYPE_INT_RGB);
         component.paint(image.createGraphics());
         png.getAbsoluteFile().getParentFile().mkdirs();

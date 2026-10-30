@@ -30,6 +30,7 @@ Los cambios importantes de Tessera. Formato basado en [Keep a Changelog](https:/
 
 ### Corregido
 
+- `Previewer.save(...)` (la imagen PNG de una pantalla) **ya no sale con el pie cortado**: usaba `doLayout()`, que solo reacomoda el contenedor de afuera, asi que los de adentro conservaban la distribucion de `pack()` a otro alto. Ahora usa `validate()` y repite hasta que el tamano se estabiliza. El plugin de NetBeans *Tessera Preview* tenia el mismo defecto en su pestana y tambien se corrigio.
 - `TextArea.placeholder(...)` (y `Input.area(n).placeholder(...)`) **ahora se ve**: FlatLaf 3.7 no pinta el placeholder en un `JTextArea`, asi que `TextArea`
   usa `TextPlaceholder`. `TextPlaceholder.install(...)` ademas se puede llamar mas de una vez sobre el mismo componente (cambia el texto en vez de duplicarlo).
 - `new HighlightColumnRenderer(String...)` ya no guarda una lista de tamano fijo: `addHighlightedColumn` y `removeHighlightedColumn` funcionan.
