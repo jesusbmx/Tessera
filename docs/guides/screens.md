@@ -561,7 +561,7 @@ Dos medidas distintas, que no se deben confundir:
 
 - **`gap`**: el espacio **entre** un hijo y el siguiente (`Row.gap(10)`, `Col.gap(8)`, `Form.gap(4)`, `Card.gap(6)`).
 - **`padding`**: el espacio **entre el borde del contenedor y sus hijos** (`padding(12)`, `padding(vertical, horizontal)`, `padding(arriba, izq, abajo, der)`).
-  Para cambiar **un solo eje** sin tocar el otro: `paddingVertical(px)` (arriba y abajo) y `paddingHorizontal(px)` (izquierda y derecha), por ejemplo `Col.gap(10).paddingHorizontal(24)`.
+  Para cambiar **un solo eje** sin tocar el otro: `paddingVertical(px)` (arriba y abajo) y `paddingHorizontal(px)` (izquierda y derecha), por ejemplo `Col.gap(10).paddingHorizontal(24)`. `padding()` sin argumentos devuelve una copia del margen actual (`Insets`).
 
 ![Gap y padding](../img/layout-gap-padding.png)
 

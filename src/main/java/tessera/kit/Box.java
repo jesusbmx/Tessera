@@ -19,7 +19,7 @@ public abstract class Box<T extends Box<T>> extends JPanel implements Styled<T> 
   private int gap;
 
   /** Espacio (px) entre el borde del contenedor y sus hijos. */
-  private Insets padding = new Insets(0, 0, 0, 0);
+  private final Insets padding = new Insets(0, 0, 0, 0);
 
   protected Box(int gap) {
     super(new MigLayout());
@@ -49,9 +49,17 @@ public abstract class Box<T extends Box<T>> extends JPanel implements Styled<T> 
 
   /** Espacio (px) arriba, izquierda, abajo y derecha (el mismo orden de Insets). */
   public T padding(int top, int left, int bottom, int right) {
-    this.padding = new Insets(top, left, bottom, right);
+    this.padding.top = top;
+    this.padding.left = left;
+    this.padding.bottom = bottom;
+    this.padding.right = right;
     relayout();
     return self();
+  }
+
+  /** Copia del espacio (px) entre el borde y los hijos: arriba, izquierda, abajo y derecha. Cambiarla no afecta al contenedor. */
+  public Insets padding() {
+    return new Insets(padding.top, padding.left, padding.bottom, padding.right);
   }
 
   /** Espacio (px) arriba y abajo; izquierda y derecha quedan como estaban. */

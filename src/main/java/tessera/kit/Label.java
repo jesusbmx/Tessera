@@ -27,7 +27,7 @@ import tessera.theme.Variant;
 public class Label extends JLabel implements Styled<Label> {
 
   /** Margen (px logicos) alrededor del texto; se recuerda para poder cambiar solo el vertical o el horizontal. */
-  private Insets padding = new Insets(0, 0, 0, 0);
+  private final Insets padding = new Insets(0, 0, 0, 0);
 
   protected Label(String text) {
     super(text);
@@ -135,9 +135,17 @@ public class Label extends JLabel implements Styled<Label> {
 
   /** Margen (px) alrededor del texto: arriba, izquierda, abajo, derecha. */
   public Label padding(int top, int left, int bottom, int right) {
-    this.padding = new Insets(top, left, bottom, right);
+    this.padding.top = top;
+    this.padding.left = left;
+    this.padding.bottom = bottom;
+    this.padding.right = right;
     setBorder(new EmptyBorder(Kit.px(top), Kit.px(left), Kit.px(bottom), Kit.px(right)));
     return this;
+  }
+
+  /** Copia del margen (px) alrededor del texto: arriba, izquierda, abajo y derecha. Cambiarla no afecta a la etiqueta. */
+  public Insets padding() {
+    return new Insets(padding.top, padding.left, padding.bottom, padding.right);
   }
 
   /** Margen (px) arriba y abajo del texto; izquierda y derecha quedan como estaban. */
