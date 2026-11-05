@@ -1,0 +1,33 @@
+# Documentacion de Tessera
+
+Todo esta en Markdown dentro de este repositorio: no depende de ningun sitio web. Dos partes: las **guias** (para aprender y resolver tareas) y la **referencia** (para consultar cada componente).
+
+## Guias
+
+| Quiero... | Leer |
+|---|---|
+| instalarla y ver mi primera ventana | [Primeros pasos](guides/getting-started.md) |
+| ver **todo lo que se puede hacer con cada contenedor** (Row, Col, Stack, Form, Grid, Card, Page, Tabs...), con una imagen por cada cosa, y cual elegir | [Contenedores](reference/kit/containers/README.md) |
+| ver pantallas completas (listado con tabla, lista y detalle, menu lateral, asistente...), con enlace a cada pieza que usan | [Como armar una pantalla](guides/screens.md) |
+| combinar Row, Col y Stack en formularios, barras, tableros y busquedas | [Combinar Row, Col y Stack](guides/layout.md) |
+| ejemplos completos listos para copiar | [Recetas](guides/recipes.md) |
+| saber **que widget usar** (Check, Switch o Toggle; Radio, Combo o ChoiceButton...) y como reaccionar a un cambio | [Que widget uso](guides/widgets.md) |
+| un boton que abre un menu: elegir una opcion, marcar varias o correr una accion; el clic derecho de una lista | [Botones que abren un menu](guides/menus.md) |
+| cambiar colores, esquinas redondeadas, fuente | [Personalizar](guides/customizing.md) |
+| pasar una app NetBeans / GroupLayout a Tessera | [Migrar una app](guides/migrating.md) |
+| resolver un problema o una duda | [Preguntas frecuentes](guides/faq.md) |
+| modificar la libreria o publicar el jar | [Contribuir](guides/contributing.md) |
+
+## Referencia
+
+Una pagina por componente, con imagen, cuando usarlo, todos sus metodos y errores comunes. Empieza por el [indice de la referencia](reference/README.md).
+
+| Paquete | Contenido |
+|---|---|
+| `tessera.kit` | [contenedores y widgets](reference/kit/README.md): `Row`, `Col`, `Stack`, `Grid`, `Form`, `Card`, `Header`, `Footer`, `Page`, `Pages`, `Scroll`, `Tabs`, `Split`, `Separator`, `Label`, `Hint`, `Button`, `Check`, `Radio`, `Toggle`, `Switch`, `Input`, `Password`, `TextArea`, `Combo`, `ChoiceButton`, `MultiChoiceButton`, `MenuButton`, `Menu`, `Spinner`, `Table` |
+| `tessera.theme` | [`Theme`](reference/theme/theme.md), [`Icons`](reference/theme/icons.md) |
+| `tessera.notify` | [`Notification`](reference/notify/notification.md), [`Toast`](reference/notify/toast.md) |
+| `tessera.app` | [`TrayDock`](reference/app/traydock.md), [`WindowPrefs`](reference/app/windowprefs.md) |
+| `tessera.components` | [componentes sueltos](reference/components/README.md) |
+
+Cada clase publica tiene ademas Javadoc corto con un ejemplo de uso. Para una lectura rapida de toda la API (pensada para IA y devs nuevos): [AGENTS.md](../AGENTS.md).

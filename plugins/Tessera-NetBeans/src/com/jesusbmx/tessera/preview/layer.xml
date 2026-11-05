@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE filesystem PUBLIC "-//NetBeans//DTD Filesystem 1.2//EN" "http://www.netbeans.org/dtds/filesystem-1_2.dtd">
+<filesystem>
+    <!-- el editor: la pestana "Tessera Preview" y el color de los hexadecimales (#1976D2) -->
+    <folder name="Editors">
+        <folder name="text">
+            <folder name="x-java">
+                <file name="com-jesusbmx-tessera-preview-HexColorHighlights.instance">
+                    <attr name="instanceOf" stringvalue="org.netbeans.spi.editor.highlighting.HighlightsLayerFactory"/>
+                    <attr name="instanceClass" stringvalue="com.jesusbmx.tessera.preview.HexColorHighlights"/>
+                </file>
+                <!-- entre Source (2000) e History (1000000) -->
+                <folder name="MultiView">
+                    <file name="com-jesusbmx-tessera-preview-PreviewElement.instance">
+                        <attr name="instanceCreate" methodvalue="org.netbeans.core.spi.multiview.MultiViewFactory.createMultiViewDescription"/>
+                        <attr name="instanceClass" stringvalue="org.netbeans.core.multiview.ContextAwareDescription"/>
+                        <attr name="class" stringvalue="com.jesusbmx.tessera.preview.PreviewElement"/>
+                        <attr name="displayName" bundlevalue="com.jesusbmx.tessera.preview.Bundle#CTL_PreviewTab"/>
+                        <attr name="preferredID" stringvalue="tessera.preview"/>
+                        <attr name="persistenceType" intvalue="2"/>
+                        <attr name="position" intvalue="2500"/>
+                    </file>
+                </folder>
+            </folder>
+        </folder>
+    </folder>
+</filesystem>
