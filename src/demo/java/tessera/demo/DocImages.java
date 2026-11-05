@@ -19,7 +19,6 @@ import tessera.kit.Form;
 import tessera.kit.Grid;
 import tessera.kit.Hint;
 import tessera.kit.Input;
-import tessera.kit.Kit;
 import tessera.kit.Label;
 import tessera.kit.Radio;
 import tessera.kit.Row;
@@ -102,7 +101,7 @@ public final class DocImages {
   private static JComponent styled() {
     return Col.gap(10).padding(12, 16, 12, 16).children(
         Card.section("Metodos encadenables").children(
-            Label.text("Total").bold().fontSize(14).color(Kit.MUTED).tip("Suma de todo"),
+            Label.text("Total").bold().fontSize(14).color(Theme.palette().muted).tip("Suma de todo"),
             Input.text().placeholder("Nombre").columns(20).width(240),
             Row.gap(10).children(
                 Button.of("Buscar").icon("tessera/img/info.svg", 16).iconGap(8),

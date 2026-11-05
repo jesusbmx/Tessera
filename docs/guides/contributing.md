@@ -34,10 +34,10 @@ src/demo/java/                Showcase: ejemplo ejecutable y fuente de las captu
   con `migInsets()` / `relayout()`.
 - Cada contenedor implementa `migLayout()` (restricciones del contenedor) y `place(Component)` (restricciones de cada hijo).
 - `put(child, constraints)` agrega el hijo y le suma el tamano fijo que pidio con `.width()/.height()`.
-- `.fill()`/`.fillBoth()` y `.width()/.height()` se guardan como **propiedades del componente** (`putClientProperty`, claves en `Kit`), no como
+- `.fill()`/`.fillBoth()` y `.width()/.height()` se guardan como **propiedades del componente** (`putClientProperty`, claves en `Layout`), no como
   campos: asi funcionan con cualquier `JComponent` aunque no sea del kit.
 
-**Medidas**: todo valor en pixeles que entra por la API es un px "logico"; el kit lo pasa por `Kit.px(n)` (zoom de pantalla de FlatLaf) antes
+**Medidas**: todo valor en pixeles que entra por la API es un px "logico"; el kit lo pasa por `Metrics.px(n)` (zoom de pantalla de FlatLaf) antes
 de usarlo. Nunca poner numeros fijos sin escalar.
 
 ## Agregar un widget
@@ -52,9 +52,9 @@ de usarlo. Nunca poner numeros fijos sin escalar.
 
 Ejemplo: que el radio de `Card` siga al tema.
 
-1. En `Kit`, agregar un campo `public static int CARD_ARC = 12;` (mismo estilo que `PRIMARY`, `SURFACE`...).
-2. En `Theme.Builder`, un metodo `cardArc(int)` que lo guarde y, en `install()`, asignarlo a `Kit.CARD_ARC`.
-3. En `Card.CardBorder`, leer `Kit.CARD_ARC` en lugar de la constante `ARC`.
+1. En `Theme`, un campo `private static int cardArc = 12;` con su lector `public static int cardArc()`.
+2. En `Theme.Builder`, un metodo `cardArc(int)` que lo guarde y, en `install()`, lo asigne al campo de `Theme`.
+3. En `Card.CardBorder`, leer `Theme.cardArc()` en lugar de la constante `ARC`.
 4. Documentarlo en [customizing.md](customizing.md) (quitar la fila de "Lo que no se puede cambiar" y agregarla a "Resumen").
 
 Con el valor por defecto igual al de antes, las apps que no lo llaman no cambian.
@@ -72,7 +72,7 @@ Con el valor por defecto igual al de antes, las apps que no lo llaman no cambian
 | Si tocas... | Actualiza |
 |---|---|
 | un contenedor o widget de `tessera.kit` | su pagina en `docs/reference/kit/containers/` o `widgets/` (ver [la referencia del kit](../reference/kit/README.md)) |
-| `Styled`, `Clickable`, `Box` o `Kit` | [Referencia del kit](../reference/kit/README.md) |
+| `Styled`, `Clickable`, `Box`, `Layout` o `Buttons` | [Referencia del kit](../reference/kit/README.md) |
 | `Notification` o `Toast` | [notification.md](../reference/notify/notification.md) o [toast.md](../reference/notify/toast.md) |
 | `TrayDock` o `WindowPrefs` | [traydock.md](../reference/app/traydock.md) o [windowprefs.md](../reference/app/windowprefs.md) |
 | una clase de `tessera.components` | la pagina de su categoria en [Componentes sueltos](../reference/components/README.md) |
@@ -84,7 +84,13 @@ Los ejemplos de [recipes.md](recipes.md) estan compilados contra la libreria: si
 
 ## Verificar
 
-No hay tests automaticos. Se comprueba compilando y mirando el Showcase:
+Pruebas de humo (`src/test/java/tessera/test/`, sin JUnit ni ventanas): arman y dibujan el kit en los cuatro temas y revisan colores en puntos concretos (paleta de cada tema, `Card`, `RoundedBorder`, renderizadores de tabla). Si cambias `Palette`, `Theme`, `Layout`, `Buttons` o los bordes, corrigelas o agregalas en el mismo cambio. No cubren `Notification`, `Toast`, `TrayDock` ni `Previewer`: necesitan una ventana de verdad.
+
+```r
+./build.sh --test        (Windows: ./build.ps1 -Test)
+```r
+
+Y se mira el Showcase:
 
 ```
 ./build.sh --demo        (Windows: ./build.ps1 -Demo)

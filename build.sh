@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
-# Compila Tessera (Java 8) y arma dist/tessera-<version>.jar. Uso: ./build.sh [--demo]
+# Compila Tessera (Java 8) y arma dist/tessera-<version>.jar. Uso: ./build.sh [--demo | --test]
 #   --demo   ademas compila y abre el Showcase
+#   --test   ademas corre las pruebas de humo (sin ventanas)
 set -euo pipefail
 cd "$(dirname "$0")"
 
@@ -33,4 +34,10 @@ if [ "${1:-}" = "--demo" ]; then
   mkdir -p build/demo
   javac --release 8 -encoding UTF-8 -Xlint:-options -cp "build/classes$SEP$CP" -d build/demo $(find src/demo/java -name '*.java')
   java -cp "build/demo${SEP}build/classes$SEP$CP" tessera.demo.Showcase
+fi
+
+if [ "${1:-}" = "--test" ]; then
+  mkdir -p build/test
+  javac --release 8 -encoding UTF-8 -Xlint:-options -cp "build/classes$SEP$CP" -d build/test $(find src/test/java -name '*.java')
+  java -Djava.awt.headless=true -cp "build/test${SEP}build/classes$SEP$CP" tessera.test.SmokeTests
 fi

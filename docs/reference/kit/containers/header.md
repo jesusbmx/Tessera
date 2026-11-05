@@ -5,7 +5,7 @@
 | | |
 |---|---|
 | **Paquete** | `tessera.kit` |
-| **Clase** | `Header extends Box<Header>`: un `JPanel` con fondo `Kit.DARK` |
+| **Clase** | `Header extends Box<Header>`: un `JPanel` con fondo `Theme.palette().banner` |
 | **Se crea con** | `Header.create(titulo)` · `Header.create(titulo, descripcion)` |
 | **Importar** | `import tessera.kit.Header;` |
 
@@ -36,15 +36,15 @@ Header.create("Header.create(titulo, descripcion)", "Elige como se conecta")
 
 ```java
 Header.create("Header.corner(componente)", "Un componente a la derecha del titulo")
-    .corner(Label.text("Ayuda").color(Kit.ON_DARK).onClick(() -> { }))
+    .corner(Label.text("Ayuda").color(Theme.palette().onBanner).onClick(() -> { }))
 ```
 
 Se coloca normalmente en `Page.top(...)`. Para cambiar el texto despues de armado: `header.title().setText(..)` y `header.subtitle(..)`.
 
 ## Referencia
 
-Banner **oscuro** con titulo y descripcion opcional: la cabecera de cada paso de un asistente o dialogo. Colores de `Kit.DARK` y
-`Kit.ON_DARK`.
+Banner **oscuro** con titulo y descripcion opcional: la cabecera de cada paso de un asistente o dialogo. Colores de `Theme.palette().banner` y
+`Theme.palette().onBanner`.
 
 | Metodo | Que hace |
 |---|---|

@@ -24,7 +24,7 @@ Page.create()
 
 | Paquete | Contenido |
 |---|---|
-| `tessera.kit` | Contenedores `Row`, `Col`, `Stack`, `Grid`, `Form`, `Card`, `Header`, `Footer`, `Page`, `Pages`, `Scroll`, `Tabs`, `Split`, `Separator`. Widgets con metodos encadenables: `Label`, `Hint`, `Button`, `Input`, `Password`, `TextArea`, `Combo`, `ChoiceButton`, `MultiChoiceButton`, `MenuButton`, `Menu`, `Check`, `Radio`, `Toggle`, `Switch`, `Spinner`, `Table`. Paleta y utilidades en `Kit`. |
+| `tessera.kit` | Contenedores `Row`, `Col`, `Stack`, `Grid`, `Form`, `Card`, `Header`, `Footer`, `Page`, `Pages`, `Scroll`, `Tabs`, `Split`, `Separator`. Widgets con metodos encadenables: `Label`, `Hint`, `Button`, `Input`, `Password`, `TextArea`, `Combo`, `ChoiceButton`, `MultiChoiceButton`, `MenuButton`, `Menu`, `Check`, `Radio`, `Toggle`, `Switch`, `Spinner`, `Table`. Los colores salen de `Theme.palette()`; utilidades en `Metrics`, `Buttons` y `Layout`. |
 | `tessera.theme` | `Theme` (FlatLaf, fuente Inter empaquetada, acento, fondo, esquinas redondeadas) e `Icons` (SVG nitidos, interruptor estilo iOS). |
 | `tessera.notify` | `Notification` (tarjetas apiladas en la esquina de la pantalla, con progreso y acciones) y `Toast` (mensaje breve sobre la ventana, con cola). |
 | `tessera.app` | `TrayDock` (icono de bandeja + reapertura desde el Dock de macOS) y `WindowPrefs` (cada ventana se abre con el tamano que el usuario le dejo). |
@@ -51,9 +51,10 @@ Java 8 o superior. Nada mas: la libreria no usa JSON, logging externo ni utilida
 ```
 ./build.sh            # compila y deja dist/tessera-<version>.jar
 ./build.sh --demo     # ademas abre el Showcase (src/demo)
+./build.sh --test     # ademas corre las pruebas de humo (sin ventanas)
 ```
 
-En Windows con PowerShell: `./build.ps1` (o `./build.ps1 -Demo`). Hace falta un **JDK** completo (8 o superior), con `javac` y `jar`, en el PATH
+En Windows con PowerShell: `./build.ps1` (o `./build.ps1 -Demo`, `./build.ps1 -Test`). Hace falta un **JDK** completo (8 o superior), con `javac` y `jar`, en el PATH
 (si `jar` no se reconoce, ver la [FAQ](docs/guides/faq.md#buildsh-dice-falta-jar-o-jar-command-not-found)).
 Tambien funciona con Maven: `mvn package`.
 

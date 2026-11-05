@@ -2,6 +2,7 @@ package tessera.kit;
 
 import java.awt.Component;
 import java.util.TreeMap;
+import tessera.theme.Metrics;
 
 /**
  * Cuadricula: varias celdas por fila, alineadas en columnas (cada columna es tan ancha como su celda mas
@@ -71,7 +72,7 @@ public class Grid extends Box<Grid> {
 
   @Override
   protected String migLayout() {
-    return migInsets() + ", gap " + Kit.px(columnGap) + "px " + Kit.px(gap()) + "px, hidemode 3, novisualpadding";
+    return migInsets() + ", gap " + Metrics.px(columnGap) + "px " + Metrics.px(gap()) + "px, hidemode 3, novisualpadding";
   }
 
   /** Un espacio explicito despues de cada columna (si no, MigLayout repite el ultimo que se le dio). */
@@ -84,7 +85,7 @@ public class Grid extends Box<Grid> {
     for (int column = 0; column < columnCount; column++) {
       constraints.append("[]");
       if (column < columnCount - 1) {
-        constraints.append(Kit.px(gaps.containsKey(column) ? gaps.get(column) : columnGap)).append("px");
+        constraints.append(Metrics.px(gaps.containsKey(column) ? gaps.get(column) : columnGap)).append("px");
       }
     }
     return constraints.toString();

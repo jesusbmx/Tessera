@@ -9,9 +9,8 @@ import javax.swing.DefaultListModel;
 import javax.swing.Icon;
 import javax.swing.JList;
 import javax.swing.SwingUtilities;
-import tessera.kit.Check;
+import tessera.kit.Buttons;
 import tessera.kit.ChoiceButton;
-import tessera.kit.Kit;
 import tessera.kit.Menu;
 import tessera.kit.MenuButton;
 import tessera.kit.MenuItem;
@@ -67,7 +66,7 @@ final class MenuExamples {
       .item("Importar de un archivo", this::importFromFile);
 
   void section3() {
-    Kit.makePrimary(add);
+    Buttons.primary(add);
     MenuButton iconOnly = MenuButton.of("").icon("app/img/more.svg", 24);
     MenuButton none = MenuButton.of("x").noArrow();
   }

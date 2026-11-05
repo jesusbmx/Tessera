@@ -10,7 +10,6 @@ import java.awt.Rectangle;
 import java.awt.Window;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
-import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.PrintWriter;
@@ -26,7 +25,6 @@ import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.prefs.Preferences;
 import javax.imageio.ImageIO;
-import javax.swing.AbstractAction;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
@@ -39,7 +37,7 @@ import javax.swing.JToolBar;
 import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
 import tessera.kit.Button;
-import tessera.kit.Kit;
+import tessera.theme.Metrics;
 import tessera.theme.Theme;
 
 /**
@@ -365,7 +363,7 @@ public final class Previewer {
       e.printStackTrace(new PrintWriter(text));
       final JTextArea error = new JTextArea(text.toString());
       error.setEditable(false);
-      error.setForeground(Kit.PRIMARY.darker());
+      error.setForeground(Theme.palette().primary.darker());
       content = error;
     }
     holder.add(new JScrollPane(content), BorderLayout.CENTER);
@@ -377,8 +375,8 @@ public final class Previewer {
   private static Dimension sizeFor(JFrame frame, Entry entry) {
     final Dimension screen = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds().getSize();
     final Dimension wanted = frame.getSize();
-    final int width = entry.width > 0 ? Kit.px(entry.width) : wanted.width + 30;
-    final int height = entry.height > 0 ? Kit.px(entry.height) : wanted.height + 30;
+    final int width = entry.width > 0 ? Metrics.px(entry.width) : wanted.width + 30;
+    final int height = entry.height > 0 ? Metrics.px(entry.height) : wanted.height + 30;
     return new Dimension(Math.min(width, screen.width * 9 / 10), Math.min(height, screen.height * 9 / 10));
   }
 }

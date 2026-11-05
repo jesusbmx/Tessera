@@ -61,7 +61,7 @@ Con `.padding(...)` y `.gap(n)` ajustas el margen interior y el espacio entre hi
 ## Referencia
 
 Bloque con **fondo suave y borde redondeado**: titulo (con icono opcional), texto de ayuda y debajo los hijos en columna (con las reglas
-de `Col`). Relleno y borde salen de `Kit.SURFACE` y `Kit.CARD_LINE` (se cambian con `Theme`). El radio de las esquinas es fijo (12): ver
+de `Col`). Relleno y borde salen de `Theme.palette().surface` y `Theme.palette().cardLine` (se cambian con `Theme`). El radio de las esquinas es fijo (12): ver
 [customizing.md](../../../guides/customizing.md).
 
 | Fabrica | Resultado |

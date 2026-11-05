@@ -3,6 +3,7 @@ package tessera.kit;
 import java.awt.Component;
 import java.awt.Dimension;
 import javax.swing.JPanel;
+import tessera.theme.Metrics;
 
 /**
  * Formulario de dos columnas: la etiqueta a la izquierda y su campo a la derecha, que ocupa el ancho que
@@ -96,7 +97,7 @@ public class Form extends Box<Form> {
    * A diferencia de {@link #space}, el espacio desaparece junto con la fila si el componente se oculta.
    */
   public Form wide(Component child, int gapAbove) {
-    put(child, Col.constraints(child, "span 2, wrap, gaptop " + Kit.px(gapAbove) + "px"));
+    put(child, Col.constraints(child, "span 2, wrap, gaptop " + Metrics.px(gapAbove) + "px"));
     return this;
   }
 
@@ -104,14 +105,14 @@ public class Form extends Box<Form> {
   public Form space(int px) {
     final JPanel spacer = new JPanel();
     spacer.setOpaque(false);
-    spacer.setPreferredSize(new Dimension(0, Kit.px(px)));
+    spacer.setPreferredSize(new Dimension(0, Metrics.px(px)));
     put(spacer, "span 2, wrap");
     return this;
   }
 
   @Override
   protected String migLayout() {
-    return migInsets() + ", gapy " + Kit.px(gap()) + "px, gapx " + Kit.px(labelGap) + "px, hidemode 3, novisualpadding";
+    return migInsets() + ", gapy " + Metrics.px(gap()) + "px, gapx " + Metrics.px(labelGap) + "px, hidemode 3, novisualpadding";
   }
 
   @Override

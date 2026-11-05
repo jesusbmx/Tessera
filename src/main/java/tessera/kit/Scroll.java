@@ -10,6 +10,7 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.Scrollable;
 import javax.swing.SwingConstants;
 import tessera.components.RoundedBorder;
+import tessera.theme.Metrics;
 
 /**
  * Contenedor con barras de desplazamiento. Dentro de un Row o un Col ocupa el espacio que sobra (ancho y alto).
@@ -27,7 +28,7 @@ public class Scroll extends JScrollPane implements Styled<Scroll> {
 
   protected Scroll(Component view) {
     super(view);
-    Kit.fill(this, true, true);
+    Layout.fill(this, true, true);
   }
 
   public static Scroll of(Component view) {
@@ -78,8 +79,8 @@ public class Scroll extends JScrollPane implements Styled<Scroll> {
 
   /** Cuanto avanza la rueda del mouse (px por paso). */
   public Scroll step(int px) {
-    getVerticalScrollBar().setUnitIncrement(Kit.px(px));
-    getHorizontalScrollBar().setUnitIncrement(Kit.px(px));
+    getVerticalScrollBar().setUnitIncrement(Metrics.px(px));
+    getHorizontalScrollBar().setUnitIncrement(Metrics.px(px));
     return this;
   }
 
@@ -99,7 +100,7 @@ public class Scroll extends JScrollPane implements Styled<Scroll> {
 
     @Override
     public int getScrollableUnitIncrement(Rectangle visible, int orientation, int direction) {
-      return Kit.px(16);
+      return Metrics.px(16);
     }
 
     @Override

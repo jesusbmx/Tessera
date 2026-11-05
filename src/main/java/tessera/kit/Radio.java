@@ -24,6 +24,6 @@ public class Radio extends JRadioButton implements Clickable<Radio> {
 
   /** Agrupa las opciones: al elegir una se desmarca la otra. */
   public static ButtonGroup group(Radio... radios) {
-    return Kit.group(radios);
+    return Buttons.group(radios);
   }
 }

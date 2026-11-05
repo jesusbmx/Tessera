@@ -6,6 +6,7 @@ import javax.swing.JMenuItem;
 import javax.swing.KeyStroke;
 import javax.swing.SwingConstants;
 import tessera.theme.Icons;
+import tessera.theme.Metrics;
 
 /**
  * Opcion de un {@link Menu}: texto, icono opcional y la accion que corre al elegirla.
@@ -67,7 +68,7 @@ public class MenuItem extends JMenuItem implements Styled<MenuItem> {
 
   /** Margen interno (px): arriba/abajo y a los lados. */
   public MenuItem padding(int vertical, int horizontal) {
-    setMargin(new Insets(Kit.px(vertical), Kit.px(horizontal), Kit.px(vertical), Kit.px(horizontal)));
+    setMargin(new Insets(Metrics.px(vertical), Metrics.px(horizontal), Metrics.px(vertical), Metrics.px(horizontal)));
     return this;
   }
 }

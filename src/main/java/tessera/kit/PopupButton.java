@@ -5,6 +5,7 @@ import javax.swing.Icon;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
 import tessera.theme.Icons;
+import tessera.theme.Metrics;
 
 /**
  * Base de los botones que abren un menu al hacer clic: {@link MenuButton}, {@link ChoiceButton} y
@@ -69,7 +70,7 @@ public abstract class PopupButton<B extends PopupButton<B>> extends JButton impl
 
   /** Espacio (px) entre el icono y el texto. */
   public B iconGap(int gap) {
-    setIconTextGap(Kit.px(gap));
+    setIconTextGap(Metrics.px(gap));
     return self();
   }
 

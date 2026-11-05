@@ -2,6 +2,7 @@ package tessera.kit;
 
 import java.awt.Component;
 import javax.swing.JSplitPane;
+import tessera.theme.Metrics;
 
 /**
  * Dos zonas separadas por una barra que se arrastra. Dentro de un Row o un Col ocupa el espacio que sobra.
@@ -16,7 +17,7 @@ public class Split extends JSplitPane implements Styled<Split> {
   protected Split(int orientation, Component first, Component second) {
     super(orientation, first, second);
     setBorder(null);
-    Kit.fill(this, true, true);
+    Layout.fill(this, true, true);
   }
 
   /** Una zona a la izquierda y otra a la derecha. */
@@ -31,7 +32,7 @@ public class Split extends JSplitPane implements Styled<Split> {
 
   /** Posicion inicial de la barra (px desde el borde izquierdo o superior). */
   public Split divider(int px) {
-    setDividerLocation(Kit.px(px));
+    setDividerLocation(Metrics.px(px));
     return this;
   }
 

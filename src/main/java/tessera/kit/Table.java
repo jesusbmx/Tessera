@@ -3,6 +3,7 @@ package tessera.kit;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.TableModel;
+import tessera.theme.Metrics;
 
 /**
  * Tabla. Se pone dentro de un {@link Scroll}.
@@ -24,7 +25,7 @@ public class Table extends JTable implements Styled<Table> {
 
   /** Alto de cada fila (px). */
   public Table rowHeight(int px) {
-    setRowHeight(Kit.px(px));
+    setRowHeight(Metrics.px(px));
     return this;
   }
 
@@ -46,7 +47,7 @@ public class Table extends JTable implements Styled<Table> {
 
   /** Ancho preferido (px) de una columna, por posicion en la vista. */
   public Table columnWidth(int column, int px) {
-    getColumnModel().getColumn(column).setPreferredWidth(Kit.px(px));
+    getColumnModel().getColumn(column).setPreferredWidth(Metrics.px(px));
     return this;
   }
 }

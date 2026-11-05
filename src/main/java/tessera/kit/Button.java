@@ -32,7 +32,7 @@ public class Button extends JButton implements Clickable<Button> {
 
   /** Convierte este boton en el principal (azul). */
   public Button primary() {
-    Kit.makePrimary(this);
+    Buttons.primary(this);
     return this;
   }
 
@@ -83,13 +83,13 @@ public class Button extends JButton implements Clickable<Button> {
 
   /** Rellena este boton con el color de la variante. */
   public Button variant(Variant variant) {
-    Kit.makeVariant(this, variant);
+    Buttons.variant(this, variant);
     return this;
   }
 
   /** Deja este boton solo con borde y texto del color de la variante. */
   public Button outline(Variant variant) {
-    Kit.makeOutline(this, variant);
+    Buttons.outline(this, variant);
     return this;
   }
 }

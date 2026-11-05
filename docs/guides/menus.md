@@ -153,10 +153,10 @@ private final MenuButton add = MenuButton.of("Agregar")
     .item("Importar de la web", this::importFromWeb)
     .item("Importar de un archivo", this::importFromFile);
 
-Kit.makePrimary(add);                                     // el azul de siempre, como cualquier boton
+Buttons.primary(add);                                     // el azul de siempre, como cualquier boton
 ```
 
-- Es un `JButton`: `Kit.makePrimary`, `.background(...)`, `.tip(...)`, `.enabled(false)` funcionan como siempre.
+- Es un `JButton`: `Buttons.primary`, `.background(...)`, `.tip(...)`, `.enabled(false)` funcionan como siempre.
 - Si el boton solo lleva un icono: `MenuButton.of("").icon("app/img/more.svg", 24)`. El icono **reemplaza** la flecha; con `.noArrow()` se quita sin poner icono.
 - Un `MenuButton` sin opciones no abre nada.
 - Para cambiar una opcion despues (su icono, si esta habilitada), se arma con `MenuItem` y se guarda en un campo:

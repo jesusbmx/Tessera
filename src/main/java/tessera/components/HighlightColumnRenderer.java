@@ -57,8 +57,8 @@ public class HighlightColumnRenderer extends DefaultTableCellRenderer {
             c.setBackground(SELECTED_COLOR); // color personalizado
             c.setForeground(Color.BLACK);
         } else {
-            c.setBackground(Color.WHITE); // fondo normal
-            c.setForeground(Color.BLACK);
+            c.setBackground(table.getBackground()); // fondo normal (el de la tabla, claro u oscuro)
+            c.setForeground(table.getForeground());
         }
 
         // Solo mostrar el borde si tiene foco (opcional)

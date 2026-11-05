@@ -39,9 +39,9 @@ Theme.builder()
 |---|---|---|
 | `font(String familia)` | usa esa fuente **instalada en el sistema** en vez de la Inter empaquetada | Inter |
 | `accent(Color)` / `accent(String hex)` | color de acento global (se lee despues con `Theme.accent()`) | `#1976D2` |
-| `primary(Color)` / `primary(String hex)` | color de los botones principales (`Button.primary`) | el de `Kit.PRIMARY` |
-| `surface(Color)` / `surface(String hex)` | relleno de las tarjetas (`Card`) | el de `Kit.SURFACE` |
-| `cardLine(Color)` / `cardLine(String hex)` | borde de las tarjetas (`Card`) | el de `Kit.CARD_LINE` |
+| `primary(Color)` / `primary(String hex)` | color de los botones principales (`Button.primary`) | el de `Theme.palette().primary` |
+| `surface(Color)` / `surface(String hex)` | relleno de las tarjetas (`Card`) | el de `Theme.palette().surface` |
+| `cardLine(Color)` / `cardLine(String hex)` | borde de las tarjetas (`Card`) | el de `Theme.palette().cardLine` |
 | `success(...)` / `danger(...)` / `warning(...)` / `info(...)` / `secondary(...)` / `light(...)` / `dark(...)` (`Color` o hex) | color de esa [`Variant`](#variantes-de-color) | Bootstrap: `#198754`, `#DC3545`, `#FFC107`, `#0DCAF0`, `#6C757D`; `light` `#F8F9FA`, `dark` `#212529` |
 | `variant(Variant, Color)` / `variant(Variant, String hex)` | lo mismo para cualquier variante | |
 | `panelBackground(Color)` / `panelBackground(String hex)` | fondo de paneles, scrolls y viewports (las listas y tablas siguen blancas) | blanco |
@@ -81,11 +81,11 @@ falla, queda el look and feel del sistema y se anota en el log. La lista complet
 
 - **Cambiar el tema con ventanas ya abiertas** no las actualiza: instalalo una sola vez, antes de crear ventanas.
 - **`accent` no pinta radios, casillas ni barras de progreso**: FlatLaf ya calculo esos colores. Hay un truco, explicado en [la nota sobre el acento](../../guides/customizing.md#nota-sobre-el-acento).
-- **Asignar `Kit.PRIMARY` (u otro color) despues de crear widgets** no los cambia: cada widget toma el color al crearse; usa `Theme.builder().primary(...)`.
-- **No hay modo oscuro**: `install()` instala el tema claro.
+- **Instalar otro tema (o cambiar un color) despues de crear widgets** no los cambia: cada widget toma el color al crearse; el tema se elige al arrancar, con `Theme.builder().primary(...)` o un tema listo.
+- **Modo oscuro**: `Theme.dark()` y `Theme.ubuntuDark()` lo instalan; `Theme.builder()` instala el claro. Los colores que la app fija por su cuenta no cambian solos (ver [customizing.md](../../guides/customizing.md#temas-listos)).
 
 ## Ver tambien
 
 - [Personalizar: colores, esquinas, fuente](../../guides/customizing.md): donde se toca cada cosa.
-- [Referencia del kit](../kit/README.md#utilidades-kit): la paleta `Kit.*` y `Kit.px`.
+- [Referencia del kit](../kit/README.md#utilidades): `Metrics`, `Buttons`, `Layout` y la paleta `Theme.palette()`.
 - [`Icons`](icons.md): iconos SVG.

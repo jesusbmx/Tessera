@@ -1,5 +1,5 @@
-# Compila Tessera (Java 8) y arma dist/tessera-<version>.jar.  Uso: ./build.ps1 [-Demo]
-param([switch]$Demo)
+# Compila Tessera (Java 8) y arma dist/tessera-<version>.jar.  Uso: ./build.ps1 [-Demo] [-Test]   (-Test: pruebas de humo, sin ventanas)
+param([switch]$Demo, [switch]$Test)
 $ErrorActionPreference = 'Stop'
 Set-Location $PSScriptRoot
 
@@ -26,4 +26,13 @@ if ($Demo) {
   $demo = Get-ChildItem src/demo/java -Recurse -Filter *.java | ForEach-Object { $_.FullName }
   & "${bin}javac" --release 8 -encoding UTF-8 -Xlint:-options -cp "build/classes;$cp" -d build/demo $demo
   & "${bin}java" -cp "build/demo;build/classes;$cp" tessera.demo.Showcase
+}
+
+if ($Test) {
+  New-Item -ItemType Directory build/test | Out-Null
+  $tests = Get-ChildItem src/test/java -Recurse -Filter *.java | ForEach-Object { $_.FullName }
+  & "${bin}javac" --release 8 -encoding UTF-8 -Xlint:-options -cp "build/classes;$cp" -d build/test $tests
+  if ($LASTEXITCODE) { exit $LASTEXITCODE }
+  & "${bin}java" '-Djava.awt.headless=true' -cp "build/test;build/classes;$cp" tessera.test.SmokeTests
+  exit $LASTEXITCODE
 }

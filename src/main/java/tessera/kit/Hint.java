@@ -30,7 +30,7 @@ public class Hint extends JLabel implements Styled<Hint> {
     super("<html>" + text + "</html>");
     putClientProperty("FlatLaf.styleClass", "small");
     setForeground(UIManager.getColor("Label.disabledForeground"));
-    Kit.fill(this, true, false);
+    Layout.fill(this, true, false);
     wrapAt(UIScale.scale(width));
   }
 

@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import javax.swing.AbstractButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import tessera.theme.Metrics;
 
 /**
  * Hijos en una columna, de arriba hacia abajo. Por defecto cada hijo ocupa todo el ancho, menos los botones
@@ -69,7 +70,7 @@ public class Col extends Box<Col> {
 
   @Override
   protected String migLayout() {
-    return migInsets() + ", wrap 1, gapy " + Kit.px(gap()) + "px, hidemode 3, novisualpadding";
+    return migInsets() + ", wrap 1, gapy " + Metrics.px(gap()) + "px, hidemode 3, novisualpadding";
   }
 
   @Override
@@ -88,8 +89,8 @@ public class Col extends Box<Col> {
    */
   static String constraints(Component child) {
     final boolean natural = child instanceof AbstractButton || child instanceof JLabel;
-    final boolean x = Kit.fillsX(child) || !natural;
-    final boolean y = Kit.fillsY(child);
+    final boolean x = Layout.fillsX(child) || !natural;
+    final boolean y = Layout.fillsY(child);
     return (x && y) ? "grow, push" : x ? "growx" : y ? "growy, pushy" : "";
   }
 

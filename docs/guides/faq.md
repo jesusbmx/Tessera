@@ -55,14 +55,14 @@ Limitacion conocida: `Theme` escribe el acento despues de que FlatLaf ya calculo
 
 El radio de `Card` es fijo (12) y no sigue a `Theme.arc`. Ver [customizing.md](customizing.md#5-lo-que-no-se-puede-cambiar-desde-la-app).
 
-### Asigne `Kit.PRIMARY` (u otro color) y los botones no cambian
+### Cambie un color o el tema y los botones no cambian
 
-Cada widget toma el color **al crearse**. Asignalo antes de armar ninguna pantalla; lo mas seguro es hacerlo en `Theme.builder().primary(...)`.
+Cada widget toma el color **al crearse**. Instala el tema antes de armar ninguna pantalla; lo mas seguro es hacerlo al arrancar, con `Theme.builder().primary(...)` o un tema listo.
 
 ### Quiero modo oscuro
 
-Tessera no trae modo oscuro: `Theme.install()` instala el look and feel **claro** (`FlatIntelliJLaf`) y la paleta del kit esta pensada para fondos
-claros. Se puede partir de FlatLaf directamente, pero los colores del kit (`Kit.SURFACE`, `Kit.DARK`...) habria que ajustarlos a mano.
+`Theme.dark()` (o `Theme.ubuntuDark()`) instala `FlatDarkLaf` y una paleta oscura. Se elige al arrancar, antes de crear ventanas. Lo que la app fija por su cuenta
+(un `new Color(250, 250, 250)` suelto) no cambia solo: usa `Theme.palette()` o `UIManager.getColor(..)`. Ver [customizing.md](customizing.md#temas-listos).
 
 ### Mis iconos PNG se ven pequenos o borrosos en pantallas de alta resolucion
 

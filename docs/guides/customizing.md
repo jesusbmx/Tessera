@@ -7,6 +7,7 @@ Antes de editar la libreria conviene revisar la tabla de abajo: casi todo se cam
 
 | Quiero cambiar | Donde | Como |
 |---|---|---|
+| **Un tema completo (claro, oscuro, Ubuntu)** | `Theme.light()`, `Theme.dark()`, `Theme.ubuntu()`, `Theme.ubuntuDark()` | ver "Temas listos" |
 | Color de acento (`Theme.accent()`) | `Theme.builder().accent(..)` | en el `UI.java` de la app; **ojo**: hoy no pinta radios, casillas ni barras (ver "Nota sobre el acento") |
 | Color de los botones principales | `Theme.builder().primary(..)` | idem |
 | Fondo de las pantallas | `Theme.builder().panelBackground(..)` | idem |
@@ -15,10 +16,10 @@ Antes de editar la libreria conviene revisar la tabla de abajo: casi todo se cam
 | **Radio de las esquinas de `Card`** | **fijo en 12**: `ARC` en `kit/Card.java` | hay que editar Tessera (ver "Lo que no se puede cambiar desde la app") |
 | Fuente de toda la interfaz | `Theme.builder().font("Segoe UI")` | por defecto Inter empaquetada |
 | Cuanto dura un tooltip | `Theme.builder().tooltipDismissMs(ms)` | 8000 por defecto |
-| Un color de la paleta (`DARK`, `MUTED`, `LINE`, filas de listas...) | `Kit.MUTED = ...` | asignacion directa, ver "Paleta del kit" |
+| Un color de la paleta (`DARK`, `MUTED`, `LINE`, filas de listas...) | `Theme.palette().muted = ...` | asignacion directa, ver "Paleta del kit" |
 | Algo de FlatLaf (pestanas, barra de titulo, menus...) | `UIManager.put("clave", valor)` | despues de `install()` |
 | Un solo widget (negrita, color, ancho...) | metodos encadenables de `Styled` | `Label.text("x").bold().color(c)` |
-| Un solo boton con otro color | `Button.primary(..)` o `Kit.makePrimary(boton)` | ver "Botones" |
+| Un solo boton con otro color | `Button.primary(..)` o `Buttons.primary(boton)` | ver "Botones" |
 | Aspecto de los avisos (`Notification`, `Toast`) | fijo en las clases | editar Tessera |
 
 ## 1. El tema (`Theme`)
@@ -43,7 +44,7 @@ UIManager.put("TabbedPane.selectedBackground", ...);   // lo propio de la app, d
 Que hace `install()` por dentro (`theme/Theme.java`):
 
 1. Guarda acento, fondo y fuente (se leen despues con `Theme.accent()`, `Theme.panelBackground()`, `Theme.fontFamily()`).
-2. Asigna `Kit.PRIMARY`, `Kit.SURFACE` y `Kit.CARD_LINE` si se pidieron.
+2. Asigna `Theme.palette().primary`, `Theme.palette().surface` y `Theme.palette().cardLine` si se pidieron.
 3. Registra la fuente Inter (`tessera/fonts/*.ttf`) o usa la familia pedida con `FlatLaf.setPreferredFontFamily`.
 4. Instala FlatLaf (`FlatIntelliJLaf`) y escribe estas claves en `UIManager`:
 
@@ -65,6 +66,29 @@ Theme.builder().accent("#0F766E").primary("#0F766E").panelBackground("#F3F4F6")
 
 ![Tema propio](../img/theme-custom.png)
 
+### Temas listos
+
+Cuatro temas que definen toda la paleta del kit (fondos, tarjetas, texto secundario, filas de listas, banners y colores de las variantes):
+
+```java
+Theme.light().install();                       // claro: el de siempre
+Theme.dark().install();                        // oscuro: grafito y acento azul
+Theme.ubuntu().install();                      // estilo Ubuntu (Yaru) claro: naranja #E95420, fondo #F6F5F4, banners berenjena
+Theme.ubuntuDark().install();                  // estilo Ubuntu (Yaru) oscuro
+Theme.dark().accent("#4F9EFF").install();      // un tema listo con un color propio
+```
+
+Los colores de cada tema son datos en [`Palette`](../../src/main/java/tessera/theme/Palette.java) (`Palette.LIGHT`, `DARK`, `UBUNTU`, `UBUNTU_DARK`): un tema nuevo es una constante mas, sin tocar `Theme`. `Theme.builder().palette(Palette.UBUNTU)` es lo mismo que `Theme.ubuntu()`, y `Theme.palette()` devuelve la instalada (`Palette.LIGHT` hasta que se instale un tema).
+
+Cada uno devuelve un `Builder`, asi que se puede ajustar antes de `install()` con los mismos metodos de arriba, mas `muted(..)`, `line(..)`,
+`rows(impar, par, seleccionada)`, `banner(fondo, texto)`, `darkMode(bool)` y `tintControls()`. `Theme.builder()` sigue igual: solo toca lo que se le pida.
+
+- **Elegirlo al arrancar.** Los widgets leen la paleta al crearse; cambiar de tema con la app abierta obliga a reconstruir las pantallas.
+- **`Theme.isDark()`** dice si el tema es oscuro, para los colores que la app fija por su cuenta (un `new Color(250, 250, 250)` suelto se vera claro en un tema oscuro: usa `UIManager.getColor(..)` o `Theme.palette()`).
+- **Los temas oscuros y Ubuntu activan `tintControls()`**: radios, casillas, barras de progreso y la seleccion toman el acento (ver "Nota sobre el acento"). `Switch` y los iconos de avisos siguen con sus colores propios.
+- **La fuente sigue siendo Inter.** El estilo Ubuntu usa la paleta, no la fuente Ubuntu (no viene empaquetada); para usarla: `.font("Ubuntu")` si esta instalada en el sistema.
+- Los iconos SVG con un color fijo (negro, por ejemplo) no cambian solos: sobre un fondo oscuro hay que pintarlos con el color del texto.
+
 ### Nota sobre el acento
 
 `Theme.builder().accent(..)` escribe `Component.accentColor` **despues** de instalar FlatLaf, y FlatLaf ya calculo los colores de radios, casillas
@@ -81,29 +105,30 @@ El interruptor `Switch` y los iconos de avisos son SVG con sus colores propios y
 Si algo no esta en esa lista, se cambia con `UIManager.put(...)` **despues** de `install()`. Las claves disponibles son las de
 FlatLaf: <https://www.formdev.com/flatlaf/customizing/>.
 
-## 2. Paleta del kit (`Kit`)
+## 2. Paleta (`Theme.palette()`)
 
-Los colores del kit son campos `public static` **no finales** de `tessera.kit.Kit`, asi que se pueden asignar a mano:
+Los colores del kit salen de la paleta que instalo el tema (`Theme.palette()`, una `Palette` de solo lectura; hasta que se instale un tema es `Palette.LIGHT`).
+Se cambian con `Theme.builder()` (`.muted(..)`, `.surface(..)`, `.rows(..)`, `.banner(..)`...) o eligiendo otro tema; no se asignan a mano:
 
 | Campo | Por defecto | Se usa en |
 |---|---|---|
-| `Kit.PRIMARY` | `#3B82F6` | botones principales, fondo al pasar el mouse (version mas oscura) |
-| `Kit.SURFACE` | `rgb(248,250,252)` | relleno de `Card` |
-| `Kit.CARD_LINE` | `rgb(226,232,240)` | borde de `Card` |
-| `Kit.DARK` / `Kit.ON_DARK` | `rgb(35,47,52)` / `rgb(204,204,204)` | `Header` (banner de pasos), barra lateral |
-| `Kit.MUTED` | `rgb(102,102,102)` | texto secundario (`Label.muted`) |
-| `Kit.LINE` | `rgb(229,229,229)` | bordes finos; hoy la libreria no lo usa, queda para las pantallas de la app |
-| `Kit.ROW_ODD` / `Kit.ROW_EVEN` / `Kit.ROW_SELECTED` | `#FAFAFA` / `#FFFFFF` / `#BBDEFB` | filas alternas de listas (`LabelListCell`) y fila seleccionada |
+| `Theme.palette().primary` | `#3B82F6` | botones principales, fondo al pasar el mouse (version mas oscura) |
+| `Theme.palette().surface` | `rgb(248,250,252)` | relleno de `Card` |
+| `Theme.palette().cardLine` | `rgb(226,232,240)` | borde de `Card` |
+| `Theme.palette().banner` / `Theme.palette().onBanner` | `rgb(35,47,52)` / `rgb(204,204,204)` | `Header` (banner de pasos), barra lateral |
+| `Theme.palette().muted` | `rgb(102,102,102)` | texto secundario (`Label.muted`) |
+| `Theme.palette().line` | `rgb(229,229,229)` | bordes finos; hoy la libreria no lo usa, queda para las pantallas de la app |
+| `Theme.palette().rowOdd` / `Theme.palette().rowEven` / `Theme.palette().rowSelected` | `#FAFAFA` / `#FFFFFF` / `#BBDEFB` | filas alternas de listas (`LabelListCell`) y fila seleccionada |
 
-**Cuidado con el orden**: cada widget toma el color **al crearse**. `Kit.PRIMARY` se lee dentro de `Kit.makePrimary(boton)`, asi que cambiarlo
-cuando ya hay botones creados no los actualiza. Por eso el lugar correcto es `Theme.builder()` o cualquier punto antes de construir pantallas.
+**Cuidado con el orden**: cada widget toma el color **al crearse**. `Theme.palette().primary` se lee dentro de `Buttons.primary(boton)`, asi que instalar otro
+tema cuando ya hay botones creados no los actualiza. Por eso el tema se elige al arrancar, antes de construir pantallas.
 
 ## 3. Un solo componente
 
 Todos los widgets y contenedores implementan `Styled`, con metodos encadenables:
 
 ```java
-Label.text("Total").bold().fontSize(14).color(Kit.MUTED).tip("Suma de todo");
+Label.text("Total").bold().fontSize(14).color(Theme.palette().muted).tip("Suma de todo");
 Input.text().placeholder("Nombre").columns(20).width(240);
 Button.of("Buscar").icon("app/img/search.svg", 16).iconGap(8).onClick(this::buscar);
 ```
@@ -112,12 +137,12 @@ Button.of("Buscar").icon("app/img/search.svg", 16).iconGap(8).onClick(this::busc
 
 `.width(px)` y `.height(px)` **solo** los entienden los contenedores del kit (`Row`, `Col`, `Form`, `Card`, `Stack`): se guardan como
 propiedad del componente y el contenedor las convierte en restricciones de MigLayout. Todas las medidas estan en px **sin escalar**; el kit
-las multiplica por el zoom de la pantalla con `Kit.px(n)`. Para medidas propias usa `Kit.px(n)`, no numeros fijos.
+las multiplica por el zoom de la pantalla con `Metrics.px(n)`. Para medidas propias usa `Metrics.px(n)`, no numeros fijos.
 
 ### Botones
 
-- `Button.primary("Guardar")` o `boton.primary()`: color `Kit.PRIMARY` con texto blanco.
-- `Kit.makePrimary(boton)` sirve para cualquier `AbstractButton` ya creado. Usa la propiedad de FlatLaf `FlatClientProperties.STYLE`
+- `Button.primary("Guardar")` o `boton.primary()`: color `Theme.palette().primary` con texto blanco.
+- `Buttons.primary(boton)` sirve para cualquier `AbstractButton` ya creado. Usa la propiedad de FlatLaf `FlatClientProperties.STYLE`
   (fondo, hover, presionado, borde); para otro color propio copia ese metodo y cambia el mapa de estilo.
 
 ### Iconos
@@ -130,7 +155,7 @@ las multiplica por el zoom de la pantalla con `Kit.px(n)`. Para medidas propias 
 
 - Por defecto se usa **Inter**, empaquetada en `tessera/fonts/` como **TTF** (no OTF: el Java 8 de Oracle escala mal los OTF y todo el texto sale al doble).
 - `Theme.builder().font("Segoe UI")` usa una fuente instalada en el sistema.
-- Para texto propio: `Kit.font(tamano, negrita)` devuelve la fuente de la interfaz escalada con el zoom.
+- Para texto propio: `Metrics.font(tamano, negrita)` devuelve la fuente de la interfaz escalada con el zoom.
 
 ## 5. Lo que no se puede cambiar desde la app
 
@@ -155,7 +180,7 @@ y se regenera el jar.
 | Retraso al guardar el tamano de las ventanas | `app/WindowPrefs.java`, `SAVE_DELAY_MS` | 500 ms |
 
 Una forma de abrirlo a las apps sin romper nada: agregar un metodo al `Theme.Builder` (por ejemplo `cardArc(int)`) que guarde el valor en un
-campo `static` de `Kit`, y leer ese campo en lugar de la constante. Asi las apps que no lo llaman siguen igual (ver "Reglas" en
+campo `static` de `Theme`, y leer ese campo en lugar de la constante. Asi las apps que no lo llaman siguen igual (ver "Reglas" en
 [contributing.md](contributing.md)).
 
 ## 6. Ver el resultado

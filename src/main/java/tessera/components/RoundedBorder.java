@@ -16,7 +16,7 @@ import javax.swing.border.Border;
  * cambia), asi que se puede reutilizar uno como base.
  *
  * <pre>
- * RoundedBorder.of(14)                                                  // solo esquinas y trazo gris claro
+ * RoundedBorder.of(14)                                                  // solo esquinas y el trazo del tema
  * RoundedBorder.of(14).line(Color.GRAY).margin(6, 8, 2, 8).gutter(Color.WHITE)
  * RoundedBorder.of(10).line(new Color(0x1976D2)).fill(Color.WHITE)      // trazo azul, relleno propio
  * RoundedBorder.of(10).noLine()                                         // solo relleno redondeado
@@ -56,9 +56,15 @@ public class RoundedBorder implements Border {
     /** Espacio entre el trazo y el contenido; null = un cuarto del radio. */
     private final Insets padding;
 
-    /** Borde de {@code radius} px con trazo gris claro, sin margen. */
+    /**
+     * Trazo por omision: el color de borde del tema ({@code Component.borderColor} de FlatLaf, que cambia entre
+     * claro y oscuro); gris claro si el look and feel no lo define. Se compara por identidad: no es un color real.
+     */
+    private static final Color THEME_LINE = new Color(192, 192, 192);
+
+    /** Borde de {@code radius} px con el trazo del tema, sin margen. */
     public static RoundedBorder of(int radius) {
-        return new RoundedBorder(radius, Color.lightGray, null, new Insets(0, 0, 0, 0), null, false, null);
+        return new RoundedBorder(radius, THEME_LINE, null, new Insets(0, 0, 0, 0), null, false, null);
     }
 
     public RoundedBorder(int radius, Color line) {
@@ -66,7 +72,7 @@ public class RoundedBorder implements Border {
     }
 
     public RoundedBorder(int radius) {
-        this(radius, Color.lightGray);
+        this(radius, THEME_LINE);
     }
 
     public RoundedBorder() {
@@ -175,7 +181,14 @@ public class RoundedBorder implements Border {
             }
 
             if (line != null) {
-                g2d.setColor(line);
+                Color stroke = line;
+                if (line == THEME_LINE) {
+                    stroke = javax.swing.UIManager.getColor("Component.borderColor");
+                    if (stroke == null) {
+                        stroke = Color.lightGray;
+                    }
+                }
+                g2d.setColor(stroke);
                 g2d.draw(shape);
             }
         } finally {
@@ -202,7 +215,7 @@ public class RoundedBorder implements Border {
 
     /**
      * Borde de "tarjeta": margen exterior (6, 8, 2, 8) relleno de {@code marginBackground} (el gutter entre tarjetas)
-     * + relleno redondeado con el fondo real del componente + trazo gris claro encima. El componente que lo use debe
+     * + relleno redondeado con el fondo real del componente + trazo del tema encima. El componente que lo use debe
      * ser no-opaco (setOpaque(false)). Equivale a
      * {@code of(radius).margin(6, 8, 2, 8).gutter(marginBackground)}.
      */

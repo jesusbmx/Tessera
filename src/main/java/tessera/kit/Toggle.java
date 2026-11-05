@@ -27,7 +27,7 @@ public class Toggle extends JToggleButton implements Clickable<Toggle> {
 
   /** Agrupa los botones: al presionar uno se suelta el otro. */
   public static ButtonGroup group(Toggle... toggles) {
-    return Kit.group(toggles);
+    return Buttons.group(toggles);
   }
 
   /** El color del boton mientras esta presionado (en vez del gris del tema): el de la variante, con texto que contrasta. */

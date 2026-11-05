@@ -4,6 +4,7 @@ import java.awt.event.ActionListener;
 import javax.swing.AbstractButton;
 import javax.swing.Icon;
 import tessera.theme.Icons;
+import tessera.theme.Metrics;
 
 /**
  * Metodos encadenables de los widgets que son botones (Button, Check, Radio, Toggle): clic, icono, estado.
@@ -35,7 +36,7 @@ public interface Clickable<T> extends Styled<T> {
 
   /** Espacio (px) entre el icono y el texto. */
   default T iconGap(int gap) {
-    ((AbstractButton) this).setIconTextGap(Kit.px(gap));
+    ((AbstractButton) this).setIconTextGap(Metrics.px(gap));
     return self();
   }
 

@@ -17,6 +17,7 @@ import javax.swing.JToolTip;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import tessera.kit.Button;
+import tessera.kit.Buttons;
 import tessera.kit.Card;
 import tessera.kit.Check;
 import tessera.kit.ChoiceButton;
@@ -24,7 +25,6 @@ import tessera.kit.Col;
 import tessera.kit.Form;
 import tessera.kit.Hint;
 import tessera.kit.Input;
-import tessera.kit.Kit;
 import tessera.kit.Label;
 import tessera.kit.Menu;
 import tessera.kit.MenuButton;
@@ -193,7 +193,7 @@ public final class MenuImages {
         .separator()
         .item("Importar de la web", () -> { })
         .item("Importar de un archivo", () -> { });
-    Kit.makePrimary(add);
+    Buttons.primary(add);
 
     final JComponent screen = Col.gap(0).padding(12, 16, 110, 16).children(
         Row.gap(10).children(Label.title("Servicios")).glue().children(more, add));

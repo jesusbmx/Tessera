@@ -11,7 +11,7 @@ arma con un `Builder`.
 
 ```java
 final InteractiveNavbar nav = new InteractiveNavbar.Builder()
-    .foreground(Kit.MUTED)
+    .foreground(Theme.palette().muted)
     .selectedForeground(Theme.accent())
     .items(lblHome, lblSettings, lblAbout)
     .build();

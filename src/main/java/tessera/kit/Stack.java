@@ -27,7 +27,7 @@ public class Stack extends Box<Stack> {
   /** Los hijos ocupan todo el ancho, y el Stack ocupa el ancho que sobra de su contenedor. */
   public static Stack fill(Component... children) {
     final Stack stack = new Stack("cell 0 0, growx, aligny center");
-    Kit.fill(stack, true, false);
+    Layout.fill(stack, true, false);
     return stack.children(children);
   }
 

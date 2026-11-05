@@ -14,7 +14,7 @@ import javax.swing.JTabbedPane;
 public class Tabs extends JTabbedPane implements Styled<Tabs> {
 
   protected Tabs() {
-    Kit.fill(this, true, true);
+    Layout.fill(this, true, true);
   }
 
   public static Tabs create() {

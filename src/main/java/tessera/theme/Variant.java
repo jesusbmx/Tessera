@@ -1,7 +1,8 @@
 package tessera.theme;
 
 import java.awt.Color;
-import tessera.kit.Kit;
+import java.util.EnumMap;
+import java.util.Map;
 
 /**
  * Colores semanticos del kit, como las variantes de Bootstrap: cada widget que los admite
@@ -15,11 +16,11 @@ import tessera.kit.Kit;
  * Theme.builder().variant(Variant.SUCCESS, "#2E7D32").install();    // cambiar un color para toda la app
  * </pre>
  *
- * {@link #PRIMARY} sigue al tema ({@code Kit.PRIMARY}); el resto trae su color (el de Bootstrap) y se cambia con {@link #setColor(Color)}.
+ * {@link #PRIMARY} sigue al tema ({@code Theme.palette().primary}); el resto trae su color (el de Bootstrap) y se cambia con {@link #setColor(Color)}.
  */
 public enum Variant {
 
-  /** La accion principal (el {@code Kit.PRIMARY} del tema). */
+  /** La accion principal (el {@code Theme.palette().primary} del tema). */
   PRIMARY(null),
   /** Accion o texto de segundo plano: gris. */
   SECONDARY(Color.decode("#6C757D")),
@@ -58,10 +59,21 @@ public enum Variant {
     }
     switch (this) {
       case PRIMARY:
-        return Kit.PRIMARY;
+        return Theme.palette().primary;
       default:
         return defaultColor;
     }
+  }
+
+  /** Las variantes cuyo color se cambio ({@link #setColor}) y siguen cambiadas. */
+  static Map<Variant, Color> overrides() {
+    final Map<Variant, Color> changed = new EnumMap<>(Variant.class);
+    for (Variant variant : values()) {
+      if (variant.override != null) {
+        changed.put(variant, variant.override);
+      }
+    }
+    return changed;
   }
 
   /** Cambia el color de la variante en toda la app (mejor antes de crear las ventanas; ver {@code Theme.Builder.variant}). */

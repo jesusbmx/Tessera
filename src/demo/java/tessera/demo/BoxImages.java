@@ -14,7 +14,6 @@ import tessera.kit.Col;
 import tessera.kit.Combo;
 import tessera.kit.Hint;
 import tessera.kit.Input;
-import tessera.kit.Kit;
 import tessera.kit.Label;
 import tessera.kit.Password;
 import tessera.kit.Radio;
@@ -24,6 +23,7 @@ import tessera.kit.Spinner;
 import tessera.kit.Stack;
 import tessera.kit.Switch;
 import tessera.kit.Table;
+import tessera.theme.Metrics;
 import tessera.theme.Theme;
 
 /**
@@ -110,7 +110,7 @@ public final class BoxImages {
     final Label label = Label.text(text).center().background(color);
     label.setBorder(BorderFactory.createCompoundBorder(
         BorderFactory.createLineBorder(color.darker()),
-        BorderFactory.createEmptyBorder(Kit.px(vertical), Kit.px(horizontal), Kit.px(vertical), Kit.px(horizontal))));
+        BorderFactory.createEmptyBorder(Metrics.px(vertical), Metrics.px(horizontal), Metrics.px(vertical), Metrics.px(horizontal))));
     return label;
   }
 

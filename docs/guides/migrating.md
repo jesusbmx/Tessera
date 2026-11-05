@@ -42,7 +42,7 @@ La fuente Inter y los SVG del interruptor ya viajan dentro de la libreria: se bo
 
 Se mantiene en la app lo que depende de la app: su `Lang`, sus eventos, sus servicios, los editores de codigo, los dialogos de negocio.
 
-Cuidado con los colores: los defaults de `Kit` son los de la libreria; si la app tenia otros (tarjetas blancas, otro azul)
+Cuidado con los colores: los defaults de `Theme.palette()` son los de la libreria; si la app tenia otros (tarjetas blancas, otro azul)
 se fijan en `Theme.builder()` (`surface`, `cardLine`, `primary`) y no en cada pantalla.
 
 ## 4. De formulario NetBeans a kit

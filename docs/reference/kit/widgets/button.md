@@ -13,7 +13,7 @@ Boton con estilos y eventos encadenables. `Button.primary` marca la accion que s
 
 **En una frase:** boton con su **estilo y su accion en la misma cadena**; `Button.primary` marca la accion que se espera del usuario.
 
-**Reemplaza, en Swing puro:** `new JButton(texto)` + `addActionListener(...)` + `setIcon(...)` y, para el boton azul, los colores de FlatLaf a mano (`Kit.makePrimary`).
+**Reemplaza, en Swing puro:** `new JButton(texto)` + `addActionListener(...)` + `setIcon(...)` y, para el boton azul, los colores de FlatLaf a mano (`Buttons.primary`).
 
 **Cual elegir entre varios widgets parecidos:** [Que widget uso](../../../guides/widgets.md#ejecutar-button-o-menubutton).
 
@@ -44,7 +44,7 @@ final Row footer = Footer.of(
 
 ## Referencia
 
-`Button.of(txt)`: boton normal. `Button.primary(txt)` o `boton.primary()`: boton **principal** (color `Kit.PRIMARY`, texto blanco), la accion
+`Button.of(txt)`: boton normal. `Button.primary(txt)` o `boton.primary()`: boton **principal** (color `Theme.palette().primary`, texto blanco), la accion
 que se espera del usuario. Hereda [`Clickable`](../README.md#clickablet--button-check-radio-toggle-switch).
 
 | Metodo | Que hace |
@@ -83,13 +83,13 @@ final Card others = Card.section("Otras formas de usarlas").children(
         Toggle.of("Lista").variant(Variant.SUCCESS).selected(true), // presionado se pinta de verde
         Toggle.of("Tarjetas")));
 ```
-`import tessera.theme.Variant;`. Sin tema propio, `primary` es `Kit.PRIMARY`; los demas son los de Bootstrap (se cambian en [Theme](../../theme/theme.md)).
+`import tessera.theme.Variant;`. Sin tema propio, `primary` es `Theme.palette().primary`; los demas son los de Bootstrap (se cambian en [Theme](../../theme/theme.md)).
 
 | Para... | Hacer |
 |---|---|
 | un boton que abre un menu | [`MenuButton`](menubutton.md) (acciones), [`ChoiceButton`](choicebutton.md) (elegir una) o [`MultiChoiceButton`](multichoicebutton.md) (marcar varias) |
 | los botones de un dialogo | [`Footer.of(cancelar, guardar)`](../containers/footer.md): abajo a la derecha |
-| un boton azul ya creado | `Kit.makePrimary(boton)` |
+| un boton azul ya creado | `Buttons.primary(boton)` |
 
 ```java
 Button.primary("Guardar").onClick(e -> save())

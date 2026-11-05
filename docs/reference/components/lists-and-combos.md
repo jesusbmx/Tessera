@@ -81,11 +81,11 @@ final Mode actual = modes.selectedKeyOr(Mode.DIRECT);        // la clave marcada
 | `clearSelection()` | desmarca todo |
 | `size()` / `isEmpty()` / `asMap()` | tamano y una vista inmutable |
 
-`CheckGroup` **no** agrupa los botones para que sean excluyentes: para eso usa `Radio.group(...)` o `Kit.group(...)`.
+`CheckGroup` **no** agrupa los botones para que sean excluyentes: para eso usa `Radio.group(...)` o `Buttons.group(...)`.
 
 ## `LabelListCell`
 
-Renderizador de filas de lista con **colores alternos** (`Kit.ROW_ODD`, `Kit.ROW_EVEN`) y fila seleccionada en `Kit.ROW_SELECTED`, con 8 px de margen.
+Renderizador de filas de lista con **colores alternos** (`Theme.palette().rowOdd`, `Theme.palette().rowEven`) y fila seleccionada en `Theme.palette().rowSelected`, con 8 px de margen.
 
 ```java
 list.setCellRenderer(new LabelListCell());                   // en una lista

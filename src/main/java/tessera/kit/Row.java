@@ -3,6 +3,7 @@ package tessera.kit;
 import java.awt.Component;
 import java.awt.Dimension;
 import javax.swing.JPanel;
+import tessera.theme.Metrics;
 
 /**
  * Hijos en una fila, de izquierda a derecha, cada uno con su ancho natural. Para que uno ocupe lo que sobra
@@ -87,7 +88,7 @@ public class Row extends Box<Row> {
 
   @Override
   protected String migLayout() {
-    return migInsets() + ", gap " + Kit.px(gap()) + "px 0, hidemode 3, novisualpadding";
+    return migInsets() + ", gap " + Metrics.px(gap()) + "px 0, hidemode 3, novisualpadding";
   }
 
   @Override
@@ -97,8 +98,8 @@ public class Row extends Box<Row> {
 
   @Override
   protected void place(Component child) {
-    final boolean x = Kit.fillsX(child);
-    final boolean y = Kit.fillsY(child);
+    final boolean x = Layout.fillsX(child);
+    final boolean y = Layout.fillsY(child);
     put(child, (x && y) ? "grow, push" : x ? "growx, pushx" : y ? "growy, pushy" : "");
   }
 }

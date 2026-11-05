@@ -1,6 +1,8 @@
 package tessera.kit;
 
 import java.awt.Component;
+import tessera.theme.Metrics;
+import tessera.theme.Theme;
 
 /**
  * Banner oscuro con un titulo y, opcionalmente, una descripcion: la cabecera de cada paso de los
@@ -17,8 +19,8 @@ public class Header extends Box<Header> {
 
   protected Header(String title) {
     super(6);
-    this.title = Label.text(title).bold().fontSize(18).color(Kit.ON_DARK);
-    background(Kit.DARK);
+    this.title = Label.text(title).bold().fontSize(18).color(Theme.palette().onBanner);
+    background(Theme.palette().banner);
     padding(14);
     put(this.title, "growx");
     relayout();
@@ -35,8 +37,8 @@ public class Header extends Box<Header> {
   /** Descripcion debajo del titulo. */
   public Header subtitle(String text) {
     if (subtitle == null) {
-      subtitle = Label.text(text).fontSize(16).color(Kit.ON_DARK);
-      put(subtitle, "growx, gapleft " + Kit.px(16) + "px");
+      subtitle = Label.text(text).fontSize(16).color(Theme.palette().onBanner);
+      put(subtitle, "growx, gapleft " + Metrics.px(16) + "px");
     } else {
       subtitle.setText(text);
     }
@@ -57,7 +59,7 @@ public class Header extends Box<Header> {
 
   @Override
   protected String migLayout() {
-    return migInsets() + ", wrap 1, gapy " + Kit.px(gap()) + "px, hidemode 3, novisualpadding";
+    return migInsets() + ", wrap 1, gapy " + Metrics.px(gap()) + "px, hidemode 3, novisualpadding";
   }
 
   @Override

@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
 import javax.swing.JPanel;
+import tessera.theme.Metrics;
 
 /**
  * Estructura de una ventana o un panel: arriba, centro y abajo (y a los lados si hace falta).
@@ -64,7 +65,7 @@ public class Page extends JPanel implements Styled<Page> {
   public Dimension getPreferredSize() {
     final Dimension size = super.getPreferredSize();
     if (minWidth > 0 && size != null) {
-      size.width = Math.max(size.width, Kit.px(minWidth));
+      size.width = Math.max(size.width, Metrics.px(minWidth));
     }
     return size;
   }

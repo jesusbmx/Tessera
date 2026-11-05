@@ -9,6 +9,8 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import tessera.theme.Icons;
+import tessera.theme.Metrics;
+import tessera.theme.Theme;
 import tessera.theme.Variant;
 
 /**
@@ -17,7 +19,7 @@ import tessera.theme.Variant;
  *
  * <pre>
  * Label.title("Gestion de clientes")
- * Label.text("Administra tus clientes").color(Kit.MUTED)
+ * Label.text("Administra tus clientes").color(Theme.palette().muted)
  * Label.field("Nombre:").tip("El nombre del cliente")
  * Label.text("Ayuda").icon("app/img/help_blue.svg", 16).onClick(this::openHelp)
  * Label.success("Guardado")        // tambien danger, warning, info, secondary, primary, light, dark
@@ -50,7 +52,7 @@ public class Label extends JLabel implements Styled<Label> {
 
   /** Texto secundario: gris. */
   public static Label muted(String text) {
-    return new Label(text).color(Kit.MUTED);
+    return new Label(text).color(Theme.palette().muted);
   }
 
   /** Texto del color de una variante (primary, success, danger...). */
@@ -111,7 +113,7 @@ public class Label extends JLabel implements Styled<Label> {
 
   /** Espacio (px) entre el icono y el texto. */
   public Label iconGap(int gap) {
-    setIconTextGap(Kit.px(gap));
+    setIconTextGap(Metrics.px(gap));
     return this;
   }
 
@@ -139,7 +141,7 @@ public class Label extends JLabel implements Styled<Label> {
     this.padding.left = left;
     this.padding.bottom = bottom;
     this.padding.right = right;
-    setBorder(new EmptyBorder(Kit.px(top), Kit.px(left), Kit.px(bottom), Kit.px(right)));
+    setBorder(new EmptyBorder(Metrics.px(top), Metrics.px(left), Metrics.px(bottom), Metrics.px(right)));
     return this;
   }
 

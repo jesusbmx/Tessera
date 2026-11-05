@@ -184,7 +184,7 @@ Row.gap(8).glue().children(btnCancel, btnOk)             // botones a la derecha
 Row.gap(14).children(rbtnPrinter, rbtnIp, rbtnUsb)       // opciones una al lado de otra
 ```
 
-`children(...)` agrega con el ancho natural, salvo que el hijo ya este marcado con `Kit.fill(...)` (ver [Utilidades](../README.md#utilidades-kit)).
+`children(...)` agrega con el ancho natural, salvo que el hijo ya este marcado con `Layout.fill(...)` (ver [Utilidades](../README.md#utilidades)).
 
 ## Ejemplos completos donde se usa
 

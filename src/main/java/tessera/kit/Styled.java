@@ -3,6 +3,7 @@ package tessera.kit;
 import java.awt.Color;
 import java.awt.Font;
 import javax.swing.JComponent;
+import tessera.theme.Metrics;
 
 /**
  * Metodos encadenables comunes a todos los widgets y contenedores del kit: {@code Label.text("Hola").bold().color(...)}.
@@ -33,7 +34,7 @@ public interface Styled<T> {
   /** La misma fuente con otro tamano (en puntos, escalado con la interfaz). */
   default T fontSize(int size) {
     final JComponent c = (JComponent) this;
-    c.setFont(c.getFont().deriveFont((float) Kit.px(size)));
+    c.setFont(c.getFont().deriveFont((float) Metrics.px(size)));
     return self();
   }
 
@@ -58,13 +59,13 @@ public interface Styled<T> {
 
   /** Ancho fijo (px) dentro de un Row, Col, Form, Card o Stack. */
   default T width(int px) {
-    ((JComponent) this).putClientProperty(Kit.WIDTH_KEY, px);
+    ((JComponent) this).putClientProperty(Layout.WIDTH_KEY, px);
     return self();
   }
 
   /** Alto fijo (px) dentro de un Row, Col, Form, Card o Stack. */
   default T height(int px) {
-    ((JComponent) this).putClientProperty(Kit.HEIGHT_KEY, px);
+    ((JComponent) this).putClientProperty(Layout.HEIGHT_KEY, px);
     return self();
   }
 

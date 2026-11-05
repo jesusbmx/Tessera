@@ -71,8 +71,8 @@ public class FlexibleColumnRenderer extends DefaultTableCellRenderer {
             c.setBackground(columnBackgrounds.getOrDefault(columnName, defaultBackground));
             c.setForeground(columnForegrounds.getOrDefault(columnName, defaultForeground));
         } else {
-            c.setBackground(Color.WHITE);
-            c.setForeground(Color.BLACK);
+            c.setBackground(table.getBackground());
+            c.setForeground(table.getForeground());
         }
 
         // Borde visual, siempre que el componente lo permita

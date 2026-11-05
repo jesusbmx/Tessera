@@ -4,6 +4,7 @@ import java.awt.Component;
 import java.awt.Insets;
 import javax.swing.JPanel;
 import net.miginfocom.swing.MigLayout;
+import tessera.theme.Metrics;
 
 /**
  * Base de los contenedores del kit (Row, Col, Stack, Form, Card): un JPanel transparente con MigLayout por
@@ -97,8 +98,8 @@ public abstract class Box<T extends Box<T>> extends JPanel implements Styled<T> 
 
   /** Restricciones de MigLayout para el contenedor: insets, gaps y modo de ocultar. */
   protected final String migInsets() {
-    return "insets " + Kit.px(padding.top) + "px " + Kit.px(padding.left) + "px "
-        + Kit.px(padding.bottom) + "px " + Kit.px(padding.right) + "px";
+    return "insets " + Metrics.px(padding.top) + "px " + Metrics.px(padding.left) + "px "
+        + Metrics.px(padding.bottom) + "px " + Metrics.px(padding.right) + "px";
   }
 
   /** Restricciones de columna y fila: por defecto ninguna. */
@@ -118,7 +119,7 @@ public abstract class Box<T extends Box<T>> extends JPanel implements Styled<T> 
 
   /** Agrega un hijo con esas restricciones de MigLayout mas el tamano fijo que haya pedido (width/height). */
   protected final void put(Component child, String constraints) {
-    final String size = Kit.sizeHint(child);
+    final String size = Layout.sizeHint(child);
     add(child, size.isEmpty() ? constraints : constraints.isEmpty() ? size : constraints + ", " + size);
   }
 

@@ -11,6 +11,8 @@ import javax.swing.JComponent;
 import javax.swing.SwingConstants;
 import javax.swing.border.AbstractBorder;
 import tessera.theme.Icons;
+import tessera.theme.Metrics;
+import tessera.theme.Theme;
 
 /**
  * Bloque con fondo suave y borde redondeado: titulo (con icono opcional), texto de ayuda y debajo sus hijos en columna
@@ -43,6 +45,7 @@ public class Card extends Box<Card> {
     super(6);
     this.title = title;
     padding(10, 12, 12, 12);
+    setBackground(Theme.palette().surface);
     setBorder(new CardBorder());
     if (title != null) {
       header.children(title);
@@ -50,11 +53,21 @@ public class Card extends Box<Card> {
     put(header, "growx");
   }
 
+  /**
+   * Relleno de la tarjeta (por omision el del tema, {@code Theme.palette().surface}). A diferencia de otros componentes no se
+   * vuelve opaco: el borde pinta el relleno con esquinas redondeadas y un fondo opaco las dejaria cuadradas.
+   */
+  @Override
+  public Card background(java.awt.Color color) {
+    setBackground(color);
+    return this;
+  }
+
   /** Bloque con un titulo de texto (negrita, un poco mas grande que el texto de los campos). */
   public static Card create(String title) {
     final Label label = Label.text(title);
     label.setFont(label.getFont().deriveFont(java.awt.Font.BOLD, label.getFont().getSize2D() + 3f));
-    label.setIconTextGap(Kit.px(8));
+    label.setIconTextGap(Metrics.px(8));
     return new Card(label);
   }
 
@@ -116,7 +129,7 @@ public class Card extends Box<Card> {
 
   @Override
   protected String migLayout() {
-    return migInsets() + ", wrap 1, gapy " + Kit.px(gap()) + "px, hidemode 3, novisualpadding";
+    return migInsets() + ", wrap 1, gapy " + Metrics.px(gap()) + "px, hidemode 3, novisualpadding";
   }
 
   @Override
@@ -138,10 +151,10 @@ public class Card extends Box<Card> {
     public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
       final Graphics2D g2 = (Graphics2D) g.create();
       g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-      final float arc = Kit.px(ARC);
-      g2.setColor(Kit.SURFACE);
+      final float arc = Metrics.px(ARC);
+      g2.setColor(c.getBackground());
       g2.fill(new RoundRectangle2D.Float(x, y, width - 1, height - 1, arc, arc));
-      g2.setColor(Kit.CARD_LINE);
+      g2.setColor(Theme.palette().cardLine);
       g2.draw(new RoundRectangle2D.Float(x + 0.5f, y + 0.5f, width - 1.5f, height - 1.5f, arc, arc));
       g2.dispose();
     }

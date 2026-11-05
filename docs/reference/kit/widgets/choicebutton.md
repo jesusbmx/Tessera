@@ -72,7 +72,7 @@ private final ChoiceButton<Method> method = ChoiceButton.<Method>of()
     .option(Method.DRIVER, "Driver", "Imprime con el driver del sistema")
     .option(Method.NETWORK, "Red", "Imprime por IP")
     .option(Method.USB, "USB", "Imprime directo al puerto USB")
-    .bold().color(Kit.MUTED)
+    .bold().color(Theme.palette().muted)
     .onChange(this::onMethodChanged);
 
 private void onMethodChanged(Method value) {

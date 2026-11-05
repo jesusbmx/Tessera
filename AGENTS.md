@@ -4,7 +4,7 @@ Libreria de UI para Swing (Java 8, FlatLaf 3.7 + MigLayout). Lee este archivo en
 es la referencia completa de la API. Detalle y ejemplos: Javadoc de cada clase (cortas, con `<pre>` de uso).
 
 ## Reglas del proyecto
-- Java 8: sin `var`, sin `List.of`, sin records. Compilar: `./build.sh` (o `./build.ps1`). No hay tests; se verifica con `./build.sh --demo` (Showcase).
+- Java 8: sin `var`, sin `List.of`, sin records. Compilar: `./build.sh` (o `./build.ps1`). Pruebas de humo, sin ventanas: `./build.sh --test` (o `./build.ps1 -Test`); corren antes de cambiar `Theme`, `Palette`, bordes o `Card`. Ademas se mira el Showcase con `--demo`.
 - Sin dependencias externas fuera de FlatLaf, JSVG y MigLayout. Nada especifico de una app (nombres, rutas, claves de idioma) dentro de la libreria.
 - Codigo y comentarios en espanol; mantener el estilo del archivo (2 espacios de indentacion).
 - Sin datos sensibles (nombres de empresas, correos, URLs, claves) en codigo, docs ni ejemplos: el proyecto puede ser open source.
@@ -13,7 +13,7 @@ es la referencia completa de la API. Detalle y ejemplos: Javadoc de cada clase (
 ## Mapa
 ```
 tessera.kit         contenedores y widgets (lo que mas se usa)
-tessera.theme       Theme (instala el tema), Icons (SVG o imagen con `Icons.of`, switch)
+tessera.theme       Theme (instala el tema), Palette (los colores de un tema: LIGHT, DARK, UBUNTU, UBUNTU_DARK), Variant, Icons (SVG o imagen con `Icons.of`, switch)
 tessera.notify      Notification (apiladas), Toast (una a la vez)
 tessera.app         TrayDock (bandeja + Dock macOS), WindowPrefs (tamano de ventanas), Preview/Previewer (ver una pantalla sin la app)
 tessera.components  modelos/renderers/bordes/validacion sueltos
@@ -26,8 +26,7 @@ Theme.builder().accent("#1976D2").primary("#1976D2").panelBackground("#F7F6F3")
 ```
 **Variantes de color** (`tessera.theme.Variant`: `PRIMARY SECONDARY SUCCESS DANGER WARNING INFO LIGHT DARK`, como Bootstrap): `PRIMARY` sigue al tema, el resto trae su color; se cambian con `.success("#2E7D32")`, `.danger(..)`, `.warning(..)`, `.info(..)`, `.secondary(..)`, `.light(..)`, `.dark(..)` o `.variant(Variant, color)` del builder. El texto sobre el color se elige solo (blanco u oscuro).
 Fuente Inter empaquetada por defecto; `.font("Segoe UI")` usa una del sistema. `Theme.fontFamily()`, `Theme.accent()` para codigo propio. `arc` afecta botones, campos y barras, **no** a `Card` (fijo en 12). `accent` hoy no cambia el color de radios, casillas ni barras de progreso (workaround y detalle en docs/guides/customizing.md).
-Despues de `install()` la app ajusta lo suyo con `UIManager.put(...)`. La paleta del kit (`Kit.PRIMARY`, `Kit.SURFACE`, `Kit.CARD_LINE`, `Kit.DARK`,
-`Kit.ON_DARK`, `Kit.MUTED`, `Kit.LINE`, `Kit.ROW_ODD/ROW_EVEN/ROW_SELECTED`) son campos `static` no finales: se pueden asignar tambien a mano.
+Despues de `install()` la app ajusta lo suyo con `UIManager.put(...)`. La paleta instalada se lee con `Theme.palette()` (`.primary .surface .cardLine .banner .onBanner .muted .line .rowOdd .rowEven .rowSelected`, solo lectura); los temas listos son `Palette.LIGHT/DARK/UBUNTU/UBUNTU_DARK` (`Theme.light()/dark()/ubuntu()/ubuntuDark()`). Un color se cambia con `Theme.builder()`, no asignandolo.
 
 ## Kit: contenedores
 Todos son `JPanel` transparentes con MigLayout adentro (no hace falta saber MigLayout). Todos: `.padding(todo)`, `.padding(vert, horiz)`,
@@ -61,7 +60,7 @@ Extienden el de Swing (`JTextField txt = Input.text()...` sigue siendo un JTextF
 - `Combo.of(items...)` / `Combo.empty()` → `.onChange .maxRows .editable` · `Spinner.integer(v,min,max,paso)` / `.decimal(...)` → `.onChange`
 - **Botones que abren un menu** (extienden `PopupButton`: `.color .arrowLeft .noArrow .icon(res,tam) .iconGap .menu()`): `ChoiceButton.<T>of()` elige **una** y el boton la muestra → `.placeholder .option(valor, texto[, ayuda]) .optionEnabled(valor, b[, ayuda]) .onChange(Consumer<T>|Runnable)`, `getValue() setValue(v) is(v) hasValue() getValueTip()` · `MultiChoiceButton.<T>of(texto)` marca **varias** → `.option .checked(v) .onChange(Consumer<Set<T>>|Runnable)`, `getValues() isChecked(v) setChecked(v,b) setValues(c)` · `MenuButton.of(texto)` **acciones**, no queda nada elegido → `.item(texto, accion) .item(MenuItem) .title .separator .clear .onOpen(Consumer<Menu>)`. Sin boton (clic derecho): `Menu.create().item(..).title(..).separator()` + `menu.show(comp, x, y)` / `menu.showBelow(comp)`; `MenuItem.of(texto, accion)` → `.icon .iconRight .padding .accelerator(KeyStroke) .onClick`, `MenuItem.title(texto)`. `Menu` y `MenuItem` chocan con `java.awt`: imports explicitos. Cual usar y ejemplos con imagenes: [docs/guides/menus.md](docs/guides/menus.md). Que widget elegir (Check/Switch/Toggle, Radio/Combo/ChoiceButton, Input/TextArea/Spinner...) y que widget avisa de un cambio hecho por codigo: [docs/guides/widgets.md](docs/guides/widgets.md)
 - `Table.of(model)` → `.rowHeight(px) .singleSelection() .onSelect(Runnable) .columnWidth(col, px)` (dentro de un `Scroll`)
-- Utilidades en `Kit`: `Kit.px(n)` (escala con el zoom), `Kit.font(size, bold)`, `Kit.group(botones...)`, `Kit.makePrimary(boton)`.
+- Utilidades: `Metrics.px(n)` (escala con el zoom), `Metrics.font(size, bold)`, `Buttons.group(botones...)`, `Buttons.primary(boton)` / `.variant(boton, v)` / `.outline(boton, v)` para un boton de Swing ya creado, `Layout.fill(c, horizontal, vertical)` (ocupar el espacio que sobra).
 - Si algo es muy puntual: `contenedor.add(comp, "growx, wrap")` acepta restricciones MigLayout crudas (evitarlo).
 
 ## Patron de una pantalla

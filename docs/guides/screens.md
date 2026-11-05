@@ -139,7 +139,7 @@ return Page.create()
             .glue()
             .children(Input.text().placeholder("Buscar...").width(200))))
     .center(Col.gap(0).padding(0, 12, 0, 12).fillBoth(Scroll.of(table)))
-    .bottom(Row.gap(12).padding(6, 14).background(Kit.SURFACE)
+    .bottom(Row.gap(12).padding(6, 14).background(Theme.palette().surface)
         .children(Label.muted("3 impresoras").small())
         .glue()
         .children(Label.muted("Conectado").small()));
@@ -192,15 +192,15 @@ Un menu oscuro a la izquierda y el contenido a la derecha: `Page.left(...)` y `P
 ```java
 private static Label navItem(String text, boolean selected) {
   return Label.text(text)
-      .color(selected ? Color.WHITE : Kit.ON_DARK)
+      .color(selected ? Color.WHITE : Theme.palette().onBanner)
       .padding(8, 10, 8, 10)
-      .background(selected ? new Color(0x35474F) : Kit.DARK);
+      .background(selected ? new Color(0x35474F) : Theme.palette().banner);
 }
 ```
 
 ```java
 return Page.create()
-    .left(Col.gap(2).padding(16, 10, 16, 10).background(Kit.DARK)
+    .left(Col.gap(2).padding(16, 10, 16, 10).background(Theme.palette().banner)
         .children(Label.title("Mi App").color(Color.WHITE).padding(4, 10, 12, 10))
         .fill(navItem("Inicio", true), navItem("Impresoras", false), navItem("Reportes", false))
         .glue()
@@ -215,7 +215,7 @@ return Page.create()
             Row.gap(8).children(Button.primary("Nueva etiqueta"), Button.of("Ver reportes")))));
 ```
 
-Notas: el menu es un `Col` con `background(Kit.DARK)`; los elementos van con `.fill(...)` para que el fondo del seleccionado ocupe todo el ancho; el `.glue()` empuja "Ajustes"
+Notas: el menu es un `Col` con `background(Theme.palette().banner)`; los elementos van con `.fill(...)` para que el fondo del seleccionado ocupe todo el ancho; el `.glue()` empuja "Ajustes"
 al fondo. Para que cada elemento cambie el contenido, junta esto con un `Pages` en el centro (`pages.show("inicio")`).
 
 ### Asistente de pasos
@@ -265,7 +265,7 @@ return Page.create()
     .top(Header.create("Panel", "Resumen de hoy"))
     .center(Col.gap(12).padding(12).children(
         Row.gap(12).fillEqual(
-            stat("Impresoras", "12", Kit.DARK),
+            stat("Impresoras", "12", Theme.palette().banner),
             stat("En linea", "9", new Color(0x14A44D)),
             stat("Con error", "1", new Color(0xDC4C64))),
         Card.create("Actividad reciente").children(

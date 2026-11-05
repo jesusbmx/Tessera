@@ -2,13 +2,12 @@ package tessera.components;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
-import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.ListCellRenderer;
 import tessera.kit.Col;
-import tessera.kit.Kit;
 import tessera.kit.Label;
+import tessera.theme.Theme;
 
 /**
  * Diseño para los items. Se registra como renderer por defecto de las listas ("List.cellRenderer"):
@@ -30,9 +29,9 @@ public class LabelListCell extends JPanel implements ListCellRenderer {
       label.setComponentOrientation(list.getComponentOrientation());
       label.setFont(list.getFont());
       if (isSelected) {
-        setBackground(Kit.ROW_SELECTED);
+        setBackground(Theme.palette().rowSelected);
       } else {
-        setBackground(index % 2 == 0 ? Kit.ROW_ODD : Kit.ROW_EVEN);
+        setBackground(index % 2 == 0 ? Theme.palette().rowOdd : Theme.palette().rowEven);
       }
 
       label.setForeground(list.getForeground());

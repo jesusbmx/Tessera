@@ -78,7 +78,7 @@ Ejemplos con imagenes, paso a paso: [Botones que abren un menu](../../guides/men
 3. **No se escribe MigLayout.** Los contenedores (`Row`, `Col`, `Form`...) son `JPanel` transparentes con MigLayout adentro; ellos
    deciden quien se estira y quien no. Los hijos solo se listan.
 4. **Medidas en px logicos.** Todo numero en pixeles que entra por la API (`gap`, `padding`, `width`, `rowHeight`...) se multiplica por el
-   zoom de la pantalla (`Kit.px`). Pon `12`, no `12 * zoom`.
+   zoom de la pantalla (`Metrics.px`). Pon `12`, no `12 * zoom`.
 5. **Se crean por fabrica.** Los constructores son `protected`: `Button.of("Ok")`, `Row.gap(8)`, `Input.text()`.
 
 ```java
@@ -132,27 +132,27 @@ Extiende `Styled`.
 El espacio entre hijos (`gap`) se da al crear el contenedor (`Row.gap(10)`) o con `.gap(n)` en `Card`. Todo esto, con imagenes, y como ocultar sin dejar hueco o
 fijar un tamano: [`Box`](containers/box.md).
 
-## Utilidades (`Kit`)
+## Utilidades
 
 Los **iconos** no estan aqui: `Icons.of(recurso, tam[, color])` en [`Icons`](../theme/icons.md).
 
-`Kit` tambien guarda la **paleta** del kit como campos `public static` (no finales): `PRIMARY`, `SURFACE`, `CARD_LINE`, `DARK`, `ON_DARK`, `MUTED`,
-`LINE`, `ROW_ODD`, `ROW_EVEN`, `ROW_SELECTED`. Sus valores y como cambiarlos: [customizing.md](../../guides/customizing.md#2-paleta-del-kit-kit).
+Los **colores** del kit (`primary`, `surface`, `cardLine`, `banner`, `onBanner`, `muted`, `line`, `rowOdd`, `rowEven`, `rowSelected`) salen de la paleta que
+instalo el tema, `Theme.palette()`. Sus valores y como cambiarlos: [customizing.md](../../guides/customizing.md#2-paleta-themepalette).
 
 | Metodo | Que hace |
 |---|---|
-| `Kit.px(int)` | escala un tamano en px con el zoom de la interfaz (igual en 100%) |
-| `Kit.font(tamano, negrita)` | la fuente de la interfaz (la del tema) con ese tamano y estilo, escalada |
-| `Kit.makePrimary(AbstractButton)` | estilo de boton principal para cualquier boton ya creado |
-| `Kit.group(AbstractButton...)` | agrupa botones: solo uno queda seleccionado |
-| `Kit.fill(c, horizontal, vertical)` | marca que el componente ocupa el espacio que sobra en esos ejes dentro de un `Row`, `Col`, `Form`, `Card` o `Stack` |
+| `Metrics.px(int)` (en `tessera.theme`) | escala un tamano en px con el zoom de la interfaz (igual en 100%) |
+| `Metrics.font(tamano, negrita)` (en `tessera.theme`) | la fuente de la interfaz (la del tema) con ese tamano y estilo, escalada |
+| `Buttons.primary(AbstractButton)` | estilo de boton principal para cualquier boton ya creado; `Buttons.variant(b, v)` y `Buttons.outline(b, v)` hacen lo mismo con una [`Variant`](../theme/theme.md#variantes-de-color) |
+| `Buttons.group(AbstractButton...)` | agrupa botones: solo uno queda seleccionado |
+| `Layout.fill(c, horizontal, vertical)` | marca que el componente ocupa el espacio que sobra en esos ejes dentro de un `Row`, `Col`, `Form`, `Card` o `Stack` |
 
-`Kit.fill` es lo que usan por dentro `Scroll`, `Tabs`, `Split`, `Hint` y `Stack.fill`. En un `Row` o `Col` se prefiere `.fill(c)` / `.fillBoth(c)`.
+`Layout.fill` es lo que usan por dentro `Scroll`, `Tabs`, `Split`, `Hint` y `Stack.fill`. En un `Row` o `Col` se prefiere `.fill(c)` / `.fillBoth(c)`.
 
 ## Mezclar con Swing puro
 
 - Un `JPanel`, `JLabel` o cualquier `Component` de Swing se puede pasar a `children(...)`, `fill(...)`, `Page.center(...)`, etc.
-- `.width(px)` / `.height(px)` y `Kit.fill` funcionan con **cualquier** `JComponent`, aunque no sea del kit: se guardan como propiedades del
+- `.width(px)` / `.height(px)` y `Layout.fill` funcionan con **cualquier** `JComponent`, aunque no sea del kit: se guardan como propiedades del
   componente y el contenedor las lee.
 - Si algo es muy puntual, un contenedor del kit (que es un `JPanel` con MigLayout) acepta restricciones crudas:
   `contenedor.add(comp, "growx, wrap")`. Se prefiere evitarlo; si lo necesitas seguido, mejor pide un metodo nuevo al kit.
@@ -169,4 +169,4 @@ Los **iconos** no estan aqui: `Icons.of(recurso, tam[, color])` en [`Icons`](../
 | `Combo.onChange` se dispara al llenarlo | tambien lo hace al elegir por codigo: registra el `onChange` **despues** de llenar y seleccionar |
 | `illegal forward reference` al declarar campos | Java inicializa los campos en orden: el que se usa va antes que el que lo usa (ver [screens.md](../../guides/screens.md#reglas)) |
 | Un texto con `<` o `&` sale raro en un `Hint` o `Card.subtitle` | se interpreta como HTML; escapalo |
-| Los colores no cambian al asignar `Kit.PRIMARY` | cada widget toma el color **al crearse**: asignalo antes de armar pantallas (mejor con `Theme.builder()`) |
+| Los colores no cambian al instalar otro tema | cada widget toma el color **al crearse**: instala el tema (`Theme.dark()`, `Theme.builder()`...) antes de armar pantallas |
