@@ -33,9 +33,11 @@ public class RoundedBorder implements Border {
     private final Color borderColor;
     private final Color marginBackground;
     private final Insets margin;
+    /** Si el margen toma el fondo del padre al pintar (en vez de un color fijo). */
+    private final boolean parentMargin;
 
     public RoundedBorder(int cornerRadius, Color borderColor) {
-        this(cornerRadius, borderColor, null, new Insets(0, 0, 0, 0));
+        this(cornerRadius, borderColor, null, new Insets(0, 0, 0, 0), false);
     }
 
     public RoundedBorder(int cornerRadius) {
@@ -46,11 +48,13 @@ public class RoundedBorder implements Border {
         this(20);
     }
 
-    private RoundedBorder(int cornerRadius, Color borderColor, Color marginBackground, Insets margin) {
+    private RoundedBorder(int cornerRadius, Color borderColor, Color marginBackground, Insets margin,
+            boolean parentMargin) {
         this.cornerRadius = cornerRadius;
         this.borderColor = borderColor;
         this.marginBackground = marginBackground;
         this.margin = margin;
+        this.parentMargin = parentMargin;
     }
 
     @Override
@@ -61,8 +65,11 @@ public class RoundedBorder implements Border {
 
             // Margen exterior (gutter entre tarjetas): rectángulo recto, sin
             // depender de qué haya detrás del componente.
-            if (marginBackground != null && (margin.top > 0 || margin.left > 0 || margin.bottom > 0 || margin.right > 0)) {
-                g2d.setColor(marginBackground);
+            final Color gutter = parentMargin
+                    ? (c.getParent() != null ? c.getParent().getBackground() : null)
+                    : marginBackground;
+            if (gutter != null && (margin.top > 0 || margin.left > 0 || margin.bottom > 0 || margin.right > 0)) {
+                g2d.setColor(gutter);
                 g2d.fillRect(x, y, width, height);
             }
 
@@ -108,6 +115,14 @@ public class RoundedBorder implements Border {
      * no-opaco (setOpaque(false)).
      */
     public static Border createCardBorder(Color marginBackground, int cornerRadius) {
-        return new RoundedBorder(cornerRadius, Color.lightGray, marginBackground, new Insets(6, 8, 2, 8));
+        return new RoundedBorder(cornerRadius, Color.lightGray, marginBackground, new Insets(6, 8, 2, 8), false);
+    }
+
+    /**
+     * Igual que {@link #createCardBorder(Color, int)}, pero el margen toma el fondo del padre del componente cada
+     * vez que se pinta: no hay que pasar un color ni cuidar que coincida con lo que hay detras.
+     */
+    public static Border createCardBorder(int cornerRadius) {
+        return new RoundedBorder(cornerRadius, Color.lightGray, null, new Insets(6, 8, 2, 8), true);
     }
 }

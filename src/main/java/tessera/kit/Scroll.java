@@ -9,6 +9,7 @@ import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.Scrollable;
 import javax.swing.SwingConstants;
+import tessera.components.RoundedBorder;
 
 /**
  * Contenedor con barras de desplazamiento. Dentro de un Row o un Col ocupa el espacio que sobra (ancho y alto).
@@ -16,6 +17,7 @@ import javax.swing.SwingConstants;
  * <pre>
  * Scroll.of(table)
  * Scroll.of(content).noBorder().vertical()       // sin borde y sin barra horizontal
+ * Scroll.of(log).rounded()                       // esquinas redondeadas
  * </pre>
  */
 public class Scroll extends JScrollPane implements Styled<Scroll> {
@@ -35,6 +37,21 @@ public class Scroll extends JScrollPane implements Styled<Scroll> {
   /** Sin borde alrededor. */
   public Scroll noBorder() {
     setBorder(null);
+    return this;
+  }
+
+  /** Borde de esquinas redondeadas de 20 px (ver {@link #rounded(int)}). */
+  public Scroll rounded() {
+    return rounded(20);
+  }
+
+  /**
+   * Borde de esquinas redondeadas con el radio dado. El margen exterior toma el fondo del contenedor donde esta el
+   * scroll, asi que no hay que indicar ningun color: reemplaza a
+   * {@code setBorder(RoundedBorder.createCardBorder(getBackground(), radius))}.
+   */
+  public Scroll rounded(int radius) {
+    setBorder(RoundedBorder.createCardBorder(radius));
     return this;
   }
 

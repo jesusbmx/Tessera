@@ -65,8 +65,26 @@ public final class ComponentBadge extends AnnotationProvider {
   private final Map<FileObject, Entry> cache = Collections.synchronizedMap(new WeakHashMap<FileObject, Entry>());
   private final Set<FileObject> pending = Collections.synchronizedSet(new HashSet<FileObject>());
 
+  /**
+   * Evita la recursion infinita: otros proveedores (p. ej. ErrorAnnotator) tambien encadenan a todos los demas, y
+   * al llamarnos de vuelta se formaba un ciclo A -> B -> A que desbordaba la pila.
+   */
+  private static final ThreadLocal<Boolean> REENTRANT = new ThreadLocal<Boolean>();
+
   @Override
   public Image annotateIcon(Image icon, int type, Set<? extends FileObject> files) {
+    if (REENTRANT.get() != null) {
+      return null;
+    }
+    REENTRANT.set(Boolean.TRUE);
+    try {
+      return annotate(icon, type, files);
+    } finally {
+      REENTRANT.remove();
+    }
+  }
+
+  private Image annotate(Image icon, int type, Set<? extends FileObject> files) {
     Image result = null;
     for (AnnotationProvider other : Lookup.getDefault().lookupAll(AnnotationProvider.class)) {
       if (other != this) {
