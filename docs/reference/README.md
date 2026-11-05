@@ -14,7 +14,7 @@ Una pagina por componente: **imagen, cuando usarlo, todos sus metodos y los erro
 | campos de entrada | [`Input`](kit/widgets/input.md) · [`Password`](kit/widgets/password.md) · [`TextArea`](kit/widgets/textarea.md) · [`Combo`](kit/widgets/combo.md) · [`Spinner`](kit/widgets/spinner.md) |
 | un boton que abre un menu: elegir una opcion, marcar varias o correr una accion | [`ChoiceButton`](kit/widgets/choicebutton.md) · [`MultiChoiceButton`](kit/widgets/multichoicebutton.md) · [`MenuButton`](kit/widgets/menubutton.md) · [`Menu`](kit/widgets/menu.md) (clic derecho) |
 | una tabla de datos | [`Table`](kit/widgets/table.md) + [`BaseTableModel`](components/tables.md#basetablemodel) |
-| cambiar colores, fuente y esquinas | [`Theme`](theme/theme.md) |
+| cambiar colores, fuente y esquinas, o pasar a modo oscuro / estilo Ubuntu | [`Theme`](theme/theme.md) · [`Palette`](theme/palette.md) |
 | avisar al usuario | [`Notification`](notify/notification.md) · [`Toast`](notify/toast.md) |
 | icono en la bandeja o recordar el tamano de la ventana | [`TrayDock`](app/traydock.md) · [`WindowPrefs`](app/windowprefs.md) |
 | validar un formulario | [Validacion de formularios](components/forms.md) |
@@ -70,7 +70,8 @@ La tabla de **cual uso para cada cosa** y lo que comparten todos (`gap`, `paddin
 
 | Clase | Para que |
 |---|---|
-| [`Theme`](theme/theme.md) | instala el look and feel, la fuente, el acento, el fondo y las esquinas |
+| [`Theme`](theme/theme.md) | instala el look and feel (claro u oscuro), la fuente, el acento, el fondo y las esquinas; trae cuatro temas listos |
+| [`Palette`](theme/palette.md) | los colores de cada tema (`LIGHT`, `DARK`, `UBUNTU`, `UBUNTU_DARK`) y `Theme.palette()` |
 | [`Icons`](theme/icons.md) | iconos SVG y el interruptor estilo iOS |
 
 ## `tessera.notify`

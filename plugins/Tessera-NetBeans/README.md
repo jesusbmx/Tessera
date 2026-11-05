@@ -4,7 +4,7 @@ Ver una pantalla de Tessera sin arrancar la app:
 
 - **Pestana "Tessera Preview"** en el editor de todo archivo `.java`, junto a *Source* y *History*: muestra como queda la pantalla dentro del
   propio editor (una imagen a su tamano natural), y se vuelve a generar sola cuando el IDE compila cambios (guardar, con "Compile on Save").
-  Su boton **Abrir en ventana** la muestra interactiva en su propia ventana (con [`Previewer`](../Tessera/docs/reference/app/preview.md)),
+  Su boton **Abrir en ventana** la muestra interactiva en su propia ventana (con [`Previewer`](../../docs/reference/app/preview.md)),
   que se relanza sola al compilar. La ventana se abre donde se dejo la vez anterior.
 - **Insignia** (ventanita azul) sobre el icono de los `.java` que heredan de `JPanel`, `JDialog`, `JFrame`... en Projects y Files.
   Usa API interna de NetBeans (`ComponentBadge`): el `.nbm` sirve solo para la version de NetBeans contra la que se compila.

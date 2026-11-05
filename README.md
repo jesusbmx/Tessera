@@ -25,7 +25,7 @@ Page.create()
 | Paquete | Contenido |
 |---|---|
 | `tessera.kit` | Contenedores `Row`, `Col`, `Stack`, `Grid`, `Form`, `Card`, `Header`, `Footer`, `Page`, `Pages`, `Scroll`, `Tabs`, `Split`, `Separator`. Widgets con metodos encadenables: `Label`, `Hint`, `Button`, `Input`, `Password`, `TextArea`, `Combo`, `ChoiceButton`, `MultiChoiceButton`, `MenuButton`, `Menu`, `Check`, `Radio`, `Toggle`, `Switch`, `Spinner`, `Table`. Los colores salen de `Theme.palette()`; utilidades en `Metrics`, `Buttons` y `Layout`. |
-| `tessera.theme` | `Theme` (FlatLaf, fuente Inter empaquetada, acento, fondo, esquinas redondeadas) e `Icons` (SVG nitidos, interruptor estilo iOS). |
+| `tessera.theme` | `Theme` (FlatLaf, fuente Inter empaquetada, acento, fondo, esquinas redondeadas) con **cuatro temas listos** (claro, oscuro, Ubuntu claro y oscuro), `Palette` (los colores de cada tema), `Metrics` (medidas con zoom) e `Icons` (SVG nitidos, interruptor estilo iOS). |
 | `tessera.notify` | `Notification` (tarjetas apiladas en la esquina de la pantalla, con progreso y acciones) y `Toast` (mensaje breve sobre la ventana, con cola). |
 | `tessera.app` | `TrayDock` (icono de bandeja + reapertura desde el Dock de macOS) y `WindowPrefs` (cada ventana se abre con el tamano que el usuario le dejo). |
 | `tessera.components` | Modelos y renderizadores de tabla/lista (`BaseTableModel`, `CheckableListModel`, `ComboItem`, `HighlightColumnRenderer`...), bordes (`RoundedBorder`, `DashedBorder`), validacion de formularios (`ErrorProvider`, `FloatingErrorProvider`), arrastrar y soltar, deshacer/rehacer, navegacion (`InteractiveNavbar`). |
@@ -89,7 +89,7 @@ Todo esta en este repositorio, en Markdown: no depende de ningun sitio web. El [
 | Paquete | Que hay | Empezar por |
 |---|---|---|
 | `tessera.kit` | **contenedores** (`Row`, `Col`, `Form`, `Grid`, `Card`, `Header`, `Footer`, `Page`, `Stack`...) y **widgets** (`Label`, `Button`, `Check`, `Radio`, `Switch`, `Input`, `Combo`, `Table`...) | [Referencia del kit](docs/reference/kit/README.md) |
-| `tessera.theme` | `Theme` e `Icons` | [Theme](docs/reference/theme/theme.md) |
+| `tessera.theme` | `Theme`, `Palette` e `Icons` | [Theme](docs/reference/theme/theme.md) y [Palette](docs/reference/theme/palette.md) |
 | `tessera.notify` | `Notification` y `Toast` | [Avisos](docs/reference/notify/README.md) |
 | `tessera.app` | `TrayDock` y `WindowPrefs` | [Escritorio](docs/reference/app/README.md) |
 | `tessera.components` | modelos de tabla, renderizadores, validacion, bordes, arrastrar y soltar... | [Componentes sueltos](docs/reference/components/README.md) |
@@ -110,7 +110,18 @@ Theme.builder()
 
 ![Tema propio](docs/img/theme-custom.png)
 
-Ojo: el radio de `Card` hoy es fijo (12) y `accent` todavia no pinta radios ni barras de progreso. Todo el detalle, con la lista de lo que se puede y no se puede cambiar, en
+O un tema listo, que define toda la paleta (se elige al arrancar, antes de crear ventanas):
+
+```java
+Theme.dark().install();                         // tambien Theme.light(), Theme.ubuntu() y Theme.ubuntuDark()
+Theme.dark().accent("#4F9EFF").install();       // y se ajusta como cualquier tema
+```
+
+| `light()` | `dark()` | `ubuntu()` | `ubuntuDark()` |
+|---|---|---|---|
+| ![Claro](docs/img/theme-light.png) | ![Oscuro](docs/img/theme-dark.png) | ![Ubuntu](docs/img/theme-ubuntu.png) | ![Ubuntu oscuro](docs/img/theme-ubuntu-dark.png) |
+
+Ojo: el radio de `Card` hoy es fijo (12) y, con `Theme.builder()` solo, `accent` no pinta radios ni barras de progreso (los temas listos si lo hacen). Todo el detalle, con la lista de lo que se puede y no se puede cambiar, en
 [docs/guides/customizing.md](docs/guides/customizing.md).
 
 ## Estructura
@@ -119,6 +130,7 @@ Ojo: el radio de `Card` hoy es fijo (12) y `accent` todavia no pinta radios ni b
 src/main/java/tessera/   la libreria (kit, theme, notify, app, components)
 src/main/resources/      fuente Inter, interruptor y iconos de avisos
 src/demo/java/           Showcase: ejemplo ejecutable y fuente de las capturas de docs/
+src/test/java/           pruebas de humo sin ventanas (./build.sh --test)
 docs/guides/             guias: primeros pasos, pantallas, recetas, personalizar, migrar, FAQ, contribuir
 docs/reference/          referencia por componente: kit (contenedores y widgets), theme, notify, app, components
 docs/img/                imagenes de la documentacion (se generan con scripts/doc-images.sh)

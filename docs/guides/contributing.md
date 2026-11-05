@@ -8,12 +8,13 @@ en una app, mira [customizing.md](customizing.md): casi siempre basta con `Theme
 ```
 src/main/java/tessera/
   kit/         contenedores y widgets (lo que mas se usa)
-  theme/       Theme (instala FlatLaf, fuente, colores, arcos), Icons (SVG, interruptor)
+  theme/       Theme (instala FlatLaf, fuente, colores, arcos), Palette (los colores de cada tema), Variant, Metrics (px y fuente con zoom), Icons (SVG, interruptor)
   notify/      Notification (tarjetas apiladas), Toast (una a la vez)
   app/         TrayDock (bandeja + Dock macOS), WindowPrefs (tamano de ventanas)
   components/  modelos, renderers, bordes y validacion sueltos
 src/main/resources/tessera/   fuente Inter (fonts/) e iconos propios (img/)
 src/demo/java/                Showcase: ejemplo ejecutable y fuente de las capturas de docs/
+src/test/java/tessera/test/   pruebas de humo sin ventanas (./build.sh --test)
 ```
 
 ## Como funciona el kit
@@ -48,6 +49,18 @@ de usarlo. Nunca poner numeros fijos sin escalar.
 4. Agregarlo al `Showcase` (`src/demo/java/tessera/demo/Showcase.java`).
 5. Documentarlo: una pagina nueva en `docs/reference/kit/widgets/` (o `containers/`) con la [plantilla de abajo](#plantilla-de-una-pagina-de-referencia), su imagen en `WidgetImages.java`, una fila en la tabla de [Referencia del kit](../reference/kit/README.md) y del [indice de la referencia](../reference/README.md), y la lista de [AGENTS.md](../../AGENTS.md).
 
+## Agregar un tema
+
+Un tema es una constante de `tessera.theme.Palette`: no hace falta tocar `Theme` mas que para su atajo.
+
+1. En `Palette`, una constante nueva: se copia una existente y se cambian los 12 colores (acento, principal, fondo, tarjeta, borde de tarjeta, texto secundario, linea,
+   fila impar, fila par, fila seleccionada, banner, texto del banner) y, si hace falta, los pares `Variant, "#hex"` que el tema cambia. `dark` y `tintControls`
+   son los dos primeros argumentos (`true, true` para un oscuro con controles del color del acento).
+2. En `Theme`, un atajo: `public static Builder miTema() { return builder().palette(Palette.MI_TEMA); }`.
+3. En las pruebas (`ThemeTests`), una constante `Expected` con los mismos valores y un caso en `run`; corre `./build.sh --test` (o `./build.ps1 -Test`).
+   Los valores esperados estan escritos a proposito en la prueba: avisan si un cambio interno los altera.
+4. Una imagen: un caso `theme-mi-tema` en `DocImages.java` y en `scripts/doc-images.sh`; despues, una columna en [palette.md](../reference/theme/palette.md) y la fila en [theme.md](../reference/theme/theme.md).
+
 ## Abrir un valor fijo a las apps
 
 Ejemplo: que el radio de `Card` siga al tema.
@@ -76,7 +89,7 @@ Con el valor por defecto igual al de antes, las apps que no lo llaman no cambian
 | `Notification` o `Toast` | [notification.md](../reference/notify/notification.md) o [toast.md](../reference/notify/toast.md) |
 | `TrayDock` o `WindowPrefs` | [traydock.md](../reference/app/traydock.md) o [windowprefs.md](../reference/app/windowprefs.md) |
 | una clase de `tessera.components` | la pagina de su categoria en [Componentes sueltos](../reference/components/README.md) |
-| `Theme` o `Icons` | [theme.md](../reference/theme/theme.md) o [icons.md](../reference/theme/icons.md), y si cambia lo que se puede personalizar, [customizing.md](customizing.md) |
+| `Theme`, `Palette` o `Icons` | [theme.md](../reference/theme/theme.md), [palette.md](../reference/theme/palette.md) o [icons.md](../reference/theme/icons.md), y si cambia lo que se puede personalizar, [customizing.md](customizing.md) |
 | la compilacion, dependencias o requisitos | [getting-started.md](getting-started.md) y el [README](../../README.md) |
 | un problema conocido que se corrige (o aparece) | [faq.md](faq.md), la lista de "Trampas conocidas" de [AGENTS.md](../../AGENTS.md) y el [CHANGELOG](../../CHANGELOG.md) |
 
@@ -121,10 +134,11 @@ Las apps que usan Tessera llevan una **copia del jar** en su carpeta `vendor/tes
 Despues de cambiar Tessera:
 
 1. Subir la version en `pom.xml` si cambia la API.
-2. `./build.sh` y tomar `dist/tessera-<version>.jar`.
+2. `./build.sh --test` (pasan las pruebas de humo) y tomar `dist/tessera-<version>.jar`.
 3. Copiarlo a `vendor/tessera/` de cada app y, si cambio el nombre, actualizar el classpath del proyecto (en NetBeans:
    `nbproject/project.properties`, ver [migrating.md](migrating.md)).
-4. Compilar cada app y abrir sus pantallas.
+4. Si una app incluye otro programa o libreria que ya trae una copia de Tessera dentro (un jar unico), regenerar ese jar tambien.
+5. Compilar cada app y abrir sus pantallas.
 
 ## Estructura de la documentacion
 

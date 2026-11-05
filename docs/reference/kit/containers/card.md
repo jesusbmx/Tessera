@@ -61,8 +61,9 @@ Con `.padding(...)` y `.gap(n)` ajustas el margen interior y el espacio entre hi
 ## Referencia
 
 Bloque con **fondo suave y borde redondeado**: titulo (con icono opcional), texto de ayuda y debajo los hijos en columna (con las reglas
-de `Col`). Relleno y borde salen de `Theme.palette().surface` y `Theme.palette().cardLine` (se cambian con `Theme`). El radio de las esquinas es fijo (12): ver
-[customizing.md](../../../guides/customizing.md).
+de `Col`). Relleno y borde salen de `Theme.palette().surface` y `Theme.palette().cardLine` (se cambian con `Theme`, o con un tema listo). El relleno se toma **al crear** la tarjeta y
+se puede cambiar solo en esa: `card.background(color)` (o `setBackground`). `background(color)` **no** la vuelve opaca, a diferencia de otros componentes: el borde pinta el relleno con
+las esquinas redondeadas, y un fondo opaco las dejaria cuadradas. El radio de las esquinas es fijo (12): ver [customizing.md](../../../guides/customizing.md).
 
 | Fabrica | Resultado |
 |---|---|
@@ -78,6 +79,7 @@ de `Col`). Relleno y borde salen de `Theme.palette().surface` y `Theme.palette()
 | `.gap(n)` | espacio entre hijos (6 por defecto) |
 | `.title()` | el componente del titulo, para cambiarlo despues |
 | `.padding(...)` | margen interior (por defecto 10, 12, 12, 12) |
+| `.background(Color)` | relleno de esta tarjeta (por defecto `Theme.palette().surface`). No la vuelve opaca: las esquinas siguen redondeadas |
 
 ```java
 Card.create("Conexion")

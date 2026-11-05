@@ -143,7 +143,7 @@ final class KitTests {
     final java.awt.Font plain = tessera.theme.Metrics.font(12, false);
     t.ok("Metrics.font en negrita", bold.isBold());
     t.ok("Metrics.font normal", !plain.isBold());
-    t.eq("Metrics.font respeta el tamano (escalado)", (float) com.formdev.flatlaf.util.UIScale.scale(16f), bold.getSize2D());
+    t.eq("Metrics.font respeta el tamano (escalado)", com.formdev.flatlaf.util.UIScale.scale(16f), bold.getSize2D());
 
     final javax.swing.JTextField field = new javax.swing.JTextField();
     t.ok("Layout.fill devuelve el mismo componente", tessera.kit.Layout.fill(field, true, false) == field);
@@ -269,7 +269,9 @@ final class KitTests {
       model.addElement("Segundo servicio");
       model.addElement("Tercer servicio");
       final JList<String> list = new JList<>(model);
-      list.setCellRenderer(new LabelListCell());
+      @SuppressWarnings("unchecked")
+      final javax.swing.ListCellRenderer<Object> renderer = (javax.swing.ListCellRenderer<Object>) (javax.swing.ListCellRenderer<?>) new LabelListCell();
+      list.setCellRenderer((javax.swing.ListCellRenderer<? super String>) renderer);
       list.setSelectedIndex(1);
 
       final Header header = Header.create("Titulo", "Subtitulo");

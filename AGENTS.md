@@ -23,7 +23,10 @@ tessera.components  modelos/renderers/bordes/validacion sueltos
 ```java
 Theme.builder().accent("#1976D2").primary("#1976D2").panelBackground("#F7F6F3")
      .surface("#FFFFFF").cardLine("#E4E1D9").arc(12).install();
+
+Theme.dark().install();       // temas listos: light() dark() ubuntu() ubuntuDark(); devuelven un Builder (se ajustan: Theme.dark().accent("#4F9EFF").install())
 ```
+**Temas listos y paleta**: cada tema es una constante de `tessera.theme.Palette` (`LIGHT DARK UBUNTU UBUNTU_DARK`: fondos, tarjetas, texto secundario, filas, banners, acento, variantes y si es oscuro). `Theme.light()` = `Theme.builder().palette(Palette.LIGHT)`; `Theme.builder().palette(p).accent(..)` parte de una paleta y la ajusta. `Theme.builder()` solo, sin paleta, cambia lo que se le pide y conserva el resto. Los oscuros (`FlatDarkLaf`) y Ubuntu activan `tintControls()` (radios, casillas, barras y seleccion con el acento). `Theme.isDark()` dice si es oscuro. Elegir el tema **al arrancar**: los widgets leen la paleta al crearse.
 **Variantes de color** (`tessera.theme.Variant`: `PRIMARY SECONDARY SUCCESS DANGER WARNING INFO LIGHT DARK`, como Bootstrap): `PRIMARY` sigue al tema, el resto trae su color; se cambian con `.success("#2E7D32")`, `.danger(..)`, `.warning(..)`, `.info(..)`, `.secondary(..)`, `.light(..)`, `.dark(..)` o `.variant(Variant, color)` del builder. El texto sobre el color se elige solo (blanco u oscuro).
 Fuente Inter empaquetada por defecto; `.font("Segoe UI")` usa una del sistema. `Theme.fontFamily()`, `Theme.accent()` para codigo propio. `arc` afecta botones, campos y barras, **no** a `Card` (fijo en 12). `accent` hoy no cambia el color de radios, casillas ni barras de progreso (workaround y detalle en docs/guides/customizing.md).
 Despues de `install()` la app ajusta lo suyo con `UIManager.put(...)`. La paleta instalada se lee con `Theme.palette()` (`.primary .surface .cardLine .banner .onBanner .muted .line .rowOdd .rowEven .rowSelected`, solo lectura); los temas listos son `Palette.LIGHT/DARK/UBUNTU/UBUNTU_DARK` (`Theme.light()/dark()/ubuntu()/ubuntuDark()`). Un color se cambia con `Theme.builder()`, no asignandolo.
@@ -40,12 +43,12 @@ Todo lo que hace cada contenedor, **con una imagen por cosa**, esta en [docs/ref
 | `Stack.fill/start/end/center(c...)` | alternativas una encima de otra; los ocultos no ocupan espacio |
 | `Grid.gap(n)` | `.row(celdas...)` filas de columnas alineadas; `.columnGap(px)`, `.columnGap(despues, px)` |
 | `Form.create()` | `.row("Etiqueta", campo)`, `.row(JComponent, campo)`, `.rowTop(..)`, `.wide(c)`, `.field(c)`, `.space(px)`, `.labelGap(px)`, `.labelsRight()` |
-| `Card.create(titulo)` | bloque con fondo suave y borde redondeado: `.icon(res)`, `.subtitle(txt)`, `.gap(n)`; `Card.section(titulo)` = compacto; `Card.create()` sin titulo; `Card.create(JComponent)` titulo propio |
+| `Card.create(titulo)` | bloque con fondo suave y borde redondeado: `.icon(res)`, `.subtitle(txt)`, `.gap(n)`, `.background(color)` (relleno propio; por omision `Theme.palette().surface`, y no la vuelve opaca); `Card.section(titulo)` = compacto; `Card.create()` sin titulo; `Card.create(JComponent)` titulo propio |
 | `Header.create(titulo, descripcion)` | banner oscuro de pasos de asistente; `.subtitle(..)`, `.corner(comp)` componente a la derecha del titulo |
 | `Footer.of(botones...)` | barra de botones alineada a la derecha |
 | `Page.create()` | `.top() .center() .bottom() .left() .right()`, `.minWidth(px)`, `.build()` (BorderLayout) |
 | `Pages.create()` | `.page(nombre, c)`, `.show(nombre)` (CardLayout) |
-| `Scroll.of(c)` | `.noBorder()`, `.vertical()`, `.step(px)` |
+| `Scroll.of(c)` | `.noBorder()`, `.rounded()` / `.rounded(radio)` (esquinas redondeadas, margen del fondo del contenedor), `.vertical()`, `.step(px)` |
 | `Tabs.create()` | `.tab(titulo, c)`, `.tab(titulo, icono, c)` |
 | `Split.horizontal(a, b)` / `.vertical` | `.divider(px)`, `.weight(0..1)` |
 | `Separator.horizontal()/vertical()` | linea fina |
@@ -120,7 +123,7 @@ WindowPrefs.install(miStore, "com.miapp.");           // con almacen propio (int
 ## Componentes sueltos (`tessera.components`)
 `BaseTableModel<T>` (modelo por columnas con lista de T) · `CheckableListModel<T>` (+ `CheckBoxCellRenderer` interno) · `ComboItem<K>` (etiqueta + valor)
 · `CheckGroup<K>` (clave ↔ radios/checks) · `HighlightColumnRenderer`, `FlexibleColumnRenderer` (resaltar columnas) · `LabelListCell` (filas alternas)
-· `ComboBoxRenderer` · `RoundedBorder`, `DashedBorder` · `ErrorProvider` (borde rojo) / `FloatingErrorProvider` (globo) con `setError(c, msg)`, `clear()`
+· `ComboBoxRenderer` · `RoundedBorder` (builder: `RoundedBorder.of(14).line(c).margin(6,8,2,8).gutter(c)`; el trazo por omision es el del tema), `DashedBorder` · `ErrorProvider` (borde rojo) / `FloatingErrorProvider` (globo) con `setError(c, msg)`, `clear()`
 (detalle y ejemplos de todos: [Componentes sueltos](docs/reference/components/README.md))
 · `DragAndDrop` (soltar archivos) · `TextUndoRedoManager` · `TextPlaceholder` (placeholder para JTextArea de Swing puro; `Input.area(n).placeholder(..)` ya lo usa) · `PopupMenuExtension` · `WindowDragListener` · `InteractiveNavbar`.
 
@@ -130,6 +133,8 @@ de la app (`"com/miapp/img/x.svg"`), no aqui.
 
 ## Trampas conocidas (verificadas)
 - Imports **explicitos**: `Label`, `Button`, `List`, `TextArea` chocan con `java.awt` y `Stack` con `java.util`.
+- Los colores salen de `Theme.palette()` (solo lectura) y se leen **al crear** cada widget: instalar otro tema despues no cambia lo ya creado. No existe `Kit`: `Metrics.px/font`, `Buttons.primary/variant/outline/group`, `Layout.fill`.
+- Un color fijo en el codigo de una app (`new Color(250, 250, 250)`) no cambia con un tema oscuro: usar `Theme.palette()` o `UIManager.getColor(..)`.
 - `Hint.of(txt)` y `Card.subtitle(txt)` meten el texto en `<html>`: escapar `<` y `&`.
 - `Toast.LENGTH_INDEFINITE` solo se cierra con `dismiss()` o su accion (un clic no lo cierra).
 - `ErrorProvider.setError` mueve el foco y muestra un `Toast`: marcar un solo error por pasada. `notIsEmail` devuelve `true` cuando **no** es correo.
@@ -142,7 +147,7 @@ Todo en Markdown dentro de `docs/` (sin sitio web); indice en [docs/README.md](d
 - **Guias**: [primeros pasos](docs/guides/getting-started.md) · [pantallas completas con enlace a cada pieza que usan](docs/guides/screens.md) · [combinar Row, Col y Stack](docs/guides/layout.md) · [recetas](docs/guides/recipes.md) · [personalizar](docs/guides/customizing.md) · [migrar](docs/guides/migrating.md) · [FAQ](docs/guides/faq.md).
 
 ## Personalizar y modificar
-- Cambiar colores, esquinas, fuente, y que **no** se puede cambiar desde la app (ej. el radio de `Card` es fijo): [docs/guides/customizing.md](docs/guides/customizing.md).
+- Cambiar colores, esquinas, fuente, tema oscuro / Ubuntu, y que **no** se puede cambiar desde la app (ej. el radio de `Card` es fijo): [docs/guides/customizing.md](docs/guides/customizing.md) y [Palette](docs/reference/theme/palette.md).
 - Convencion de pantallas con ejemplo completo: [docs/guides/screens.md](docs/guides/screens.md).
 - Como esta hecha la libreria y como agregar o abrir cosas: [docs/guides/contributing.md](docs/guides/contributing.md).
 

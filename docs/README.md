@@ -13,7 +13,7 @@ Todo esta en Markdown dentro de este repositorio: no depende de ningun sitio web
 | ejemplos completos listos para copiar | [Recetas](guides/recipes.md) |
 | saber **que widget usar** (Check, Switch o Toggle; Radio, Combo o ChoiceButton...) y como reaccionar a un cambio | [Que widget uso](guides/widgets.md) |
 | un boton que abre un menu: elegir una opcion, marcar varias o correr una accion; el clic derecho de una lista | [Botones que abren un menu](guides/menus.md) |
-| cambiar colores, esquinas redondeadas, fuente | [Personalizar](guides/customizing.md) |
+| cambiar colores, esquinas redondeadas, fuente, o pasar a **modo oscuro** / estilo Ubuntu | [Personalizar](guides/customizing.md) y [`Palette`](reference/theme/palette.md) |
 | pasar una app NetBeans / GroupLayout a Tessera | [Migrar una app](guides/migrating.md) |
 | resolver un problema o una duda | [Preguntas frecuentes](guides/faq.md) |
 | modificar la libreria o publicar el jar | [Contribuir](guides/contributing.md) |
@@ -25,7 +25,7 @@ Una pagina por componente, con imagen, cuando usarlo, todos sus metodos y errore
 | Paquete | Contenido |
 |---|---|
 | `tessera.kit` | [contenedores y widgets](reference/kit/README.md): `Row`, `Col`, `Stack`, `Grid`, `Form`, `Card`, `Header`, `Footer`, `Page`, `Pages`, `Scroll`, `Tabs`, `Split`, `Separator`, `Label`, `Hint`, `Button`, `Check`, `Radio`, `Toggle`, `Switch`, `Input`, `Password`, `TextArea`, `Combo`, `ChoiceButton`, `MultiChoiceButton`, `MenuButton`, `Menu`, `Spinner`, `Table` |
-| `tessera.theme` | [`Theme`](reference/theme/theme.md), [`Icons`](reference/theme/icons.md) |
+| `tessera.theme` | [`Theme`](reference/theme/theme.md), [`Palette`](reference/theme/palette.md), [`Icons`](reference/theme/icons.md); `Metrics`, `Variant` |
 | `tessera.notify` | [`Notification`](reference/notify/notification.md), [`Toast`](reference/notify/toast.md) |
 | `tessera.app` | [`TrayDock`](reference/app/traydock.md), [`WindowPrefs`](reference/app/windowprefs.md) |
 | `tessera.components` | [componentes sueltos](reference/components/README.md) |

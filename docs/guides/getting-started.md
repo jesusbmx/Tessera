@@ -118,7 +118,7 @@ public class Hola {
 
   public static void main(String[] args) {
     SwingUtilities.invokeLater(() -> {
-      Theme.builder().install();                       // una sola vez, antes de crear ventanas
+      Theme.builder().install();                       // una sola vez, antes de crear ventanas (o Theme.dark(), Theme.ubuntu()...)
 
       final Input txtName = Input.text().placeholder("Tu nombre");
 
@@ -144,7 +144,7 @@ Compila y ejecuta como se mostro arriba. Lo que acabas de usar:
 
 | Pieza | Para que |
 |---|---|
-| `Theme.builder().install()` | instala FlatLaf, la fuente Inter y los colores. **Antes** de crear cualquier ventana |
+| `Theme.builder().install()` | instala FlatLaf, la fuente Inter y los colores. **Antes** de crear cualquier ventana. Para otro aspecto, un tema listo: `Theme.dark().install()`, `Theme.ubuntu().install()`... (ver [`Palette`](../reference/theme/palette.md)) |
 | `Page` | ventana con cabecera (`top`), centro (`center`) y pie (`bottom`) |
 | `Header` | el banner oscuro con titulo y descripcion |
 | `Col` | acomoda hijos en columna; `padding(12)` deja margen alrededor |

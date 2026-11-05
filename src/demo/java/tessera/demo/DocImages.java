@@ -37,6 +37,7 @@ import tessera.theme.Theme;
  * containers        guides/screens.md: los contenedores Row, Col, Form, Grid y Card
  * theme-default     guides/customizing.md: el tema por defecto
  * theme-custom      guides/customizing.md: un tema propio (acento, fondo, esquinas)
+ * theme-light | theme-dark | theme-ubuntu | theme-ubuntu-dark     reference/theme: los cuatro temas listos
  * arc-0 | arc-12 | arc-24     guides/customizing.md: radio de las esquinas
  * styled            guides/customizing.md: metodos encadenables de un widget
  * </pre>
@@ -54,6 +55,18 @@ public final class DocImages {
       case "theme-custom":
         Theme.builder().accent("#0F766E").primary("#0F766E").panelBackground("#F3F4F6")
             .surface("#FFFFFF").cardLine("#D1D5DB").arc(6).install();
+        break;
+      case "theme-light":
+        Theme.light().install();
+        break;
+      case "theme-dark":
+        Theme.dark().install();
+        break;
+      case "theme-ubuntu":
+        Theme.ubuntu().install();
+        break;
+      case "theme-ubuntu-dark":
+        Theme.ubuntuDark().install();
         break;
       case "arc-0":
         Theme.builder().accent("#1976D2").panelBackground("#F7F6F3").arc(0).install();

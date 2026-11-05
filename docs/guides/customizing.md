@@ -16,7 +16,7 @@ Antes de editar la libreria conviene revisar la tabla de abajo: casi todo se cam
 | **Radio de las esquinas de `Card`** | **fijo en 12**: `ARC` en `kit/Card.java` | hay que editar Tessera (ver "Lo que no se puede cambiar desde la app") |
 | Fuente de toda la interfaz | `Theme.builder().font("Segoe UI")` | por defecto Inter empaquetada |
 | Cuanto dura un tooltip | `Theme.builder().tooltipDismissMs(ms)` | 8000 por defecto |
-| Un color de la paleta (`DARK`, `MUTED`, `LINE`, filas de listas...) | `Theme.palette().muted = ...` | asignacion directa, ver "Paleta del kit" |
+| Un color de la paleta (`banner`, `muted`, `line`, filas de listas...) | `Theme.builder().muted(..)`, `.line(..)`, `.rows(..)`, `.banner(..)`, o un tema listo | `Theme.palette()` es solo lectura: ver "Paleta" |
 | Algo de FlatLaf (pestanas, barra de titulo, menus...) | `UIManager.put("clave", valor)` | despues de `install()` |
 | Un solo widget (negrita, color, ancho...) | metodos encadenables de `Styled` | `Label.text("x").bold().color(c)` |
 | Un solo boton con otro color | `Button.primary(..)` o `Buttons.primary(boton)` | ver "Botones" |

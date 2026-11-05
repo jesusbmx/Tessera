@@ -19,7 +19,7 @@ Los cambios importantes de Tessera. Formato basado en [Keep a Changelog](https:/
 - **`@Preview` y `Previewer`** (`tessera.app`): ver una pantalla en su propia ventana mientras se arma, sin arrancar la app. `@Preview` en la clase (o en metodos estaticos con datos de muestra) y un `main` de una linea; F5 la recrea. Ver [preview.md](docs/reference/app/preview.md).
 - **Botones que abren un menu** (`tessera.kit`), uno por cada cosa que se quiere hacer, con una base comun (`PopupButton`: flecha, color, abrir debajo del boton):
   - [`ChoiceButton<T>`](docs/reference/kit/widgets/choicebutton.md): elige **una** opcion y el boton la muestra. Cada opcion lleva valor, texto y ayuda;
-    `getValue()`, `setValue(v)`, `is(v)` y `onChange(...)` (tambien al elegir por codigo) reemplazan al `JPopupMenu` + un `JRadioButtonMenuItem` por opcion + `Kit.group`.
+    `getValue()`, `setValue(v)`, `is(v)` y `onChange(...)` (tambien al elegir por codigo) reemplazan al `JPopupMenu` + un `JRadioButtonMenuItem` por opcion + `Buttons.group`.
   - [`MultiChoiceButton<T>`](docs/reference/kit/widgets/multichoicebutton.md): marca **varias** opciones con casillas; `getValues()`, `isChecked(v)`, `setChecked(v, b)`.
   - [`MenuButton`](docs/reference/kit/widgets/menubutton.md): **acciones**; el clic en una opcion corre algo y no queda nada elegido. `onOpen` para menus que se llenan al momento.
   - [`Menu` y `MenuItem`](docs/reference/kit/widgets/menu.md): el menu y sus opciones **sin boton**, por ejemplo el clic derecho de una lista (`menu.show(lista, x, y)`).
@@ -37,6 +37,7 @@ Los cambios importantes de Tessera. Formato basado en [Keep a Changelog](https:/
 
 ### Corregido
 
+- El plugin de NetBeans **Tessera Preview** ya no se queda en una **recursion infinita** al indexar: `ComponentBadge` (la insignia de los `.java` que heredan de un componente Swing) y `ErrorAnnotator` de NetBeans se llamaban entre si (`StackOverflowError`, y NetBeans se trababa en "Scanning projects"). Ahora lleva una guardia de reentrada.
 - `Previewer.save(...)` (la imagen PNG de una pantalla) **ya no sale con el pie cortado**: usaba `doLayout()`, que solo reacomoda el contenedor de afuera, asi que los de adentro conservaban la distribucion de `pack()` a otro alto. Ahora usa `validate()` y repite hasta que el tamano se estabiliza. El plugin de NetBeans *Tessera Preview* tenia el mismo defecto en su pestana y tambien se corrigio.
 - `TextArea.placeholder(...)` (y `Input.area(n).placeholder(...)`) **ahora se ve**: FlatLaf 3.7 no pinta el placeholder en un `JTextArea`, asi que `TextArea`
   usa `TextPlaceholder`. `TextPlaceholder.install(...)` ademas se puede llamar mas de una vez sobre el mismo componente (cambia el texto en vez de duplicarlo).
@@ -47,6 +48,7 @@ Los cambios importantes de Tessera. Formato basado en [Keep a Changelog](https:/
 
 ### Documentacion
 
+- Pagina nueva [`Palette`](docs/reference/theme/palette.md) (los colores de cada tema, con una imagen de cada uno) y [`Theme`](docs/reference/theme/theme.md) con los cuatro temas listos, `Theme.palette()` y los metodos nuevos del `Builder`. [`RoundedBorder`](docs/reference/components/borders.md) (builder), [`Scroll`](docs/reference/kit/containers/scroll.md) (`rounded()`) y [`Card`](docs/reference/kit/containers/card.md) (`background`) al dia. Guia nueva "Agregar un tema" en [contributing.md](docs/guides/contributing.md). Imagenes nuevas `theme-light.png`, `theme-dark.png`, `theme-ubuntu.png` y `theme-ubuntu-dark.png` (`DocImages.java`, `scripts/doc-images.sh`).
 - **Cada contenedor explica a fondo lo que puede hacer, con una imagen por cosa**: las paginas de `docs/reference/kit/containers/` pasaron de una tabla de metodos a una galeria (**Lo que se puede hacer**: un titulo, una imagen y el codigo por cada cosa que se puede pedir). `Row`, `Col` y `Stack` traen 10, 9 y 4 secciones (`gap`, `fill`, `fillEqual`, `fillBoth`, `glue`, alineacion, `padding`, anchos fijos, ocultar, anidar, patrones listos); `Form`, `Grid`, `Card`, `Header`, `Footer` y `Page` reciben lo que antes solo estaba en `screens.md`; `Tabs`, `Split`, `Pages`, `Scroll` y `Separator` ganan imagenes propias.
 - Paginas nuevas [Contenedores](docs/reference/kit/containers/README.md) (la tabla **que uso para cada cosa** y todos los contenedores agrupados por proposito) y [`Box`](docs/reference/kit/containers/box.md) (lo que comparten `Row`, `Col`, `Stack`, `Grid`, `Form`, `Card` y `Header`: `gap`, `padding`, tamano fijo y ocultar sin dejar hueco).
 - Los ejemplos generales **enlazan a las piezas que usan**: cada pantalla completa de [screens.md](docs/guides/screens.md), cada [receta](docs/guides/recipes.md) y cada ejemplo de [Combinar Row, Col y Stack](docs/guides/layout.md) lleva debajo del titulo una linea **Usa:** con un enlace a la pagina de cada contenedor y widget que emplea. A la inversa, cada contenedor lista los ejemplos completos donde se usa.
