@@ -9,7 +9,7 @@ Dos formas de avisar al usuario sin abrir un dialogo que bloquee: [`Notification
 
 | | `Notification` | `Toast` |
 |---|---|---|
-| Aparece | en la **esquina inferior derecha de la pantalla** | **centrado sobre una ventana** o componente |
+| Aparece | en la **esquina inferior derecha de la pantalla** (en macOS, la superior derecha) | **centrado sobre una ventana** o componente |
 | Varios a la vez | **si**, se apilan y se acomodan | **no**, se muestran de uno en uno, en cola |
 | Identificador | **si** (`id` obligatorio): mostrar otra con el mismo `id` la **reemplaza** | no |
 | Barra de progreso | si | no |

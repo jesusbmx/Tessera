@@ -1,6 +1,6 @@
 # Notification
 
-Notificacion flotante estilo Chrome o Windows: **tarjeta oscura** en la esquina inferior derecha de la pantalla. Pueden verse varias a la vez; se apilan.
+Notificacion flotante estilo Chrome o Windows: **tarjeta oscura** en la esquina inferior derecha de la pantalla (en macOS, la superior derecha). Pueden verse varias a la vez; se apilan.
 
 | | |
 |---|---|
@@ -102,7 +102,8 @@ new Thread(() -> {                                       // trabajo fuera del ED
   actualizar su progreso enseguida). `setProgress`, `complete` y `dismiss` tambien. Los callbacks corren en el EDT.
 - **Cierre automatico**: se pausa mientras el mouse esta sobre la tarjeta y se reanuda al salir.
 - **Posicion**: esquina inferior derecha del area usable de la pantalla (sin la barra de tareas), con 16 px de margen y 10 px entre
-  tarjetas. Las nuevas se apilan hacia arriba.
+  tarjetas. Las nuevas se apilan hacia arriba. **En macOS** es al reves, como las notificaciones nativas: esquina **superior**
+  derecha, bajo la barra de menu, y las nuevas empujan a las anteriores hacia abajo.
 - **Tamano**: todas miden el mismo ancho (364 px), sea cual sea el contenido.
 - **Linux sin compositor**: las esquinas redondeadas y el fundido necesitan translucidez de ventana. Si el gestor de ventanas no la
   soporta, la tarjeta se ve **rectangular y sin animacion** en lugar de fallar.

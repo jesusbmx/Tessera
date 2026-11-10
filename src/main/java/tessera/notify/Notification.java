@@ -45,7 +45,8 @@ import tessera.theme.Theme;
  * Notificación flotante estilo Google Chrome / Windows Action Center: tarjeta
  * oscura, letras blancas, ícono y acción opcional. A diferencia de {@link Toast},
  * puede haber varias visibles al mismo tiempo: se apilan en la esquina inferior
- * derecha de la pantalla y se van acomodando conforme llegan o se cierran.
+ * derecha de la pantalla (en macOS, en la superior derecha, bajo la barra de menú, y
+ * crecen hacia abajo) y se van acomodando conforme llegan o se cierran.
  *
  * <p>Cada notificación lleva un {@code id} obligatorio (como el id de
  * {@code NotificationManager.notify()} en Android o de {@code displayNotification}
@@ -104,6 +105,17 @@ public class Notification {
     } catch (Exception e) {
       return false;
     }
+  }
+
+  /**
+   * En macOS las notificaciones nativas salen arriba a la derecha (bajo la barra de menú) y empujan hacia
+   * abajo a las anteriores; en el resto de sistemas salen abajo a la derecha y empujan hacia arriba
+   * (Windows, GNOME). Se sigue la costumbre de cada plataforma.
+   */
+  static final boolean STACK_FROM_TOP = isMac();
+
+  private static boolean isMac() {
+    return System.getProperty("os.name", "").toLowerCase(java.util.Locale.ROOT).startsWith("mac");
   }
 
   /** Fondo de la tarjeta: siempre el mismo, para todos los estilos. Lo único que cambia de color es el ícono. */
@@ -1023,7 +1035,9 @@ public class Notification {
           final Rectangle bounds = screenBounds();
           final Point at = new Point(
                   bounds.x + bounds.width - MARGIN - card.getWidth(),
-                  bounds.y + bounds.height - MARGIN - card.getHeight());
+                  STACK_FROM_TOP
+                          ? bounds.y + MARGIN
+                          : bounds.y + bounds.height - MARGIN - card.getHeight());
           mVisible.add(card);
           card.showAnimated(at, true);
         }
@@ -1072,15 +1086,21 @@ public class Notification {
       }
     }
 
+    /**
+     * Acomoda las tarjetas contra la esquina derecha, la más nueva pegada al borde de arranque y las
+     * anteriores detrás de ella: abajo y creciendo hacia arriba, o (macOS) arriba y creciendo hacia abajo.
+     */
     private void relayout() {
       final Rectangle bounds = screenBounds();
-      int y = bounds.y + bounds.height - MARGIN;
+      int y = STACK_FROM_TOP ? bounds.y + MARGIN : bounds.y + bounds.height - MARGIN;
       for (int i = mVisible.size() - 1; i >= 0; i--) {
         final Card card = mVisible.get(i);
-        y -= card.getHeight();
+        if (!STACK_FROM_TOP) {
+          y -= card.getHeight();
+        }
         final int x = bounds.x + bounds.width - MARGIN - card.getWidth();
         card.animateTo(new Point(x, y));
-        y -= GAP;
+        y += STACK_FROM_TOP ? card.getHeight() + GAP : -GAP;
       }
     }
 
